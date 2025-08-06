@@ -12,6 +12,7 @@ const validateSignup = [
     .exists({ checkFalsy: true })
     .isEmail()
     .withMessage('Please provide a valid email.'),
+
   check('username')
     .exists({ checkFalsy: true })
     .isLength({ min: 4 })
@@ -20,6 +21,31 @@ const validateSignup = [
     .not()
     .isEmail()
     .withMessage('Username cannot be an email.'),
+
+  check('firstName')
+    .exists({ checkFalsy: true })
+    .isLength({ min: 2})
+    .withMessage('First name must be at least 2 characters.'),
+  check('firstName')
+    .isLength({ max: 50 })
+    .withMessage('First name cannot exceed 50 characters.'),
+  check('firstName')
+    .not()
+    .isEmail()
+    .withMessage('Username cannot be an email.'),
+
+  check('lastName')
+    .exists({ checkFalsy: true })
+    .isLength({ min: 2 })
+    .withMessage('Last name must be at least 2 characters.'),
+  check('lastName')
+    .isLength({ max: 50 })
+    .withMessage('First name cannot exceed 50 characters.'),
+  check('lastName')
+    .not()
+    .isEmail()
+    .withMessage('Username cannot be an email.'),
+
   check('password')
     .exists({ checkFalsy: true })
     .isLength({ min: 6 })
@@ -33,12 +59,14 @@ router.post(
   '/',
   validateSignup,
   async (req, res) => {
-    const { email, password, username } = req.body;
+    const { email, password, username, firstName, lastName } = req.body;
     const hashedPassword = bcrypt.hashSync(password);
-    const user = await User.create({ email, username, hashedPassword });
+    const user = await User.create({ email, username, firstName, lastName, hashedPassword });
 
     const safeUser = {
       id: user.id,
+      firstName: user.firstName,
+      lastName: user.lastName,
       email: user.email,
       username: user.username,
     };
@@ -53,3 +81,4 @@ router.post(
 
 
 module.exports = router;
+
