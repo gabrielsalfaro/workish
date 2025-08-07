@@ -16,21 +16,42 @@ module.exports = {
         username: 'demo',
         firstName: 'Demo',
         lastName: 'User',
-        hashedPassword: bcrypt.hashSync('password')
+        hashedPassword: bcrypt.hashSync('password'),
+        profileImg: 'https://example.com/image.jpg',
+        phone: 1234567890,
+        city: 'San Francisco',
+        state: 'CA',
+        jobTitle: 'Developer Advocate',
+        summary: 'Demo user for the app.',
+        companyId: 1
       },
       {
         email: 'user1@user.io',
         username: 'FakeUser1',
         firstName: 'Fake1',
         lastName: 'User',
-        hashedPassword: bcrypt.hashSync('password2')
+        hashedPassword: bcrypt.hashSync('password2'),
+        profileImg: 'https://example.com/image.jpg',
+        phone: 2345678901,
+        city: 'New York',
+        state: 'NY',
+        jobTitle: 'Full Stack Engineer',
+        summary: 'A passionate coder.',
+        companyId: 2
       },
       {
         email: 'user2@user.io',
         username: 'FakeUser2',
         firstName: 'Fake2',
         lastName: 'User',
-        hashedPassword: bcrypt.hashSync('password3')
+        hashedPassword: bcrypt.hashSync('password3'),
+        profileImg: 'https://example.com/image.jpg',
+        phone: 3456789012,
+        city: 'Chicago',
+        state: 'IL',
+        jobTitle: 'Project Manager',
+        summary: 'Detail-oriented and driven.',
+        companyId: 1
       }
     ], { validate: true });
   },

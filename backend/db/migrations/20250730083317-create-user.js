@@ -26,17 +26,49 @@ module.exports = {
       },
       firstName: {
         type: Sequelize.STRING(50),
-        allowNull: false,
-        // unique: true
+        allowNull: false
       },
       lastName: {
         type: Sequelize.STRING(50),
-        allowNull: false,
-        // unique: true
+        allowNull: false
       },
       hashedPassword: {
         type: Sequelize.STRING.BINARY,
         allowNull: false
+      },
+      profileImg: {
+        type: Sequelize.STRING,
+        allowNull: true
+      },
+      phone: {
+        type: Sequelize.INTEGER,
+        allowNull: true
+      },
+      city: {
+        type: Sequelize.STRING(50),
+        allowNull: true
+      },
+      state: {
+        type: Sequelize.STRING(2),
+        allowNull: true
+      },
+      jobTitle: {
+        type: Sequelize.STRING,
+        allowNull: true
+      },
+      summary: {
+        type: Sequelize.TEXT,
+        allowNull: true
+      },
+      companyId: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        references: {
+          model: 'Companies',
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL'
       },
       createdAt: {
         allowNull: false,

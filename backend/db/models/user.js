@@ -6,6 +6,7 @@ module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     static associate(models) {
       // define association here
+      // User.belongsTo(models.Company, { foreignKey: 'companyId' });
     }
   }
 
@@ -36,27 +37,15 @@ module.exports = (sequelize, DataTypes) => {
       firstName: {
         type: DataTypes.STRING,
         allowNull: false,
-        // unique: true,
         validate: {
           len: [2, 50],
-          isNotEmail(value) {
-            if (Validator.isEmail(value)) {
-              throw new Error('Cannot be an email.');
-            }
-          },
         },
       },
       lastName: {
         type: DataTypes.STRING,
         allowNull: false,
-        // unique: true,
         validate: {
           len: [2, 50],
-          isNotEmail(value) {
-            if (Validator.isEmail(value)) {
-              throw new Error('Cannot be an email.');
-            }
-          },
         },
       },
       hashedPassword: {
@@ -64,6 +53,46 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         validate: {
           len: [60, 60],
+        },
+      },
+      profileImg: {
+        type: DataTypes.STRING,
+        validate: {
+          isUrl: true,
+        },
+      },
+      phone: {
+        type: DataTypes.INTEGER, 
+        validate: {
+          isNumeric: true,
+        },
+      },
+      city: {
+        type: DataTypes.STRING,
+        validate: {
+          len: [2, 50],
+        },
+      },
+      state: {
+        type: DataTypes.STRING(2),
+        validate: {
+          len: [2, 2],
+        },
+      },
+      jobTitle: {
+        type: DataTypes.STRING,
+        validate: {
+          len: [2, 100],
+        },
+      },
+      summary: {
+        type: DataTypes.TEXT,
+      },
+      companyId: {
+        type: DataTypes.INTEGER,
+        references: {
+          model: 'Companies',
+          key: 'id',
         },
       },
     },
@@ -77,5 +106,6 @@ module.exports = (sequelize, DataTypes) => {
       },
     }
   );
+
   return User;
 };
