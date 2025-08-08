@@ -62,7 +62,7 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       phone: {
-        type: DataTypes.INTEGER, 
+        type: DataTypes.BIGINT, 
         validate: {
           isNumeric: true,
         },
