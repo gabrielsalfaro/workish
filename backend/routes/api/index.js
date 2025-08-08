@@ -83,7 +83,51 @@ router.get(
 // Test route
 router.post('/test', (req, res) => {
   res.json({ requestBody: req.body });
+  console.log('test')
+  const { user } = req;
+    if (user) {
+      const safeUser = {
+        id: user.id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        username: user.username,
+      };
+      return res.json({
+        user: safeUser
+      });
+    } else return res.json({ user: null });
 });
+
+router.get('/test', (req, res) => {
+  console.log('GET /api/test hit');
+
+  const { user } = req;
+
+  let safeUser = null;
+  if (user) {
+    safeUser = {
+      id: user.id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      username: user.username,
+      // profile_img: user.profile_img,
+      phone: user.phone,
+      city: user.city,
+      state: user.state,
+      jobTitle: user.jobTitle,
+      companyId: user.companyId,
+      summary: user.summary,
+    };
+  }
+
+  res.json({
+    message: 'Test route response',
+    user: safeUser
+  });
+});
+
 
 
 
