@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const express = require('express');
 const sessionRouter = require('./session.js');
 const usersRouter = require('./users.js');
 const { restoreUser, setTokenCookie, requireAuth } = require("../../utils/auth.js");
