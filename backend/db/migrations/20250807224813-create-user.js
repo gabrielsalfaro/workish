@@ -63,12 +63,12 @@ module.exports = {
       companyId: {
         type: Sequelize.INTEGER,
         allowNull: true,
-        // references: {
-        //   model: 'Companies',
-        //   key: 'id'
-        // },
-        // onUpdate: 'CASCADE',
-        // onDelete: 'SET NULL'
+        references: {
+          model: 'Companies',
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL'
       },
       createdAt: {
         allowNull: false,
