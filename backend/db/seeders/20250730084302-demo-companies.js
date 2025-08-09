@@ -14,7 +14,7 @@ module.exports = {
         name: 'Tech Corp',
         city: 'San Francisco',
         state: 'CA',
-        website: 'https://techcorp.com',
+        website: '#',
         phone: 1234567890,
         email: 'info@techcorp.com'
       },
@@ -22,7 +22,7 @@ module.exports = {
         name: 'Biz Solutions',
         city: 'New York',
         state: 'NY',
-        website: 'https://bizsolutions.io',
+        website: '#',
         phone: 9876543210,
         email: 'contact@bizsolutions.io'
       },
@@ -30,7 +30,7 @@ module.exports = {
         name: 'DataWorks',
         city: 'Chicago',
         state: 'IL',
-        website: 'https://dataworks.net',
+        website: '#',
         phone: 5551234567,
         email: 'hello@dataworks.net'
       }
