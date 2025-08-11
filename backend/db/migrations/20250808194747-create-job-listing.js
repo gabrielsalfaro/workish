@@ -17,10 +17,22 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       employerId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        refernces: {
+          model: 'Users',
+          key: 'id'
+        },
+        // onUpdate: 'CASCADE',
+        // onDelete: 'SET NULL'
       },
       companyId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Companies',
+          keky: 'id'
+        },
+        // onUpdate: 'CASCADE',
+        // onDelete: 'SET NULL'
       },
       city: {
         type: Sequelize.STRING
@@ -36,15 +48,17 @@ module.exports = {
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
+      },
     }, options);
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('JobListings');
+    await queryInterface.dropTable('JobListings', options);
   }
 };

@@ -9,7 +9,11 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      // ApplicationJobHistory belongs to a JobApplication
+      ApplicationJobHistory.belongsTo(models.JobApplication, { foreignKey: 'applicationId' });
+
+      // ApplicationJobHistory belongs to a JobHistory
+      ApplicationJobHistory.belongsTo(models.JobHistory, { foreignKey: 'jobHistoryId' });
     }
   }
   ApplicationJobHistory.init({

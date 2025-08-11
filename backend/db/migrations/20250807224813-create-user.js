@@ -67,8 +67,8 @@ module.exports = {
           model: 'Companies',
           key: 'id'
         },
-        onUpdate: 'CASCADE',
-        onDelete: 'SET NULL'
+        // onUpdate: 'CASCADE',
+        // onDelete: 'SET NULL'
       },
       createdAt: {
         allowNull: false,

@@ -16,7 +16,13 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       userId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        refernces: {
+          model: 'Users',
+          key: 'id'
+        },
+        // onUpdate: 'CASCADE',
+        // onDelete: 'SET NULL'
       },
       employer: {
         type: Sequelize.STRING
@@ -35,15 +41,17 @@ module.exports = {
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
+      },
     }, options);
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('JobHistories');
+    await queryInterface.dropTable('JobHistories', options);
   }
 };

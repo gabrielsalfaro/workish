@@ -9,7 +9,14 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      // JobHistory belongs to a User
+      JobHistory.belongsTo(models.User, { foreignKey: 'userId' });
+
+      // JobHistory belongsToMany JobApplications (via join table)
+      JobHistory.belongsToMany(models.JobApplication, { 
+        through: 'ApplicationJobHistory',
+        foreignKey: 'jobHistoryId',
+        otherKey: 'applicationId'})
     }
   }
   JobHistory.init({

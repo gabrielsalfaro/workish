@@ -16,22 +16,36 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       applicationId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        refernces: {
+          model: 'JobApplications',
+          key: 'id'
+        },
+        // onUpdate: 'CASCADE',
+        // onDelete: 'SET NULL'
       },
       jobHistoryId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        refernces: {
+          model: 'JobHistory',
+          key: 'id'
+        },
+        // onUpdate: 'CASCADE',
+        // onDelete: 'SET NULL'
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
+      },
     }, options);
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('ApplicationJobHistories');
+    await queryInterface.dropTable('ApplicationJobHistories', options);
   }
 };
