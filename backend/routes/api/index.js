@@ -104,6 +104,13 @@ router.get('/test', (req, res) => {
   console.log('GET /api/test hit');
 
   const { user } = req;
+  const path = require('path');
+
+  if (process.env.NODE_ENV === 'production') {
+    return res.sendFile(
+      path.resolve(__dirname, '../../../frontend/dist/index.html')
+    );
+  }
 
   let safeUser = null;
   if (user) {

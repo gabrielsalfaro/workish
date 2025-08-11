@@ -23,7 +23,15 @@ module.exports = {
         state: 'CA',
         jobTitle: 'Developer Advocate',
         summary: 'Demo user for the app.',
-        companyId: 1
+        companyId: 1,
+        createdAt: {
+          type: Sequelize.DATE,
+          defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
+        },
+        updatedAt: {
+          type: Sequelize.DATE,
+          defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
+        },
       },
       {
         email: 'user1@user.io',
@@ -37,7 +45,15 @@ module.exports = {
         state: 'NY',
         jobTitle: 'Full Stack Engineer',
         summary: 'A passionate coder.',
-        companyId: 2
+        companyId: 2,
+        createdAt: {
+          type: Sequelize.DATE,
+          defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
+        },
+        updatedAt: {
+          type: Sequelize.DATE,
+          defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
+        },
       },
       {
         email: 'user2@user.io',
@@ -51,7 +67,15 @@ module.exports = {
         state: 'IL',
         jobTitle: 'Project Manager',
         summary: 'Detail-oriented and driven.',
-        companyId: 1
+        companyId: 1,
+        createdAt: {
+          type: Sequelize.DATE,
+          defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
+        },
+        updatedAt: {
+          type: Sequelize.DATE,
+          defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
+        },
       }
     ], { validate: true });
   },

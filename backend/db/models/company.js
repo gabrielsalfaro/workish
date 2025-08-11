@@ -9,20 +9,52 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      // A Company can have many Users (if they're employers)
+      Company.hasMany(models.User, { foreignKey: 'companyId' });
+
+      // A Company can have any JobListings (created by employers)
+      Company.hasMany(models.JobListing, { foreignKey: 'companyId' });
     }
   }
   Company.init({
-    name: DataTypes.STRING,
-    city: DataTypes.STRING,
-    state: DataTypes.STRING,
-    website: DataTypes.STRING,
-    phone: DataTypes.BIGINT,
-    email: DataTypes.STRING
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    city: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    state: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: [2, 2]
+      }
+    },
+    website: {
+      type: DataTypes.STRING,
+      // validate: {
+      //   isUrl: true
+      // }
+    },
+    phone: {
+      type: DataTypes.BIGINT,
+      validate: {
+        isNumeric: true
+      }
+    },
+    email: {
+      type: DataTypes.STRING,
+      validate: {
+        isEmail: true
+      }
+    }
   }, {
     sequelize,
     modelName: 'Company',
   });
+
   return Company;
 };
 

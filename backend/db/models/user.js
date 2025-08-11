@@ -5,8 +5,20 @@ const { Model, Validator } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     static associate(models) {
-      // define association here
+       // A User belongs to a Company (the one they work at)
       User.belongsTo(models.Company, { foreignKey: 'companyId' });
+
+      // A User can have many JobListings (if they're an employer)
+      User.hasMany(models.JobListing, { foreignKey: 'employerId' });
+
+      // A User can have many JobApplications
+      User.hasMany(models.JobApplication, { foreignKey: 'userId' });
+
+      // A User can have many entries in their job history
+      User.hasMany(models.JobHistory, { foreignKey: 'userId' });
+
+      // A User can have many Watchlist entries
+      // User.hasMany(models.Watchlist, { foreignKey: 'userId' });
     }
   }
 
@@ -74,7 +86,7 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       state: {
-        type: DataTypes.STRING(2),
+        type: DataTypes.STRING,
         validate: {
           len: [2, 2],
         },
