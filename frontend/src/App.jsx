@@ -1,8 +1,28 @@
-import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
-import JobListingsCreate from './components/JobListingsCreate/JobListingsCreate';
+import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { Outlet, createBrowserRouter, RouterProvider } from 'react-router-dom';
+import LoginFormPage from './components/LoginFormPage';
+import SignupFormPage from './components/SignupFormPage';
+import Navigation from './components/Navigation';
+import * as sessionActions from './store/session';
+import JobListingsCreate from './components/JobListingsCreate';
 
 function Layout() {
-  return (<div><Outlet /></div>)
+  const dispatch = useDispatch();
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    dispatch(sessionActions.restoreUser()).then(() => {
+      setIsLoaded(true)
+    });
+  }, [dispatch]);
+
+  return (
+    <>
+      <Navigation isLoaded={isLoaded} />
+      {isLoaded && <Outlet />}
+    </>
+  );
 }
 
 const router = createBrowserRouter([
@@ -10,15 +30,27 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       {
-        path: '/jobs/new',
+        path: '/',
+        element: <h1>Welcome!</h1>
+      },
+      {
+        path: "login",
+        element: <LoginFormPage />
+      },
+      {
+        path: "signup",
+        element: <SignupFormPage />
+      },
+      {
+        path: "/jobs/new",
         element: <JobListingsCreate />
       },
     ]
   }
-])
+]);
+
 function App() {
-  // return <h1> Hello from App </h1>;
-  return <RouterProvider router={router} />
+  return <RouterProvider router={router} />;
 }
 
 export default App;
