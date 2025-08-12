@@ -2,9 +2,10 @@ const router = require('express').Router();
 const express = require('express');
 const sessionRouter = require('./session.js');
 const usersRouter = require('./users.js');
+const jobListingsRouter = require('./joblistings.js');
+// const jobsRouter = require('./joblistings');
 const { restoreUser, setTokenCookie, requireAuth } = require("../../utils/auth.js");
 const { User } = require('../../db/models');
-
 
 // Connect restoreUser middleware to the API router
   // If current user session is valid, set req.user to the user in the database
@@ -13,6 +14,8 @@ router.use(restoreUser);
 
 router.use('/session', sessionRouter);
 router.use('/users', usersRouter);
+router.use('/jobs', jobListingsRouter)
+// router.use('/jobs/new', jobsRouter);
 
 
 // Static routes
@@ -48,37 +51,6 @@ if (process.env.NODE_ENV !== 'production') {
   });
 }
 
-
-// GET /api/set-token-cookie
-router.get('/set-token-cookie', async (_req, res) => {
-  const user = await User.findOne({
-    where: {
-      username: 'demo'
-    }
-  });
-  setTokenCookie(res, user);
-  return res.json({ user: user });
-});
-
-
-// GET /api/restore-user
-router.use(restoreUser);
-router.get(
-  '/restore-user',
-  (req, res) => {
-    return res.json(req.user);
-  }
-);
-
-
-// GET /api/require-auth
-router.get(
-  '/require-auth',
-  requireAuth,
-  (req, res) => {
-    return res.json(req.user);
-  }
-);
 
 
 // Test route
@@ -138,5 +110,40 @@ router.get('/test', (req, res) => {
 
 
 
+// // GET /api/set-token-cookie
+// router.get('/set-token-cookie', async (_req, res) => {
+//   const user = await User.findOne({
+//     where: {
+//       username: 'demo'
+//     }
+//   });
+//   setTokenCookie(res, user);
+//   return res.json({ user: user });
+// });
+
+
+// // GET /api/restore-user
+// router.use(restoreUser);
+// router.get(
+//   '/restore-user',
+//   (req, res) => {
+//     return res.json(req.user);
+//   }
+// );
+
+
+// // GET /api/require-auth
+// router.get(
+//   '/require-auth',
+//   requireAuth,
+//   (req, res) => {
+//     return res.json(req.user);
+//   }
+// );
+
 
 module.exports = router;
+
+
+
+
