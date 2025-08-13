@@ -16,7 +16,8 @@ module.exports = {
         state: 'CA',
         website: '#',
         phone: 1234567890,
-        email: 'info@techcorp.com'
+        email: 'info@techcorp.com',
+        logo: '#'
       },
       {
         name: 'Biz Solutions',
@@ -24,7 +25,8 @@ module.exports = {
         state: 'NY',
         website: '#',
         phone: 9876543210,
-        email: 'contact@bizsolutions.io'
+        email: 'contact@bizsolutions.io',
+        logo: '#'
       },
       {
         name: 'DataWorks',
@@ -32,7 +34,53 @@ module.exports = {
         state: 'IL',
         website: '#',
         phone: 5551234567,
-        email: 'hello@dataworks.net'
+        email: 'hello@dataworks.net',
+        logo: '#'
+      },
+      {
+        name: 'InnovateX',
+        city: 'Austin',
+        state: 'TX',
+        website: '#',
+        phone: 5121234567,
+        email: 'hello@innovatex.com',
+        logo: '#'
+      },
+      {
+        name: 'GreenStack',
+        city: 'Seattle',
+        state: 'WA',
+        website: '#',
+        phone: 2069876543,
+        email: 'info@greenstack.io',
+        logo: '#'
+      },
+      {
+        name: 'HealthBridge',
+        city: 'Boston',
+        state: 'MA',
+        website: '#',
+        phone: 6175551122,
+        email: 'contact@healthbridge.com',
+        logo: '#'
+      },
+      {
+        name: 'SkyNetics',
+        city: 'Los Angeles',
+        state: 'CA',
+        website: '#',
+        phone: 3101237890,
+        email: 'admin@skynetics.ai',
+        logo: '#'
+      },
+      {
+        name: 'FinEdge',
+        city: 'Denver',
+        state: 'CO',
+        website: '#',
+        phone: 3039873210,
+        email: 'team@finedge.co',
+        logo: '#'
       }
     ], { validate: true });
   },

@@ -30,6 +30,9 @@ module.exports = {
       website: {
         type: Sequelize.STRING
       },
+      logo: {
+        type: Sequelize.STRING
+      },
       phone: {
         type: Sequelize.BIGINT,
         allowNull: true

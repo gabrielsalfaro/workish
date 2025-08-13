@@ -38,6 +38,12 @@ module.exports = (sequelize, DataTypes) => {
       //   isUrl: true
       // }
     },
+    logo: {
+      type: DataTypes.STRING,
+      // validate: {
+      //   isUrl: true
+      // }
+    },
     phone: {
       type: DataTypes.BIGINT,
       validate: {
