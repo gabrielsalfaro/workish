@@ -3,8 +3,10 @@ const { JobListing, User, Company } = require('../../db/models');
 const router = express.Router();
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
+const { requireAuth } = require('../../utils/auth');
 
-// GET /api/jobs/:jobId - Get JobListing by :jobId
+
+// Get JobListing by :jobId - GET /api/jobs/:jobId
 router.get('/:jobId', async (req, res) => {
     try {
         let { jobId } = req.params;
@@ -47,25 +49,64 @@ router.get('/:jobId', async (req, res) => {
 })
 
 
-// POST /api/jobs/new - Create a new job listing
-router.post('/new', async (req, res, next) => {
-  try {
-    const { title, description, city, state, companyId } = req.body;
-    const employerId = req.user.id;
+// Create a new job listing - POST /api/jobs/new
+router.post(
+  '/new', 
+  requireAuth,
+  async (req, res, next) => {
+    try {
+      const { title, description, city, state, companyId } = req.body;
+      const employerId = req.user.id;
 
-    const newJob = await JobListing.create({
-      employerId,
-      companyId,
-      title,
-      description,
-      city,
-      state
-    });
+      const newJob = await JobListing.create({
+        employerId,
+        companyId,
+        title,
+        description,
+        city,
+        state
+      });
 
-    return res.status(201).json(newJob);
-  } catch (err) {
-    next(err);
-  }
+      return res.status(201).json(newJob);
+    } catch (err) {
+      next(err);
+    }
 });
+
+
+// Update a job listing - PUT /api/jobs/:jobId
+router.put('/:jobId', 
+  requireAuth,
+  async (req, res, next) => {
+    try {
+      const { jobId } = req.params;
+      const { title, description, city, state, companyId } = req.body;
+      const userId = req.user.id;
+
+      const job = await JobListing.findByPk(jobId);
+
+      if (!job) {
+        return res.status(404).json({ message: 'Job not found' });
+      }
+
+      if (job.employerId !== userId) {
+        return res.status(403).json({ message: 'Forbidden' });
+      }
+
+      // Update fields
+      job.title = title;
+      job.description = description;
+      job.city = city;
+      job.state = state;
+      job.companyId = companyId;
+
+      await job.save();
+
+      return res.status(200).json(job);
+    } catch (err) {
+      next(err);
+    }
+});
+
 
 module.exports = router;
