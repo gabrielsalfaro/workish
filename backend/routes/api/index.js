@@ -16,6 +16,7 @@ router.use('/session', sessionRouter);
 router.use('/users', usersRouter);
 router.use('/jobs', jobListingsRouter)
 router.use('/jobs', applicationsRouter);
+router.use('/applications', applicationsRouter);
 
 
 // Test route
