@@ -49,11 +49,11 @@ router.get('/:jobId', async (req, res) => {
 })
 
 
-// Create a new job listing - POST /api/jobs/new
+// Create a new JobListing - POST /api/jobs/new
 router.post(
   '/new', 
   requireAuth,
-  async (req, res, next) => {
+  async (req, res) => {
     try {
       const { title, description, city, state, companyId } = req.body;
       const employerId = req.user.id;
@@ -74,10 +74,10 @@ router.post(
 });
 
 
-// Update a job listing - PUT /api/jobs/:jobId
+// Update a JobListing - PUT /api/jobs/:jobId
 router.put('/:jobId', 
   requireAuth,
-  async (req, res, next) => {
+  async (req, res) => {
     try {
       const { jobId } = req.params;
       const { title, description, city, state, companyId } = req.body;
@@ -109,7 +109,7 @@ router.put('/:jobId',
 });
 
 
-// Delete a job listing - DELETE /api/jobs/:jobId
+// Delete a JobListing - DELETE /api/jobs/:jobId
 router.delete('/:jobId', 
   requireAuth,
   async (req, res, next) => {

@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { createBrowserRouter, RouterProvider, Outlet, NavLink } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 import Navigation from './components/Navigation';
 import * as sessionActions from './store/session';
 import JobListingsCreate from './components/JobListingsCreate/JobListingsCreate';
+import Home from './components/Home/Home';
 
 function Layout() {
   const dispatch = useDispatch();
@@ -29,10 +30,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <>
-          <h1>Welcome!</h1>
-          <NavLink to='/jobs/new'>create a job listing!</NavLink>
-        </>
+        element: <Home />
       },
       {
         path: '/jobs/new',

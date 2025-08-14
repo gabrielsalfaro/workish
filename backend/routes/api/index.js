@@ -3,7 +3,7 @@ const express = require('express');
 const sessionRouter = require('./session.js');
 const usersRouter = require('./users.js');
 const jobListingsRouter = require('./joblistings.js');
-// const jobsRouter = require('./joblistings');
+const applicationsRouter = require('./applications.js');
 const { restoreUser, setTokenCookie, requireAuth } = require("../../utils/auth.js");
 const { User } = require('../../db/models');
 
@@ -15,7 +15,7 @@ router.use(restoreUser);
 router.use('/session', sessionRouter);
 router.use('/users', usersRouter);
 router.use('/jobs', jobListingsRouter)
-// router.use('/jobs/new', jobsRouter);
+router.use('/jobs', applicationsRouter);
 
 
 // Test route
