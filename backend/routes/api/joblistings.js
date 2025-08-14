@@ -4,7 +4,7 @@ const router = express.Router();
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const { requireAuth } = require('../../utils/auth');
-
+const { Op } = require('sequelize');
 
 
 // Get all JobListings created by current user - GET /api/jobs/created
@@ -61,6 +61,56 @@ router.post(
       return res.status(500).json({ message: 'Internal Server Error'})
     }
 });
+
+
+// Search JobListings - GET /api/jobs/search
+router.get('/search', async (req, res) => {
+  const { keyword, city, state, companyId } = req.query;
+  const filters = {};
+
+  try {
+    // Filter: Keyword in title or description
+    if (keyword) {
+      filters[Op.or] = [
+        { title: { [Op.like]: `%${keyword}%` } },
+        { description: { [Op.like]: `%${keyword}%` } }
+      ];
+    }
+
+    // Filter: City
+    if (city) {
+      filters.city = { [Op.like]: city };
+    }
+
+    // Filter: State
+    if (state) {
+      filters.state = state.toUpperCase();
+    }
+
+    // Filter: Company ID
+    if (companyId) {
+      filters.companyId = companyId;
+    }
+
+    const jobListings = await JobListing.findAll({
+      where: filters,
+      include: [
+        {
+          model: Company,
+          attributes: ['id', 'name', 'city', 'state', 'logo']
+        }
+      ],
+      order: [['createdAt', 'DESC']]
+    });
+
+    res.status(200).json(jobListings);
+    // 404 here? or frontend?
+  } catch (error) {
+    console.error('Error searching job listings:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
 
 
 // Get JobListing by :jobId - GET /api/jobs/:jobId
