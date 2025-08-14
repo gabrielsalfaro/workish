@@ -1,9 +1,66 @@
 const express = require('express');
-const { JobListing, User, Company } = require('../../db/models');
+const { JobListing, User, Company, JobApplication } = require('../../db/models');
 const router = express.Router();
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const { requireAuth } = require('../../utils/auth');
+
+
+
+// Get all JobListings created by current user - GET /api/jobs/created
+router.get(
+  '/created', 
+  requireAuth, 
+  async (req, res) => {
+    try {
+      const userId = req.user.id;
+
+      const jobs = await JobListing.findAll({
+        where: { employerId: userId },
+        include: [
+          {
+            model: Company,
+            attributes: ['id', 'name', 'city', 'state', 'website']
+          },
+          {
+            model: JobApplication,
+            attributes: ['id', 'status', 'userId']
+          }
+        ],
+        order: [['createdAt', 'DESC']] // add sorting here or frontend?
+      });
+
+      return res.status(200).json(jobs);
+    } catch (error) {
+      console.error('Error fetching created jobs:', error);
+      return res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
+
+// Create a new JobListing - POST /api/jobs/new
+router.post(
+  '/new', 
+  requireAuth,
+  async (req, res) => {
+    try {
+      const { title, description, city, state, companyId } = req.body;
+      const employerId = req.user.id;
+
+      const newJob = await JobListing.create({
+        employerId,
+        companyId,
+        title,
+        description,
+        city,
+        state
+      });
+
+      return res.status(201).json(newJob);
+    } catch (error) {
+      return res.status(500).json({ message: 'Internal Server Error'})
+    }
+});
 
 
 // Get JobListing by :jobId - GET /api/jobs/:jobId
@@ -47,31 +104,6 @@ router.get('/:jobId', async (req, res) => {
     }
 
 })
-
-
-// Create a new JobListing - POST /api/jobs/new
-router.post(
-  '/new', 
-  requireAuth,
-  async (req, res) => {
-    try {
-      const { title, description, city, state, companyId } = req.body;
-      const employerId = req.user.id;
-
-      const newJob = await JobListing.create({
-        employerId,
-        companyId,
-        title,
-        description,
-        city,
-        state
-      });
-
-      return res.status(201).json(newJob);
-    } catch (error) {
-      return res.status(500).json({ message: 'Internal Server Error'})
-    }
-});
 
 
 // Update a JobListing - PUT /api/jobs/:jobId

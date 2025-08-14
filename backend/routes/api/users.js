@@ -1,7 +1,7 @@
 const express = require('express')
 const bcrypt = require('bcryptjs');
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
-const { User } = require('../../db/models');
+const { User, JobHistory, Company } = require('../../db/models');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const router = express.Router();
@@ -78,6 +78,36 @@ router.post(
     });
   }
 );
+
+
+// GET /api/users/:userId
+router.get('/:userId', async (req, res) => {
+  const { userId } = req.params;
+
+  try {
+    const user = await User.findByPk(userId, {
+      include: [
+        {
+          model: JobHistory,
+          attributes: ['employer', 'city', 'state', 'startDate', 'endDate']
+        },
+        {
+          model: Company,
+          attributes: ['id', 'name', 'city', 'state', 'website', 'email']
+        }
+      ]
+    });
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    return res.json(user);
+  } catch (error) {
+    console.error('Error fetching user profile:', error);
+    return res.status(500).json({ message: 'Internal server error' });
+  }
+});
 
 
 module.exports = router;
