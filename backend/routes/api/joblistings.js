@@ -89,7 +89,7 @@ router.get('/search', async (req, res) => {
 
     // Filter: Company ID
     if (companyId) {
-      filters.companyId = companyId;
+      filters.companyId = companyId; // Need company.name
     }
 
     const jobListings = await JobListing.findAll({

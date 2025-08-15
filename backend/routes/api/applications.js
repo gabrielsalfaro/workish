@@ -34,9 +34,12 @@ router.get('/', requireAuth, async (req, res) => {
 });
 
 
-// Get Applications submitted to JobListing - GET /api/applications/employer?jobId=123
-router.get('/employer', requireAuth, async (req, res) => {
-  const { jobId } = req.query;
+// Get Applications submitted to JobListing - GET /api/jobs/:jobId/applications
+router.get(
+    '/:jobId/applications', 
+    requireAuth, 
+    async (req, res) => {
+  const { jobId } = req.params;
   const userId = req.user.id;
 
   try {
@@ -81,6 +84,7 @@ router.post(
         const userId = req.user.id;
 
         try {
+            // Add check for duplicate logic
             const job = await JobListing.findByPk(jobId);
             if (!job) {
                 return res.status(404).json({ message: 'Job not found' });
