@@ -11,11 +11,11 @@ export const loadSearchResults = (jobs) => ({
 
 
 // search
-export const fetchJobs = () => async (dispatch) => {
-    const res = await fetch('/api/jobs/search?keyword=${keyword}');
+export const fetchJobs = (keyword) => async (dispatch) => {
+    const res = await fetch(`/api/jobs/search?keyword=${keyword}`);
     if (res.ok) {
       const data = await res.json();
-      dispatch(loadSearchResults(data.Jobs));
+      dispatch(loadSearchResults(data));
     }
 };
 

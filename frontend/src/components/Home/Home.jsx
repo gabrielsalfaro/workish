@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import JobListingsResults from '../JobListingsResults';
 import JobListingDetails from '../JobListingDetails';
 import { fetchJobs } from '../../store/joblistings';
@@ -10,11 +10,16 @@ import './Home.css';
 const Home = () => {
     const [searchQuery, setSearchQuery] = useState();
     const dispatch = useDispatch();
+    const jobsState = useSelector(state => state.jobs);
+
 
     const handleSearch = (e) => {
         e.preventDefault();
         dispatch(fetchJobs(searchQuery));
+
     };
+
+    const checkState = () => {console.log('jobsState', jobsState)}
 
   return (<>
     <h1>Welcome!</h1>
@@ -28,7 +33,7 @@ const Home = () => {
         />
         <button 
             className="search"
-            onSubmit={handleSearch}
+            onClick={handleSearch}
         >Search</button>
     </div>
     
@@ -41,6 +46,9 @@ const Home = () => {
     </div>
     <div>
         <JobListingDetails />
+    </div>
+    <div>
+        <button onClick={checkState}>check state</button>
     </div>
 
 </>
