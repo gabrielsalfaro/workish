@@ -2,8 +2,9 @@ import { useSelector } from 'react-redux'
 // import jobsReducer from '../../store/joblistings'
 import './JobListingsResults.css'
 
-const JobListingsResults = () => {
+const JobListingsResults = ({ onSelectJob }) => {
     const jobs = useSelector(state => state.jobs.jobs);
+
     
   return (
   <>
@@ -11,7 +12,7 @@ const JobListingsResults = () => {
     <div>
       {jobs ? (
         Object.values(jobs).map(job => (
-          <div key={job.id}>{job.title}</div>
+          <div key={job.id} onClick={() => onSelectJob(job.id)} >{job.title}</div>
         ))
       ) : (
         <p>No Jobs Found</p>

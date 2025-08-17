@@ -8,9 +8,10 @@ import './Home.css';
 
 
 const Home = () => {
-    const [searchQuery, setSearchQuery] = useState();
+    const [searchQuery, setSearchQuery] = useState('');
     const dispatch = useDispatch();
     const jobsState = useSelector(state => state.jobs);
+    const [selectedJobId, setSelectedJobId] = useState(null);
 
 
     const handleSearch = (e) => {
@@ -42,10 +43,10 @@ const Home = () => {
     </div>
 
     <div>
-        <JobListingsResults />
+        <JobListingsResults onSelectJob={setSelectedJobId} />
     </div>
     <div>
-        <JobListingDetails />
+        <JobListingDetails jobId={selectedJobId} />
     </div>
     <div>
         <button onClick={checkState}>check state</button>
