@@ -42,9 +42,12 @@ function ProfileButton({ user }) {
 
   return (
     <>
-      <button onClick={toggleMenu}>
-        <FaUserCircle />
-      </button>
+    <div className="profile-button-container">
+      <div className="profile-button-bars" onClick={toggleMenu}>
+        <button onClick={toggleMenu}>
+          <FaUserCircle />
+        </button>
+      </div>
       <ul className={ulClassName} ref={ulRef}>
         {user ? (
           <>
@@ -70,6 +73,7 @@ function ProfileButton({ user }) {
           </>
         )}
       </ul>
+    </div>
     </>
   );
 }

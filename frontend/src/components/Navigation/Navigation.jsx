@@ -7,16 +7,29 @@ function Navigation({ isLoaded }) {
   const sessionUser = useSelector(state => state.session.user);
 
   return (
-    <ul>
-      <li>
-        <NavLink to="/">Home</NavLink>
-      </li>
-      {isLoaded && (
-        <li>
-          <ProfileButton user={sessionUser} />
+    <>
+    <div className="navigation-container">
+      <ul className="navigation-content">
+        <li className="navigation-home">
+          <NavLink to="/">Workish</NavLink>
         </li>
-      )}
-    </ul>
+
+        <li className="navigation-spacer"></li>
+
+        {isLoaded && (
+          <>
+            <li className="navigation-create-job">
+              <NavLink to="/jobs/new">Create a New Job Listing</NavLink>
+            </li>
+          <li>
+            <ProfileButton user={sessionUser} />
+          </li>
+          </>
+        )}
+      </ul>
+    </div>
+    
+    </>
   );
 }
 

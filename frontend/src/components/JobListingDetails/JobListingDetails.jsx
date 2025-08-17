@@ -6,17 +6,21 @@ const JobListingDetails = ({ jobId }) => {
     const jobs = useSelector(state => state.jobs.jobs);
     const job = jobs?.[jobId];
 
-    if (!job) return <div>Select a job to see details.</div>;
+    if (!job) return (
+    <div>
+        {/* <p>Select a job to see details.</p> */}
+    </div>
+    );
 
 
   return (
   <>
-    <div>JobListingDetails</div>
+    <div><h3>JobListingDetails</h3></div>
     <div className="details-container">
-        <div>title: {job.title}</div>
-        <div>description: {job.description}</div>
-        <div>city: {job.city}</div>
-        <div>state: {job.state}</div>
+        <div><b>title:</b> {job.title}</div>
+        <div><b>description:</b> {job.description}</div>
+        <div><b>city:</b> {job.city}</div>
+        <div><b>state:</b> {job.state}</div>
     </div>
 
   </>
