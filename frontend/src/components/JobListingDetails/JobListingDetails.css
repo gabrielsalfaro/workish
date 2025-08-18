@@ -1,0 +1,11 @@
+.details-container {
+    /* display: flex; */
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    border-left: 1px solid #ddd;
+    /* width: 800px; */
+    padding: 10px;
+    /* min-width: 200px; */
+    /* max-width: 40%; */
+    margin: 10px;
+}

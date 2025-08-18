@@ -15,7 +15,7 @@ const JobListingDetails = ({ jobId }) => {
 
   return (
   <>
-    <div><h3>JobListingDetails</h3></div>
+    {/* <div><h3>JobListingDetails</h3></div> */}
     <div className="details-container">
         <div><b>title:</b> {job.title}</div>
         <div><b>description:</b> 

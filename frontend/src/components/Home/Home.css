@@ -1,7 +1,14 @@
-.search-field {
+.search-field-keyword {
     border: 1px solid #ccc;
     border-radius: 6px;
     width: 300px;
+    padding: 10px;
+}
+
+.search-field-location {
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    width: 200px;
     padding: 10px;
 }
 
@@ -9,6 +16,49 @@
     display: flex;
     justify-content: center;
     justify-items: center;
+}
+
+.search-form {
+    display: flex;
+    justify-content: center;
+    justify-items: center;
     margin: 20px 0;
     gap: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    max-width: 800px;
+    padding: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.home-job-listings-container {
+    display: flex;
+    justify-content: center;
+    /* border: 1px solid #ccc; */
+    /* border-radius: 6px; */
+    /* width: 300px; */
+    padding: 10px;
+    gap: 10px;
+    align-items: flex-start;
+}
+
+.home-job-listings-container > div:first-child {
+    width: 300px;
+    /* border-right: 1px solid #ddd; */
+    padding-right: 10px;
+}
+
+.home-job-listings-container > div:last-child {
+    flex: 1;
+    max-height: 500px;
+    overflow-y: auto;
+    padding-left: 10px;
+    max-width: 500px;
+}
+
+.search-button {
+    background-color: #2453ba;
+    color: white;
+    padding: 10px;
+    border-radius: 6px;
 }

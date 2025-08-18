@@ -10,14 +10,15 @@ import './Home.css';
 
 const Home = () => {
     const [searchQuery, setSearchQuery] = useState('');
+    const [locationQuery, setLocationQuery] = useState('');
     const dispatch = useDispatch();
     // const jobsState = useSelector(state => state.jobs);
     const [selectedJobId, setSelectedJobId] = useState(null);
     const [hasSearched, setHasSearched] = useState(false);
-const location = useLocation();
+    const location = useLocation();
 
   useEffect(() => {
-    // Reset search when Home is visited
+    // Reset search when Home is clicked
     setSearchQuery('');
     setSelectedJobId(null);
     setHasSearched(false);
@@ -35,33 +36,46 @@ const location = useLocation();
 
   return (<>
     {/* <h1>Welcome!</h1> */}
-    <form className='search-container' onSubmit={handleSearch}>
-        <input 
-            placeholder='search...'
-            type="text" 
-            value={searchQuery}
-            className='search-field'
-            onChange={(e) => setSearchQuery(e.target.value)}
-        />
-        <button 
-            className="search"
-            // onClick={handleSearch}
-        >Search</button>
-    </form>
+    <div className="search-container">
+        <form className='search-form' onSubmit={handleSearch}>
+            <input 
+                placeholder='Job title, keywords, or company'
+                type="text" 
+                value={searchQuery}
+                className='search-field-keyword'
+                onChange={(e) => setSearchQuery(e.target.value)}
+            />
+            <input 
+                placeholder='City, state, or "remote"'
+                type="text" 
+                value={locationQuery}
+                className='search-field-location'
+                onChange={(e) => setLocationQuery(e.target.value)}
+            />
+            <button 
+                className="search-button"
+                // onClick={handleSearch}
+            >Search</button>
+        </form>
+    </div>
+    
     
     <div>
         {/* <NavLink to='/jobs/new'>create a job listing!</NavLink> */}
     </div>
 
-    <div>
-        <JobListingsResults 
-            onSelectJob={setSelectedJobId} 
-            hasSearched={hasSearched}
-        />
+    <div className="home-job-listings-container">
+        <div>
+            <JobListingsResults 
+                onSelectJob={setSelectedJobId} 
+                hasSearched={hasSearched}
+            />
+        </div>
+        <div>
+            <JobListingDetails jobId={selectedJobId} />
+        </div>
     </div>
-    <div>
-        <JobListingDetails jobId={selectedJobId} />
-    </div>
+
     <div>
         {/* <button onClick={checkState} style={{padding: '10px'}}>check state</button> */}
     </div>
