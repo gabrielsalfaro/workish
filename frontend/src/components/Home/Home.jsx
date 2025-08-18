@@ -1,9 +1,10 @@
 // import { NavLink } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import JobListingsResults from '../JobListingsResults';
 import JobListingDetails from '../JobListingDetails';
-import { fetchJobs } from '../../store/joblistings';
+import { fetchJobs, clearJobs } from '../../store/joblistings';
 import './Home.css';
 
 
@@ -13,7 +14,15 @@ const Home = () => {
     // const jobsState = useSelector(state => state.jobs);
     const [selectedJobId, setSelectedJobId] = useState(null);
     const [hasSearched, setHasSearched] = useState(false);
+const location = useLocation();
 
+  useEffect(() => {
+    // Reset search when Home is visited
+    setSearchQuery('');
+    setSelectedJobId(null);
+    setHasSearched(false);
+    dispatch(clearJobs());
+  }, [location.key, dispatch]);
 
     const handleSearch = (e) => {
         e.preventDefault();
@@ -26,7 +35,7 @@ const Home = () => {
 
   return (<>
     {/* <h1>Welcome!</h1> */}
-    <div className='search-container'>
+    <form className='search-container' onSubmit={handleSearch}>
         <input 
             placeholder='search...'
             type="text" 
@@ -36,9 +45,9 @@ const Home = () => {
         />
         <button 
             className="search"
-            onClick={handleSearch}
+            // onClick={handleSearch}
         >Search</button>
-    </div>
+    </form>
     
     <div>
         {/* <NavLink to='/jobs/new'>create a job listing!</NavLink> */}

@@ -12,7 +12,7 @@ const JobListingsResults = ({ onSelectJob, hasSearched }) => {
     <div>
       {Object.values(jobs || {}).length > 0 ? (
         Object.values(jobs).map(job => (
-          <div key={job.id} onClick={() => onSelectJob(job.id)} >{job.title}</div>
+          <div key={job.id} onClick={() => onSelectJob(job.id)} ><b>{job.title}</b></div>
         ))
       ) : (
         hasSearched && <p>No Jobs Found</p>

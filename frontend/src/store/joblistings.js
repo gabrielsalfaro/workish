@@ -1,12 +1,17 @@
 // import { csrfFetch } from './csrf';
 
 const LOAD_SEARCH_RESULTS = 'jobs/LOAD_SEARCH_RESULTS';
+const CLEAR_JOBS = 'jobs/CLEAR_JOBS';
 
 const initialState = {}
 
 export const loadSearchResults = (jobs) => ({
     type: LOAD_SEARCH_RESULTS,
     jobs,
+});
+
+export const clearJobs = () => ({
+  type: CLEAR_JOBS
 });
 
 
@@ -18,6 +23,7 @@ export const fetchJobs = (keyword) => async (dispatch) => {
       dispatch(loadSearchResults(data));
     }
 };
+
 
 // lookup reducers
 const jobsReducer = (state = initialState, action) => {
@@ -31,6 +37,8 @@ const jobsReducer = (state = initialState, action) => {
         // return newState;
         return { ...state, jobs: newState }
       }
+      case CLEAR_JOBS:
+        return { ...state, jobs: null };
       default:
         return state;
     }
