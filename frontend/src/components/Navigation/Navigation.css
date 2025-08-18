@@ -100,6 +100,14 @@
   align-items: flex-start;
 }
 
+.menu-hr {
+  border: none;
+  border-top: 1px solid #ccc;
+  margin: 8px 0;
+  height: 0;
+  width: 90%;
+}
+
 .manage-spots-navlink:hover {
   text-decoration: underline;
 }

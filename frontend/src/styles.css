@@ -24,10 +24,10 @@ html, body, #root {
 }
 
 
-/* h1 {
-    font-size: 55;
+h1 {
+    font-size: 25px;
     font-weight: bold;
-} */
+}
 
 
 .spacer {

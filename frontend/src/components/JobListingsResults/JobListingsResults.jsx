@@ -12,7 +12,6 @@ const JobListingsResults = ({ onSelectJob, hasSearched }) => {
     <div className="job-result-container">
       {Object.values(jobs || {}).length > 0 ? (
         Object.values(jobs).map(job => (
-        <>
           <div key={job.id} className="job-result-content">
             <div onClick={() => onSelectJob(job.id)} >
                 <b>{job.title} </b>
@@ -22,7 +21,6 @@ const JobListingsResults = ({ onSelectJob, hasSearched }) => {
             
             </div>
           </div>
-        </>
         ))
       ) : (
         hasSearched && <p>No Jobs Found</p>

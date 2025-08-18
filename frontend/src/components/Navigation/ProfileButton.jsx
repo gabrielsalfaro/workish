@@ -1,10 +1,13 @@
 import { useState, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 import { FaUserCircle } from 'react-icons/fa';
 import * as sessionActions from '../../store/session';
 import OpenModalMenuItem from './OpenModalMenuItem';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
+import './Navigation.css'
+
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
@@ -54,6 +57,10 @@ function ProfileButton({ user }) {
             <li>{user.username}</li>
             <li>{user.firstName} {user.lastName}</li>
             <li>{user.email}</li>
+            <hr className='menu-hr' />
+             <NavLink to="/jobs/my-jobs" onClick={closeMenu} className={'manage-jobs-navlink'}>Manage Jobs</NavLink>
+            <li style={{color: 'gray'}}>view applications</li>
+            <hr className='menu-hr' />
             <li>
               <button onClick={logout}>Log Out</button>
             </li>

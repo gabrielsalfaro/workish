@@ -5,6 +5,7 @@ import Navigation from './components/Navigation';
 import * as sessionActions from './store/session';
 import JobListingsCreate from './components/JobListingsCreate/JobListingsCreate';
 import Home from './components/Home/Home';
+import JobListingsManage from './components/JobListingsManage/JobListingsManage';
 
 function Layout() {
   const dispatch = useDispatch();
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
       {
         path: '/jobs/new',
         element: <JobListingsCreate />
+      },
+      {
+        path: '/jobs/my-jobs',
+        element: <JobListingsManage />
       }
     ]
   }
