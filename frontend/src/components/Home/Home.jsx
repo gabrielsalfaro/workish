@@ -17,18 +17,20 @@ const Home = () => {
     const [hasSearched, setHasSearched] = useState(false);
     const location = useLocation();
 
-  useEffect(() => {
-    // Reset search when Home is clicked
-    setSearchQuery('');
-    setSelectedJobId(null);
-    setHasSearched(false);
-    dispatch(clearJobs());
-  }, [location.key, dispatch]);
+    useEffect(() => {
+        // Reset search when Home is clicked
+        setSearchQuery('');
+        setSelectedJobId(null);
+        setHasSearched(false);
+        dispatch(clearJobs());
+    }, [location.key, dispatch]);
 
     const handleSearch = (e) => {
         e.preventDefault();
+
+        const [city, state] = locationQuery.split(',').map(string => string.trim());
         setHasSearched(true);
-        dispatch(fetchJobs(searchQuery));
+        dispatch(fetchJobs(searchQuery, {city: city, state: state}));
 
     };
 
