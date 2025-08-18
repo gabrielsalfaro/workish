@@ -33,6 +33,23 @@ const JobListingsManage = () => {
                         <div key={job.id} className="my-job-listing-content">
                             <b>{job.title} </b>
                             <div>{job.city}, {job.state}</div>
+                            
+                            <div>
+                                <button 
+                                    onClick={() => console.log('clicked')} 
+                                    className="my-jobs-update-button"
+                                >
+                                    update
+                                </button>
+                            </div>
+                            <div>
+                                <button 
+                                    onClick={() => console.log('clicked')} 
+                                    className="my-jobs-delete-button"
+                                >
+                                    delete
+                                </button>
+                            </div>
                         </div>
                     ))
                 ) : (

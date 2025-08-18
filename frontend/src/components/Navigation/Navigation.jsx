@@ -16,8 +16,9 @@ function Navigation({ isLoaded }) {
 
         <li className="navigation-spacer"></li>
 
-        {isLoaded && (
+        {isLoaded && sessionUser && (
           <>
+          
             <li className="navigation-create-job">
               <NavLink to="/jobs/new">Create a New Job Listing</NavLink>
             </li>
@@ -25,6 +26,12 @@ function Navigation({ isLoaded }) {
             <ProfileButton user={sessionUser} />
           </li>
           </>
+        )}
+
+        {isLoaded && !sessionUser && (
+          <li className="navigation-profile">
+            <ProfileButton user={null} />
+          </li>
         )}
       </ul>
     </div>
