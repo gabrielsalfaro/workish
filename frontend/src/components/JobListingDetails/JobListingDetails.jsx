@@ -1,10 +1,24 @@
-import { useSelector } from 'react-redux'
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { fetchJobById } from '../../store/joblistings';
 import './JobListingDetails.css'
 
 
-const JobListingDetails = ({ jobId }) => {
-    const jobs = useSelector(state => state.jobs.jobs);
-    const job = jobs?.[jobId];
+const JobListingDetails = ({ jobId: propJobId }) => {
+    const dispatch = useDispatch();
+    const params = useParams();
+    const jobId = propJobId || params.jobId;
+    
+    // const jobs = useSelector(state => state.jobs.jobs);
+    // const job = jobs?.[jobId];
+    const job = useSelector(state => state.jobs?.[jobId]);
+
+    useEffect(() => {
+        if (!job && jobId) {
+        dispatch(fetchJobById(jobId));
+        }
+    }, [dispatch, job, jobId]);
 
     if (!job) return (
     <div>

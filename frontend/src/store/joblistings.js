@@ -3,6 +3,8 @@
 const LOAD_SEARCH_RESULTS = 'jobs/LOAD_SEARCH_RESULTS';
 const CLEAR_JOBS = 'jobs/CLEAR_JOBS';
 const LOAD_MY_JOBS = 'jobs/LOAD_MY_JOBS';
+const LOAD_SINGLE_JOB = 'spots/LOAD_SINGLE_JOB';
+
 
 const initialState = {}
 
@@ -19,6 +21,11 @@ export const loadMyJobs = (jobs) => ({
   type: LOAD_MY_JOBS,
   jobs,
 });
+
+export const loadSingleJob = (job) => ({
+  type: LOAD_SINGLE_JOB,
+  job
+})
 
 
 // search
@@ -49,6 +56,22 @@ export const fetchMyJobs = () => async (dispatch) => {
     }
 };
 
+// fetch Job Details /:jobId
+export const fetchJobById = (jobId) => async (dispatch) => {
+  try {
+    const res = await fetch(`/api/jobs/${jobId}`);
+    if (res.ok) {
+      const job = await res.json();
+      dispatch(loadSingleJob(job));
+    } else {
+      console.error('Failed to fetch job by ID');
+    }
+  } catch (error) {
+    console.error('Error fetching job by ID:', error);
+  }
+};
+
+
 
 // lookup reducers
 const jobsReducer = (state = initialState, action) => {
@@ -61,6 +84,12 @@ const jobsReducer = (state = initialState, action) => {
         // console.log('newState: ', newState)
         // return newState;
         return { ...state, jobs: newState }
+      }
+      case LOAD_SINGLE_JOB: {
+        return {
+            ...state,
+            [action.job.id]: action.job
+        };
       }
       case LOAD_MY_JOBS: {
         const jobsObj = {};

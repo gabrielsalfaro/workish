@@ -92,6 +92,7 @@ router.get('/search', async (req, res) => {
       filters.companyId = companyId; // Need company.name
     }
 
+    // keywords need toLowerCase();
     const jobListings = await JobListing.findAll({
       where: filters,
       include: [
