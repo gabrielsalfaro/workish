@@ -84,19 +84,21 @@ router.post(
 router.get('/search', async (req, res) => {
   const { keyword, city, state } = req.query;
   const filters = [];
+  const isPostgres = req.app.get('sequelize').getDialect() === 'postgres';
+  const likeOperator = isPostgres ? Op.iLike : Op.like;
 
   if (keyword) {
     filters.push({
       [Op.or]: [
-        { title: { [Op.like]: `%${keyword}%` } },
-        { description: { [Op.like]: `%${keyword}%` } },
-        { '$Company.name$': { [Op.like]: `%${keyword}%` } } // add company name
+        { title: { [likeOperator]: `%${keyword}%` } },
+        { description: { [likeOperator]: `%${keyword}%` } },
+        { '$Company.name$': { [likeOperator]: `%${keyword}%` } } // add company name
       ]
     });
   }
 
   if (city) {
-    filters.push({ city: { [Op.like]: `%${city}%` } });
+    filters.push({ city: { [likeOperator]: `%${city}%` } });
   }
 
   if (state) {
