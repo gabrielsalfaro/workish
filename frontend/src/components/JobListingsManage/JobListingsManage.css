@@ -1,0 +1,20 @@
+.my-job-listing-content {
+    display: flex;
+    margin: 20px;
+    padding: 10px;
+}
+
+.my-jobs-update-button {
+    background-color: #2453ba;
+    color: white;
+    padding: 10px;
+    border-radius: 6px;
+}
+
+.my-jobs-delete-button {
+    background-color: #2453ba;
+    color: white;
+    padding: 10px;
+    border-radius: 6px;
+}
+

@@ -4,6 +4,7 @@ import './JobListingsResults.css'
 
 const JobListingsResults = ({ onSelectJob, hasSearched }) => {
     const jobs = useSelector(state => state.jobs.jobs);
+    // const joblistings = await Job
 
     
   return (
@@ -15,6 +16,11 @@ const JobListingsResults = ({ onSelectJob, hasSearched }) => {
           <div key={job.id} className="job-result-content">
             <div onClick={() => onSelectJob(job.id)} >
                 <b>{job.title} </b>
+                    {job.Company?.name && (
+                <div className="job-company-name">
+                  {job.Company.name}
+                </div>
+              )}
                 <div>
                     {job.city}, {job.state}
                 </div>

@@ -38,7 +38,7 @@ const JobListingsCreate = () => {
 
   return (
     <div className="job-listing-form">
-      <h2>Create a Job Listing</h2>
+      <h1>Create a Job Listing</h1>
       <form onSubmit={handleSubmit}>
         <input 
           placeholder='job title'
@@ -67,7 +67,9 @@ const JobListingsCreate = () => {
           className="quill"
           theme="snow"
         />
-        <button type="submit">Post Job</button>
+        <button 
+        className='job-listing-post-button' 
+        type="submit">Post Job</button>
       </form>
     </div>
   );
