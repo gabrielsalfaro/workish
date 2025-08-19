@@ -37,41 +37,49 @@ const JobListingsCreate = () => {
   };
 
   return (
-    <div className="job-listing-form">
-      <h1>Create a Job Listing</h1>
-      <form onSubmit={handleSubmit}>
-        <input 
-          placeholder='job title'
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-        <input 
-          placeholder='city'
-          value={city}
-          onChange={(e) => setCity(e.target.value)}
-        />
-        <input 
-          placeholder='state'
-          value={state}
-          onChange={(e) => setState(e.target.value)}
-        />
-        <input 
-          placeholder='CompanyId'
-          type='number'
-          value={companyId}
-          onChange={(e) => setCompanyId(Number(e.target.value))}
-        />
-        <ReactQuill
-          value={description}
-          onChange={setDescription}
-          className="quill"
-          theme="snow"
-        />
-        <button 
-        className='job-listing-post-button' 
-        type="submit">Post Job</button>
-      </form>
+    <>
+    <div className='create-job-listing-container'>
+        <div className="job-listing-form-content">
+        <h1 className='create-job-listing-header'>Create a Job Listing</h1>
+        <form className="job-listing-form-content" onSubmit={handleSubmit}>
+            <input 
+                placeholder='job title'
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+            />
+            <input 
+                placeholder='city'
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+            />
+            <input 
+                placeholder='state'
+                value={state}
+                onChange={(e) => setState(e.target.value)}
+            />
+            <input 
+                placeholder='CompanyId'
+                type='number'
+                value={companyId}
+                onChange={(e) => setCompanyId(Number(e.target.value))}
+            />
+            <div>
+                <ReactQuill
+                    value={description}
+                    onChange={setDescription}
+                    className="quill"
+                    theme="snow"
+                />
+            </div>
+            <button 
+                className='job-listing-post-button' 
+                type="submit">Post Job
+            </button>
+        </form>
+
+        </div>
     </div>
+    </>
   );
 };
 

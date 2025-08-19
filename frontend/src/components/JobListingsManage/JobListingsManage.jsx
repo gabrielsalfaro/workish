@@ -27,15 +27,17 @@ const JobListingsManage = () => {
 
     return (
         <>
-        <h1>My Job Listings</h1>
+        <h1 className='my-job-listings-header'>My Job Listings</h1>
         <div className="my-job-listings-container">
             {jobs.length > 0 ? (
                 jobs.map(job => (
                     <>
-                    <NavLink to={`/jobs/${job.id}/details`} key={job.id} >
-                        <div className="my-job-listing-content">
+                        <div key={job.id} className="my-job-listing-content">
+                    <NavLink to={`/jobs/${job.id}/details`}  >
+
                             <div><b>{job.title} </b></div>
                             <div>{job.city}, {job.state}</div>
+                    </NavLink>
                             
                             <div className="my-jobs-button-container">
                                 <div>
@@ -57,7 +59,6 @@ const JobListingsManage = () => {
                             </div>
 
                         </div>
-                    </NavLink>
                     </>
                 ))
             ) : (

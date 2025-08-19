@@ -31,12 +31,15 @@ const JobListingDetails = ({ jobId: propJobId }) => {
   <>
     {/* <div><h3>JobListingDetails</h3></div> */}
     <div className="details-container">
-        <div><b>title:</b> {job.title}</div>
-        <div><b>Company:</b> {job.Company?.name}</div>
-        <div><b>City:</b> {job.Company?.city}</div>
-        <div><b>State:</b> {job.Company?.state}</div>
-        <div><b>Website:</b> {job.Company?.website}</div>
-        <button className="job-apply-button" onClick={console.log('clicked')}>apply</button>
+        <div className='details-header-content'>
+            <div><b>title:</b> {job.title}</div>
+            <div><b>Company:</b> {job.Company?.name}</div>
+            <div><b>City:</b> {job.Company?.city}</div>
+            <div><b>State:</b> {job.Company?.state}</div>
+            <div><b>Website:</b> {job.Company?.website}</div>
+            <button className="job-apply-button" onClick={console.log('clicked')}>apply</button>
+        </div>
+
         <div><b>description:</b> 
         {/* {job.description} */}
         <div dangerouslySetInnerHTML={{ __html: job.description }} />

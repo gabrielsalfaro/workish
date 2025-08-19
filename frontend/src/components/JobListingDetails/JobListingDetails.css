@@ -9,3 +9,19 @@
     /* max-width: 40%; */
     margin: 10px;
 }
+
+.details-header-content {
+    border-bottom: 1px solid #ccc;
+    /* border-radius: 6px; */
+    padding-bottom: 10px;
+    /* min-width: 200px; */
+    /* max-width: 40%; */
+    margin: 10px 0;
+}
+
+.job-apply-button {
+    background-color: #2453ba;
+    color: white;
+    padding: 10px;
+    border-radius: 6px;
+}
