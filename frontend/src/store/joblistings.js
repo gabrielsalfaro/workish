@@ -29,17 +29,21 @@ export const loadSingleJob = (job) => ({
 
 
 // search
-export const fetchJobs = (keyword, { city, state }) => async (dispatch) => {
+export const fetchJobs = (keyword, { city, state, companyName }) => async (dispatch) => {
   try {
     const query = new URLSearchParams();
     if (keyword) query.append('keyword', keyword);
     if (city) query.append('city', city);
     if (state) query.append('state', state); // state not working yet
+    if (companyName) query.append('companyName', companyName.trim());
+
+    // console.log('Fetching with query:', query.toString());
 
     const res = await fetch(`/api/jobs/search?${query.toString()}`);
 
     if (res.ok) {
       const data = await res.json();
+    //   console.log('Job data from backend:', data);
       dispatch(loadSearchResults(data));
     }
   } catch (error) {

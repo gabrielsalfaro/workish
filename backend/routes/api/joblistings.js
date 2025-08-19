@@ -44,12 +44,28 @@ router.post(
   requireAuth,
   async (req, res) => {
     try {
-      const { title, description, city, state, companyId } = req.body;
+      const { title, description, city, state, companyName } = req.body;
       const employerId = req.user.id;
+
+      // Check if company exists
+      let company = await Company.findOne({ where: { name: companyName } });
+
+      // If not, create a new company
+      if (!company) {
+        company = await Company.create({
+          name: companyName,
+          city: city || 'Unknown',
+          state: state || 'Unknown',
+          website: '#',
+          email: 'placeholder@example.io',
+          phone: '0000000000',
+          logo: ''
+        });
+      }
 
       const newJob = await JobListing.create({
         employerId,
-        companyId,
+        companyId: company.id,
         title,
         description,
         city,
@@ -58,6 +74,7 @@ router.post(
 
       return res.status(201).json(newJob);
     } catch (error) {
+      console.error('Error creating job listing', error)
       return res.status(500).json({ message: 'Internal Server Error'})
     }
 });
@@ -65,49 +82,44 @@ router.post(
 
 // Search JobListings - GET /api/jobs/search
 router.get('/search', async (req, res) => {
-  const { keyword, city, state, companyId } = req.query;
-  const filters = {};
+  const { keyword, city, state } = req.query;
+  const filters = [];
+
+  if (keyword) {
+    filters.push({
+      [Op.or]: [
+        { title: { [Op.like]: `%${keyword}%` } },
+        { description: { [Op.like]: `%${keyword}%` } },
+        { '$Company.name$': { [Op.like]: `%${keyword}%` } } // add company name
+      ]
+    });
+  }
+
+  if (city) {
+    filters.push({ city: { [Op.like]: `%${city}%` } });
+  }
+
+  if (state) {
+    filters.push({ state: state.toUpperCase() });
+  }
 
   try {
-    // Filter: Keyword in title or description
-    if (keyword) {
-      filters[Op.or] = [
-        { title: { [Op.like]: `%${keyword}%` } },
-        { description: { [Op.like]: `%${keyword}%` } }
-      ];
-    }
-
-    // Filter: City
-    if (city) {
-      filters.city = { [Op.like]: city };
-    }
-
-    // Filter: State
-    if (state) {
-      filters.state = state.toUpperCase();
-    }
-
-    // Filter: Company ID
-    if (companyId) {
-      filters.companyId = companyId; // Need company.name
-    }
-
-    // keywords need toLowerCase();
     const jobListings = await JobListing.findAll({
-      where: filters,
+      where: {
+        [Op.and]: filters
+      },
       include: [
         {
           model: Company,
-          attributes: ['id', 'name', 'city', 'state', 'logo']
+          attributes: ['id', 'name', 'city', 'state', 'logo'],
         }
       ],
       order: [['createdAt', 'DESC']]
     });
 
     res.status(200).json(jobListings);
-    // 404 here? or frontend?
   } catch (error) {
-    console.error('Error searching job listings:', error);
+    console.error(error);
     res.status(500).json({ message: 'Internal server error' });
   }
 });
@@ -163,7 +175,7 @@ router.put('/:jobId',
   async (req, res) => {
     try {
       const { jobId } = req.params;
-      const { title, description, city, state, companyId } = req.body;
+      const { title, description, city, state, companyName } = req.body;
       const userId = req.user.id;
 
       const job = await JobListing.findByPk(jobId);
@@ -181,7 +193,7 @@ router.put('/:jobId',
       job.description = description;
       job.city = city;
       job.state = state;
-      job.companyId = companyId;
+      job.companyName = companyName;
 
       await job.save();
 

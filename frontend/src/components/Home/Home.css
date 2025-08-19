@@ -50,7 +50,8 @@
 
 .home-job-listings-container > div:last-child {
     flex: 1;
-    max-height: 500px;
+    max-height: 800px;
+    border-left: 1px solid #ddd;
     overflow-y: auto;
     padding-left: 10px;
     max-width: 500px;
@@ -61,4 +62,14 @@
     color: white;
     padding: 10px;
     border-radius: 6px;
+}
+
+.home-job-listing-results {
+    height: 500px;
+}
+
+.spacer {
+    min-height: 70vh;
+    border-right: 1px solid #ddd;
+    /* border-left: 1px solid #ccc; */
 }

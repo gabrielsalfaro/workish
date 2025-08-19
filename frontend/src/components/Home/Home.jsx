@@ -25,12 +25,22 @@ const Home = () => {
         dispatch(clearJobs());
     }, [location.key, dispatch]);
 
+    // useEffect(() => {
+    //   dispatch(fetchJobs('Developer', { city: 'San Francisco', state: 'CA', companyName: 'Biz' }));
+    // Search only by companyName:
+    // }, [dispatch]);
+
+
+
+
     const handleSearch = (e) => {
         e.preventDefault();
 
         const [city, state] = locationQuery.split(',').map(string => string.trim());
         setHasSearched(true);
-        dispatch(fetchJobs(searchQuery, {city: city, state: state}));
+        dispatch(fetchJobs(searchQuery, {city: city, state: state, companyName: searchQuery}));
+        // dispatch(fetchJobs(searchQuery, { city, state }));
+        // dispatch(fetchJobs('', { companyName: searchQuery }));
 
     };
 
@@ -71,8 +81,10 @@ const Home = () => {
             <JobListingsResults 
                 onSelectJob={setSelectedJobId} 
                 hasSearched={hasSearched}
+                className='home-job-listing-results'
             />
         </div>
+        {/* <div className="spacer"></div> */}
         <div>
             <JobListingDetails jobId={selectedJobId} />
         </div>

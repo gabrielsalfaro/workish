@@ -6,7 +6,7 @@ import { csrfFetch } from '../../store/csrf';
 
 const JobListingsCreate = () => {
   const [title, setTitle] = useState('');
-  const [companyId, setCompanyId] = useState(1); 
+  const [companyName, setCompanyName] = useState('');
   const [city, setCity] = useState('');
   const [state, setState] = useState('');
   const [description, setDescription] = useState('');
@@ -19,7 +19,7 @@ const JobListingsCreate = () => {
       description,
       city,
       state,
-      companyId // need to create company first or..?
+      companyName
     };
 
     try {
@@ -58,10 +58,10 @@ const JobListingsCreate = () => {
                 onChange={(e) => setState(e.target.value)}
             />
             <input 
-                placeholder='CompanyId'
-                type='number'
-                value={companyId}
-                onChange={(e) => setCompanyId(Number(e.target.value))}
+                placeholder='Company Name'
+                // type='number'
+                value={companyName}
+                onChange={(e) => setCompanyName(e.target.value)}
             />
             <div>
                 <ReactQuill

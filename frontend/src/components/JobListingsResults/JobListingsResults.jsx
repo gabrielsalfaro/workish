@@ -5,6 +5,8 @@ import './JobListingsResults.css'
 const JobListingsResults = ({ onSelectJob, hasSearched }) => {
     const jobs = useSelector(state => state.jobs.jobs);
     // const joblistings = await Job
+    console.log('Jobs from Redux:', jobs);
+
 
     
   return (
