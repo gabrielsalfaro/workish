@@ -5,6 +5,7 @@ const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const { requireAuth } = require('../../utils/auth');
 const { Op } = require('sequelize');
+const { sequelize } = require('../../db/models');
 
 
 // Get all JobListings created by current user - GET /api/jobs/created
@@ -84,7 +85,7 @@ router.post(
 router.get('/search', async (req, res) => {
   const { keyword, city, state } = req.query;
   const filters = [];
-  const isPostgres = req.app.get('sequelize').getDialect() === 'postgres';
+  const isPostgres = sequelize.getDialect() === 'postgres';
   const likeOperator = isPostgres ? Op.iLike : Op.like;
 
   if (keyword) {
