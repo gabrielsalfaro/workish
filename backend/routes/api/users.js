@@ -86,6 +86,7 @@ router.get('/:userId', async (req, res) => {
 
   try {
     const user = await User.findByPk(userId, {
+      attributes: ['id', 'username', 'firstName', 'lastName', 'email', 'profileImg'],
       include: [
         {
           model: JobHistory,

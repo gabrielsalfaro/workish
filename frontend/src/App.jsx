@@ -7,6 +7,7 @@ import JobListingsCreate from './components/JobListingsCreate/JobListingsCreate'
 import Home from './components/Home/Home';
 import JobListingsManage from './components/JobListingsManage/JobListingsManage';
 import JobListingDetails from './components/JobListingDetails';
+import UserProfile from './components/UserProfile/UserProfile';
 
 function Layout() {
   const dispatch = useDispatch();
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
       {
         path: '/jobs/:jobId/details',
         element: <JobListingDetails />
+      },
+      {
+        path: '/users/:userId',
+        element: <UserProfile />
       }
     ]
   }
