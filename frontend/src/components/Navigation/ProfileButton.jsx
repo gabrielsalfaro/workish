@@ -59,27 +59,32 @@ function ProfileButton({ user }) {
             <li>{user.firstName} {user.lastName}</li>
             <li>{user.email}</li>
             <hr className='menu-hr' />
-             <NavLink to="/jobs/my-jobs" onClick={closeMenu} className={'manage-jobs-navlink'}>Manage Jobs</NavLink>
-            <li style={{color: 'gray'}}>View applications</li>
+             <li><NavLink to="/jobs/my-jobs" onClick={closeMenu} className={'manage-jobs-navlink'}>Manage Jobs</NavLink></li>
+             <li><NavLink to="/applications" onClick={closeMenu} className={'applications-navlink'}>View applications</NavLink></li>
+            {/* <li style={{color: 'gray'}}>View applications</li> */}
             <hr className='menu-hr' />
             <li>
-              <button onClick={logout}>Log Out</button>
+              <button onClick={logout} className='logout'>Log Out</button>
             </li>
           </div>
 
           </>
         ) : (
           <>
+          <div className="user-login-signup">
             <OpenModalMenuItem
               itemText="Log In"
+              className={'user-login-button'}
               onItemClick={closeMenu}
               modalComponent={<LoginFormModal />}
             />
             <OpenModalMenuItem
-              itemText="Sign Up"
+              itemText="Sign Up" 
+              className={'user-signup-button'}
               onItemClick={closeMenu}
               modalComponent={<SignupFormModal />}
             />
+          </div>
           </>
         )}
       </ul>

@@ -120,6 +120,36 @@
   width: 90%;
 }
 
+.manage-jobs-navlink:hover {
+  text-decoration: underline;
+}
+
+.applications-navlink:hover {
+  text-decoration: underline;
+}
+
+.logout:hover {
+  text-decoration: underline;
+}
+
+.user-login-signup {
+  font-size: 16px;
+  padding: 10px 10px 10px 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.user-login-button:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.user-signup-button:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 .manage-spots-navlink:hover {
   text-decoration: underline;
 }

@@ -3,11 +3,13 @@ import thunk from 'redux-thunk';
 import sessionReducer from './session';
 import jobsReducer from './joblistings';
 import usersReducer from './users';
+import applicationsReducer from './applications';
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   jobs: jobsReducer,
-  user: usersReducer
+  user: usersReducer,
+  applications: applicationsReducer
 });
 
 let enhancer;
