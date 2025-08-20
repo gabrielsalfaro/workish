@@ -60,7 +60,7 @@ const JobListingEdit = () => {
       console.log('Job updated:', data);
       if (res.ok) {
           dispatch(fetchMyJobs());
-          navigate('/jobs/my-jobs');
+          navigate(`/jobs/${data.id}/details`);
       }
     } catch (error) {
       console.error('Error updating job:', error);

@@ -48,22 +48,25 @@ function ProfileButton({ user }) {
     <div className="profile-button-container">
       <div className="profile-button-bars" onClick={toggleMenu}>
         <button onClick={toggleMenu}>
-          <FaUserCircle />
+          <FaUserCircle size={25} color='#999'/>
         </button>
       </div>
       <ul className={ulClassName} ref={ulRef}>
         {user ? (
           <>
-            <li>{user.username}</li>
+          <div className="profile-menu-list-items">
+            <li>Hello, <b>{user.username}</b></li>
             <li>{user.firstName} {user.lastName}</li>
             <li>{user.email}</li>
             <hr className='menu-hr' />
              <NavLink to="/jobs/my-jobs" onClick={closeMenu} className={'manage-jobs-navlink'}>Manage Jobs</NavLink>
-            <li style={{color: 'gray'}}>view applications</li>
+            <li style={{color: 'gray'}}>View applications</li>
             <hr className='menu-hr' />
             <li>
               <button onClick={logout}>Log Out</button>
             </li>
+          </div>
+
           </>
         ) : (
           <>

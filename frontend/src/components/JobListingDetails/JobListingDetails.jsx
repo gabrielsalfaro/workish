@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, NavLink } from 'react-router-dom';
 import { fetchJobById } from '../../store/joblistings';
 import './JobListingDetails.css'
 
@@ -33,16 +33,23 @@ const JobListingDetails = ({ jobId: propJobId, embedded = false}) => {
     <div className={containerClass}>
         <div className='details-header-content'>
             <div>
-            <div><span><b>title:</b> {job.title}</span></div>
-            <div><span><b>Company:</b> {job.Company?.name}</span></div>
-            <div><span><b>City:</b> {job.Company?.city}</span></div>
-            <div><span><b>State:</b> {job.Company?.state}</span></div>
-            <div><span><b>Website:</b> {job.Company?.website}</span></div>
-            <button className="job-apply-button" onClick={console.log('clicked')}>apply</button>
+                <div><span><b>title:</b> {job.title}</span></div>
+                <div><span><b>Company:</b> {job.Company?.name}</span></div>
+                <div><span><b>City:</b> {job.Company?.city}</span></div>
+                <div><span><b>State:</b> {job.Company?.state}</span></div>
+                <div><span><b>Website:</b> {job.Company?.website}</span></div>
+
+                <NavLink to={`/jobs/${job.id}/apply`}>
+                    <button 
+                        className="job-apply-button" 
+                        // onClick={console.log('clicked')}
+                    >Apply
+                    </button>
+                </NavLink>
             </div>
          </div>   
         
-            <hr />
+            <center><hr className='job-detail-header-hr'/></center>
 
         <div>
             <div><b>description:</b> </div>
