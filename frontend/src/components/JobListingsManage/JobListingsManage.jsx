@@ -2,7 +2,9 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchMyJobs } from '../../store/joblistings';
 import './JobListingsManage.css'
-import { NavLink } from 'react-router-dom';
+import { NavLink, Navigate } from 'react-router-dom';
+import { csrfFetch } from '../../store/csrf';
+
 
 const JobListingsManage = () => {
     const [loading, setLoading] = useState(true);
@@ -24,6 +26,24 @@ const JobListingsManage = () => {
     const jobs = Object.values(jobsObj || {}).filter(
         job => job.employerId === sessionUser?.id
     );
+
+    const handleDelete = async (jobId) => {
+        // convert to modal
+        if (!window.confirm('Are you sure you want to delete this job?')) return;
+
+        try {
+                const res = await csrfFetch(`/api/jobs/${jobId}`, {
+                method: 'DELETE'
+            });
+
+            if (res.ok) {
+                dispatch(fetchMyJobs());
+                return <Navigate to='/jobs/my-jobs' />
+            }
+        } catch (error) {
+            console.error('Failed to delete job:', error);
+        }
+    };
 
     return (
         <>
@@ -48,7 +68,7 @@ const JobListingsManage = () => {
                             </div>
                             <div>
                                 <button 
-                                    onClick={() => console.log('clicked')} 
+                                    onClick={() => handleDelete(job.id)} 
                                     className="my-jobs-delete-button"
                                 >
                                     delete

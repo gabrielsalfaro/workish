@@ -1,0 +1,21 @@
+.edit-job-listing-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.edit-job-update-button {
+    padding-top: 10px;
+}
+
+.job-listing-update-button {
+    margin-top: 10px;
+    background-color: #2453ba;
+    color: white;
+    padding: 10px;
+    border-radius: 6px;
+}
+
+.edit-job-listing-header {
+    padding-bottom: 20px;
+}

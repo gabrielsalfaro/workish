@@ -1,8 +1,12 @@
-import './JobListingsCreate.css';
 import ReactQuill from 'react-quill';
 import { useState } from 'react';
 import 'react-quill/dist/quill.snow.css';
 import { csrfFetch } from '../../store/csrf';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { fetchMyJobs } from '../../store/joblistings';
+import './JobListingsCreate.css';
+
 
 const JobListingsCreate = () => {
   const [title, setTitle] = useState('');
@@ -10,6 +14,8 @@ const JobListingsCreate = () => {
   const [city, setCity] = useState('');
   const [state, setState] = useState('');
   const [description, setDescription] = useState('');
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,6 +37,10 @@ const JobListingsCreate = () => {
 
       const data = await res.json();
       console.log('Job created:', data);
+      if (res.ok) {
+        dispatch(fetchMyJobs());
+        navigate('/jobs/my-jobs');
+      }
     } catch (err) {
       console.error('Error posting job:', err);
     }

@@ -2,11 +2,15 @@ import ReactQuill from 'react-quill';
 import { useState, useEffect } from 'react';
 import 'react-quill/dist/quill.snow.css';
 import { csrfFetch } from '../../store/csrf';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
+import { fetchMyJobs } from '../../store/joblistings';
+import { useDispatch } from 'react-redux';
 import './JobListingEdit.css'
 
 const JobListingEdit = () => {
   const { jobId } = useParams();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [title, setTitle] = useState('');
   const [companyName, setCompanyName] = useState('');
@@ -54,6 +58,10 @@ const JobListingEdit = () => {
 
       const data = await res.json();
       console.log('Job updated:', data);
+      if (res.ok) {
+          dispatch(fetchMyJobs());
+          navigate('/jobs/my-jobs');
+      }
     } catch (error) {
       console.error('Error updating job:', error);
     }
@@ -85,12 +93,15 @@ const JobListingEdit = () => {
             value={companyName}
             onChange={(e) => setCompanyName(e.target.value)}
           />
-          <ReactQuill 
-            value={description}
-            onChange={setDescription}
-            className="quill"
-            theme="snow"
-          />
+          <div>
+            <ReactQuill 
+              value={description}
+              onChange={setDescription}
+              className="quill"
+              theme="snow"
+            />
+          </div>
+
           <button 
             className='job-listing-update-button' 
             onClick={handleSubmit}
@@ -98,6 +109,7 @@ const JobListingEdit = () => {
           >
             Update Job
           </button>
+
         </form>
       </div>
     </div>
