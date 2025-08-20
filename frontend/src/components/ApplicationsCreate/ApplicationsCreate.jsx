@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchJobById } from '../../store/joblistings';
 import { fetchUser } from '../../store/users';
+import { csrfFetch } from '../../store/csrf';
 import './ApplicationsCreate.css';
 
 
@@ -41,9 +42,37 @@ const ApplicationsCreate = () => {
     };
 
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log( firstName, lastName, email, phone );
+
+          const applicationData = {
+            firstName,
+            lastName,
+            email,
+            phone,
+            userId: sessionUser?.id,
+            jobId,
+            jobHistory: user?.JobHistories || []
+        };
+
+        try {
+            const res = await csrfFetch(`/api/applications/${jobId}/apply`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(applicationData),
+            });
+
+            if (res.ok) {
+                const data = await res.json();
+                console.log('Application submitted successfully:', data);
+                // redirect to application
+            } 
+
+        } catch (error) {
+            console.error('Error submitting application:', error);
+        }
     };
 
 
@@ -105,7 +134,12 @@ const ApplicationsCreate = () => {
                 </div>
             ))}
         </div>
-        <button type="submit" className="application-apply-button">Submit Application</button>
+        <button 
+            type="submit" 
+            className="application-apply-button"
+            onClick={handleSubmit}
+        >Submit Application
+        </button>
       </form>
     </div>
     </>
