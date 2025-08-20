@@ -17,6 +17,19 @@ const JobListingsCreate = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const fillDemoData = () => {
+    setTitle('Frontend Developer');
+    setCompanyName('Biz Solutions');
+    setCity('San Francisco');
+    setState('CA');
+    setDescription(`<p>We're looking for a passionate frontend developer to join our team and build stunning user experiences.</p>
+        <ul>
+        <li>3+ years React experience</li>
+        <li>Strong CSS and UI skills</li>
+        <li>Remote-friendly</li>
+        </ul>`);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -39,7 +52,7 @@ const JobListingsCreate = () => {
       console.log('Job created:', data);
       if (res.ok) {
         dispatch(fetchMyJobs());
-        navigate('/jobs/my-jobs');
+        navigate(`/jobs/${data.id}/details`);
       }
     } catch (err) {
       console.error('Error posting job:', err);
@@ -51,6 +64,15 @@ const JobListingsCreate = () => {
     <div className='create-job-listing-container'>
         <div className="job-listing-form-content">
         <h1 className='create-job-listing-header'>Create a Job Listing</h1>
+        <center>
+          <button 
+            style={{padding: '10px 0', justifyContent: 'center'}}
+            type="button" 
+            onClick={fillDemoData} 
+            className="demo-fill-button">
+            Fill Demo Data
+          </button>
+        </center>
         <form className="job-listing-form-content" onSubmit={handleSubmit}>
             <input 
                 placeholder='job title'

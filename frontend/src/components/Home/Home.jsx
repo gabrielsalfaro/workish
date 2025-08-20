@@ -86,7 +86,7 @@ const Home = () => {
         </div>
         {/* <div className="spacer"></div> */}
         <div>
-            <JobListingDetails jobId={selectedJobId} />
+            <JobListingDetails jobId={selectedJobId} embedded={true} />
         </div>
     </div>
 
