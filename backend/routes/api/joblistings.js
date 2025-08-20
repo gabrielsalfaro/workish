@@ -165,7 +165,7 @@ router.get('/:jobId', async (req, res) => {
         // }
         // return res.status(200).json(finalJob);
     } catch (error) {
-        console.error('Error in /api/jobs/:jobId', error);
+        console.error('Error fetching job', error);
         return res.status(500).json({ message: 'Internal Server Error'})
     }
 
@@ -202,6 +202,7 @@ router.put('/:jobId',
 
       return res.status(200).json(job);
     } catch (error) {
+      console.error('Cannot update job', error)
       return res.status(500).json({ message: 'Internal Server Error'})
     }
 });

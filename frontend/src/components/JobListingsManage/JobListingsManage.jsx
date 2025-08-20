@@ -32,33 +32,31 @@ const JobListingsManage = () => {
             {jobs.length > 0 ? (
                 jobs.map(job => (
                     <>
-                        <div key={job.id} className="my-job-listing-content">
-                    <NavLink to={`/jobs/${job.id}/details`}  >
-
+                    <div key={job.id} className="my-job-listing-content">
+                        <NavLink to={`/jobs/${job.id}/details`}  >
                             <div><b>{job.title} </b></div>
                             <div>{job.city}, {job.state}</div>
-                    </NavLink>
-                            
-                            <div className="my-jobs-button-container">
-                                <div>
-                                    <button 
-                                        onClick={() => console.log('clicked')} 
-                                        className="my-jobs-update-button"
-                                    >
+                        </NavLink>
+
+                        <div className="my-jobs-button-container">
+                            <div>
+                                <NavLink to={`/jobs/${job.id}/edit`}>
+                                    <button className="my-jobs-update-button">
                                         update
                                     </button>
-                                </div>
-                                <div>
-                                    <button 
-                                        onClick={() => console.log('clicked')} 
-                                        className="my-jobs-delete-button"
-                                    >
-                                        delete
-                                    </button>
-                                </div>
+                                </NavLink>
                             </div>
-
+                            <div>
+                                <button 
+                                    onClick={() => console.log('clicked')} 
+                                    className="my-jobs-delete-button"
+                                >
+                                    delete
+                                </button>
+                            </div>
                         </div>
+
+                    </div>
                     </>
                 ))
             ) : (
