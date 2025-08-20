@@ -57,6 +57,14 @@
     overflow-x: hidden;
     padding-left: 10px;
     max-width: 800px;
+    box-sizing: border-box;
+}
+
+.home-job-listing-details {
+    box-sizing: border-box;
+    /* margin-right: 20px; */
+    padding-right: 20px;
+    margin-top: 10px;
 }
 
 .search-button {
