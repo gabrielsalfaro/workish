@@ -15,3 +15,7 @@
     margin: 10px;
     cursor: pointer;
 }
+
+.job-result-content:hover {
+    background-color: #eaf2ff;
+}

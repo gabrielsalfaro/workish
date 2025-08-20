@@ -18,6 +18,8 @@
   /* margin-left: 20px; */
   justify-content: center;
   margin-top: 20px;
+  /* box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.10); */
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .job-details-standalone span {

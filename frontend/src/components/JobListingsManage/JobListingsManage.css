@@ -18,8 +18,12 @@
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 10px;
-    /* box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); */
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
     gap: 10px;
+}
+
+.my-job-listing-content:hover {
+    background-color: #eaf2ff;
 }
 
 .my-job-listings-header {
