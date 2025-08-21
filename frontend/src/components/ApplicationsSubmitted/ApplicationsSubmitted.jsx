@@ -52,7 +52,7 @@ const ApplicationsSubmitted = () => {
                 applications.map(application => (
                     <>
                     <div key={application.id} className="my-job-listing-content">
-                        <NavLink to={`applications/${application.id}/details`}  >
+                        <NavLink to={`/applications/${application.id}/details`}  >
                             <div><b>{application.JobListing.title} </b></div>
                             <div>{application.JobListing.city}, {application.JobListing.state}</div>
                         </NavLink>
@@ -60,7 +60,7 @@ const ApplicationsSubmitted = () => {
                         <div className="application-status">status</div>
                         <div className="my-jobs-button-container">
                             <div>
-                                <NavLink to={`/applications/${application.id}/edit`}>
+                                <NavLink to={`/applications/${application.id}/details`}>
                                     <button className="my-jobs-update-button">
                                         view
                                     </button>

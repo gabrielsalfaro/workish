@@ -34,7 +34,7 @@
 
 .job-details-embedded {
   width: 100%;
-  padding: 2rem;
+  padding: 1.9rem;
   margin-left: 20px;
   max-width: 100%;
   overflow-wrap: break-word;
@@ -62,9 +62,35 @@
     /* gap: 10px; */
 }
 
+.job-details-title,
+.job-details-company,
+.job-details-location,
+.job-details-description {
+  padding: 2px;
+}
+
+.job-details-location {
+  font-size: .75rem;
+  color: #777;
+}
+.job-details-description {
+  display: flex;
+  flex-direction: column;
+  padding-top: 20px;
+  font-size: .9rem;
+  color: #555;
+  /* margin-top: 20px; */
+  /* padding: 2px; */
+}
+
+.job-details-description-header {
+  margin-top: 20px;
+}
+
 .job-apply-button {
     background-color: #2453ba;
     color: white;
     padding: 10px;
+    margin-top: 10px;
     border-radius: 6px;
 }

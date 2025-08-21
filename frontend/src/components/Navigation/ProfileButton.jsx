@@ -60,7 +60,7 @@ function ProfileButton({ user }) {
             <li>{user.email}</li>
             <hr className='menu-hr' />
              <li><NavLink to="/jobs/my-jobs" onClick={closeMenu} className={'manage-jobs-navlink'}>Manage Jobs</NavLink></li>
-             <li><NavLink to="/applications" onClick={closeMenu} className={'applications-navlink'}>View applications</NavLink></li>
+             <li><NavLink to="/applications" onClick={closeMenu} className={'applications-navlink'}>View Applications</NavLink></li>
             {/* <li style={{color: 'gray'}}>View applications</li> */}
             <hr className='menu-hr' />
             <li>

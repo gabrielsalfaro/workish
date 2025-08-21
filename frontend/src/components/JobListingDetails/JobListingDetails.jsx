@@ -33,11 +33,11 @@ const JobListingDetails = ({ jobId: propJobId, embedded = false}) => {
     <div className={containerClass}>
         <div className='details-header-content'>
             <div>
-                <div><span><b>title:</b> {job.title}</span></div>
-                <div><span><b>Company:</b> {job.Company?.name}</span></div>
-                <div><span><b>City:</b> {job.Company?.city}</span></div>
-                <div><span><b>State:</b> {job.Company?.state}</span></div>
-                <div><span><b>Website:</b> {job.Company?.website}</span></div>
+                <div className='job-details-title'><span><h1>{job.title}</h1></span></div>
+                <div className='job-details-company'><span> {job.Company?.name}</span></div>
+                <div className='job-details-location'><span>{job?.city}, {job?.state}</span></div>
+                {/* <div><span><b>State:</b> </span></div> */}
+                {/* <div><span><b>Website:</b> {job.Company?.website}</span></div> */}
 
                 <NavLink to={`/jobs/${job.id}/apply`}>
                     <button 
@@ -52,12 +52,12 @@ const JobListingDetails = ({ jobId: propJobId, embedded = false}) => {
             <center><hr className='job-detail-header-hr'/></center>
 
         <div>
-            <div><b>description:</b> </div>
+            <div className='job-details-description-header'><b>Full job description</b> </div>
         {/* {job.description} */}
-            <div dangerouslySetInnerHTML={{ __html: job.description }} />
+            <div className='job-details-description' dangerouslySetInnerHTML={{ __html: job.description }} />
         {/* </div> */}
-            <div><b>city:</b> {job.city}</div>
-            <div><b>state:</b> {job.state}</div>
+            {/* <div><b>city:</b> {job.city}</div>
+            <div><b>state:</b> {job.state}</div> */}
         </div>
 
     </div>

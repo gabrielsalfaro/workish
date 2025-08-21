@@ -23,7 +23,7 @@ const JobListingsResults = ({ onSelectJob, hasSearched }) => {
                   {job.Company.name}
                 </div>
               )}
-                <div>
+                <div className='job-details-location'>
                     {job.city}, {job.state}
                 </div>
             

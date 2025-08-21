@@ -1,4 +1,5 @@
 const LOAD_MY_APPLICATIONS = 'applications/LOAD_MY_APPLICATIONS';
+const LOAD_SINGLE_APPLICATION = 'applications/LOAD_SINGLE_APPLICATION';
 
 const initialState = {}
 
@@ -6,6 +7,11 @@ const initialState = {}
 export const loadMyApplications = (applications) => ({
     type: LOAD_MY_APPLICATIONS,
     applications,
+});
+
+export const loadSingleApplication = (application) => ({
+    type: LOAD_SINGLE_APPLICATION,
+    application,
 });
 
 
@@ -19,6 +25,22 @@ export const fetchMyApplications = () => async (dispatch) => {
     }
 }
 
+// fetch Application Details /:jobId
+export const fetchApplicationById = (applicationId) => async (dispatch) => {
+  try {
+    const res = await fetch(`/api/applications/${applicationId}/details`);
+    if (res.ok) {
+      const application = await res.json();
+      dispatch(loadSingleApplication(application));
+    } else {
+      console.error('Failed to fetch application by ID');
+    }
+  } catch (error) {
+    console.error('Error fetching application by ID:', error);
+  }
+};
+
+
 
 const applicationsReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -29,7 +51,12 @@ const applicationsReducer = (state = initialState, action) => {
             });
             return newState;
         }
-
+        case LOAD_SINGLE_APPLICATION: {
+        return {
+            ...state,
+            [action.application.id]: action.application
+        };
+        }
         default:
           return state;
     }

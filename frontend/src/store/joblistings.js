@@ -77,7 +77,7 @@ export const fetchJobById = (jobId) => async (dispatch) => {
 
 
 
-// lookup reducers
+
 const jobsReducer = (state = initialState, action) => {
     switch (action.type) {
       case LOAD_SEARCH_RESULTS: {
