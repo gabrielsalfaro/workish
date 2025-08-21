@@ -57,6 +57,7 @@ export const fetchMyJobs = () => async (dispatch) => {
     if (res.ok) {
       const data = await res.json();
       dispatch(loadMyJobs(data)); 
+      return data;
     }
 };
 

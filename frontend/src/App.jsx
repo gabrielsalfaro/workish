@@ -12,6 +12,7 @@ import JobListingEdit from './components/JobListingEdit/JobListingEdit';
 import ApplicationsCreate from './components/ApplicationsCreate/ApplicationsCreate';
 import ApplicationsSubmitted from './components/ApplicationsSubmitted/ApplicationsSubmitted';
 import ApplicationDetails from './components/ApplicationDetails/ApplicationDetails';
+import ApplicationsReview from './components/ApplicationsReview/ApplicationsReview';
 
 function Layout() {
   const dispatch = useDispatch();
@@ -66,6 +67,10 @@ const router = createBrowserRouter([
       {
         path: '/applications/:applicationId/details',
         element: <ApplicationDetails />
+      },
+      {
+        path: '/jobs/:jobId/applications',
+        element: <ApplicationsReview />
       },
       {
         path: '/users/:userId',

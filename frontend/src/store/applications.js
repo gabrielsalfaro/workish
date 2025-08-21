@@ -1,5 +1,6 @@
 const LOAD_MY_APPLICATIONS = 'applications/LOAD_MY_APPLICATIONS';
 const LOAD_SINGLE_APPLICATION = 'applications/LOAD_SINGLE_APPLICATION';
+const LOAD_EMPLOYER_APPLICATIONS = 'applications/LOAD_EMPLOYER_APPLICATIONS';
 
 const initialState = {}
 
@@ -14,6 +15,10 @@ export const loadSingleApplication = (application) => ({
     application,
 });
 
+export const loadEmployerApplications = (applications) => ({
+  type: LOAD_EMPLOYER_APPLICATIONS,
+  applications
+});
 
 
 // my applications (submitted)
@@ -40,6 +45,14 @@ export const fetchApplicationById = (applicationId) => async (dispatch) => {
   }
 };
 
+// fetch Applications submitted to my JobListings
+export const fetchEmployerApplications = (jobId) => async (dispatch) => {
+  const res = await fetch(`/api/jobs/${jobId}/applications`);
+  if (res.ok) {
+    const data = await res.json();
+    dispatch(loadEmployerApplications(data));
+  }
+};
 
 
 const applicationsReducer = (state = initialState, action) => {
@@ -56,6 +69,13 @@ const applicationsReducer = (state = initialState, action) => {
             ...state,
             [action.application.id]: action.application
         };
+        }
+        case LOAD_EMPLOYER_APPLICATIONS: {
+            const newState = { ...state };
+            action.applications.forEach(app => {
+                newState[app.id] = app;
+            });
+            return newState;
         }
         default:
           return state;

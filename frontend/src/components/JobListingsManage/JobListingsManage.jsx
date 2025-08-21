@@ -53,7 +53,7 @@ const JobListingsManage = () => {
                 jobs.map(job => (
                     <>
                     <div key={job.id} className="my-job-listing-content">
-                        <NavLink to={`/jobs/${job.id}/details`}  >
+                        <NavLink to={`/jobs/${job.id}/applications`}  >
                             <div><b>{job.title} </b></div>
                             <div>{job.city}, {job.state}</div>
                         </NavLink>
