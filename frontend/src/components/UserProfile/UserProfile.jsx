@@ -21,11 +21,17 @@ const UserProfile = () => {
 
   if (!user) return <div className="loading">Loading...</div>;
 
+  const formatDate = (isoDate) => {
+      if (!isoDate) return '';
+      const date = new Date(isoDate);
+      return date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+  };
 
   return (
     <>
-    <div><h1>UserProfile</h1></div>
     <div className="profile-container">
+      <div className='profile-header'><h1>UserProfile</h1></div>
+
       <div className="profile-card">
         <div className="profile-avatar">
           {user.profileImg ? (
@@ -47,6 +53,14 @@ const UserProfile = () => {
               <span>Email:</span> {user.email}
             </p>
 
+          </div>
+          <div>
+              <h2>Employment History</h2>
+              {user?.JobHistories?.map((job) => (
+                  <div key={job.id}>
+                    <p>{job.employer} - {job.city}, {job.state}, {formatDate(job.startDate)} - {formatDate(job.endDate)}</p>
+                  </div>
+              ))}
           </div>
         </div>
       </div>

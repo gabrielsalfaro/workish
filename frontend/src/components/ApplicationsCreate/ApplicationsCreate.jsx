@@ -128,8 +128,8 @@ const ApplicationsCreate = () => {
 
         <div>
             <h2>Employment History</h2>
-            {user?.JobHistories?.map((job, i) => (
-                <div key={i}>
+            {user?.JobHistories?.map((job) => (
+                <div key={job.id}>
                 <p>{job.employer} - {job.city}, {job.state}, {formatDate(job.startDate)} - {formatDate(job.endDate)}</p>
                 </div>
             ))}

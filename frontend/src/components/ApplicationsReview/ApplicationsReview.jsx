@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchMyJobs } from '../../store/joblistings';
-// import { NavLink, Navigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 // import { csrfFetch } from '../../store/csrf';
 import { fetchEmployerApplications } from '../../store/applications';
 import { useParams } from 'react-router-dom';
@@ -15,6 +15,8 @@ const ApplicationsReview = () => {
     const applications = Object.values(applicationsObj || {});
     const { jobId } = useParams();
     const job = useSelector(state => state.jobs?.[jobId]);
+    // const sessionUser = useSelector(state => state.session.user);
+    // const userId = sessionUser?.id;
 
 
     useEffect(() => {
@@ -52,14 +54,18 @@ const ApplicationsReview = () => {
 
         {applications.length === 0 && <p>No applications submitted yet.</p>}
 
-        {applications.map((app) => (
-            <div key={app.id} className="application-card">
-            <h3>{app.JobListing?.title}</h3>
-            <p><strong>Applicant:</strong> {app.User?.firstName} {app.User?.lastName}</p>
-            <p><strong>Email:</strong> {app.User?.email}</p>
-            <p><strong>Submitted:</strong> {new Date(app.createdAt).toLocaleDateString()}</p>
-            <p><strong>Status:</strong> {app.status}</p>
-            </div>
+        {applications.map((application) => (
+            <>
+            <NavLink to={`/users/${application.User?.id}`}>
+                <div key={application.id} className="application-card">
+                    <h3>{application.JobListing?.title}</h3>
+                    <p><strong>Applicant:</strong> {application.User?.firstName} {application.User?.lastName}</p>
+                    <p><strong>Email:</strong> {application.User?.email}</p>
+                    <p><strong>Submitted:</strong> {new Date(application.createdAt).toLocaleDateString()}</p>
+                    <p><strong>Status:</strong> {application.status}</p>
+                </div>
+            </NavLink>
+            </>
         ))}
     </div>
     </>
