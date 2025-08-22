@@ -62,6 +62,10 @@ router.get(
             'id', 'username', 'firstName', 'lastName', 'email', 
             'profileImg', 'phone', 'city', 'state', 'jobTitle', 'summary'
           ]
+        },
+        {
+          model: JobListing,
+          include: [Company]
         }
       ],
       order: [['createdAt', 'DESC']]

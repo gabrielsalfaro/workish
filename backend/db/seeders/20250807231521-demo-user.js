@@ -59,14 +59,42 @@ module.exports = {
         firstName: 'Liam',
         lastName: 'Garcia',
         hashedPassword: bcrypt.hashSync('password'),
-        profileImg: 'https://i.imgur.com/2R116Ik.png',
+        profileImg: 'https://i.imgur.com/BKlPDyf.png',
         phone: 3456789012,
         city: 'Miami',
         state: 'FL',
         jobTitle: 'Sales Associate',
         summary: 'Detail-oriented and driven.',
         companyId: 3,
-      }
+      },
+      {
+        email: 'karen@user.io',
+        username: 'karen',
+        firstName: 'Karen',
+        lastName: 'Nguyen',
+        hashedPassword: bcrypt.hashSync('password'),
+        profileImg: 'https://i.imgur.com/faSab6r.png',
+        phone: 6789012345,
+        city: 'Los Angeles',
+        state: 'CA',
+        jobTitle: 'QA Engineer',
+        summary: 'Bug hunter and quality gatekeeper.',
+        companyId: 1
+      },
+      {
+        email: 'michael@user.io',
+        username: 'michael',
+        firstName: 'Michael',
+        lastName: "O'Connor",
+        hashedPassword: bcrypt.hashSync('password'),
+        profileImg: 'https://i.imgur.com/aMKpU0q.png',
+        phone: 7890123456,
+        city: 'Denver',
+        state: 'CO',
+        jobTitle: 'DevOps Engineer',
+        summary: 'Automation and CI/CD pipelines enthusiast.',
+        companyId: 4
+      },
     ], { validate: true });
   },
 
@@ -74,7 +102,7 @@ module.exports = {
     options.tableName = 'Users';
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete(options, {
-      username: { [Op.in]: ['demo', 'marnie', 'bobbie', 'liam'] }
+      username: { [Op.in]: ['demo', 'marnie', 'bobbie', 'liam', 'karen', 'michael'] }
     }, {});
   }
 };

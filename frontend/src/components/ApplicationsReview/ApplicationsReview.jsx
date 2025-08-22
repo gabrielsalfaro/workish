@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchMyJobs } from '../../store/joblistings';
+// import { fetchMyJobs } from '../../store/joblistings';
 import { NavLink } from 'react-router-dom';
 // import { csrfFetch } from '../../store/csrf';
 import { fetchEmployerApplications } from '../../store/applications';
@@ -11,29 +11,27 @@ import './ApplicationsReview.css';
 const ApplicationsReview = () => {
     const [loading, setLoading] = useState(true);
     const dispatch = useDispatch();
-    const applicationsObj = useSelector(state => state.applications || {});
-    const applications = Object.values(applicationsObj || {});
     const { jobId } = useParams();
+    const applicationsObj = useSelector(state =>
+        state.applications.employerApplications?.[jobId] || {}
+    );
+    const applications = Object.values(applicationsObj);
+    // const { jobId } = useParams();
     const job = useSelector(state => state.jobs?.[jobId]);
     // const sessionUser = useSelector(state => state.session.user);
     // const userId = sessionUser?.id;
 
 
     useEffect(() => {
-        const loadApps = async () => {
+        const loadApplications = async () => {
             if (jobId) {
-                await dispatch(fetchJobById(jobId));
+                await dispatch(fetchJobById(jobId)); // get job info
+                await dispatch(fetchEmployerApplications(jobId)); // get apps for this job
             }
-
-            const jobs = await dispatch(fetchMyJobs());
-            for (const job of Object.values(jobs)) {
-                await dispatch(fetchEmployerApplications(job.id));
-            }
-
             setLoading(false);
-    };
+        };
 
-    loadApps();
+        loadApplications();
     }, [dispatch, jobId]);
 
     if (loading) return <p>Loading...</p>;

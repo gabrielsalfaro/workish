@@ -71,11 +71,19 @@ const applicationsReducer = (state = initialState, action) => {
         };
         }
         case LOAD_EMPLOYER_APPLICATIONS: {
-            const newState = { ...state };
-            action.applications.forEach(app => {
-                newState[app.id] = app;
-            });
-            return newState;
+          const jobId = action.applications[0]?.jobListingId;
+          const appsByJob = {};
+          action.applications.forEach(app => {
+            appsByJob[app.id] = app;
+          });
+
+          return {
+            ...state,
+            employerApplications: {
+              ...state.employerApplications,
+              [jobId]: appsByJob
+            }
+          };
         }
         default:
           return state;

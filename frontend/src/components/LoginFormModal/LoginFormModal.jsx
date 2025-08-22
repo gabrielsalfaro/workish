@@ -70,7 +70,7 @@ function LoginFormModal() {
                 required
               />
             </label>
-            {errors.credential && (<p>{errors.credential}</p>)}
+            {/* {errors.credential && (<p>{errors.credential}</p>)} */}
 
             <center>
               <button 
