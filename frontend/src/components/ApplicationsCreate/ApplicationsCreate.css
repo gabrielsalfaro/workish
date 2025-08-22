@@ -4,6 +4,7 @@
     justify-content: center;
     align-items: center;
     margin-top: 20px;
+    /* padding-bottom: 400px auto; */
     max-width: 600px;
     width: 100%;
     margin: 40px auto;
@@ -72,10 +73,21 @@
     font-size: 16px;
     cursor: pointer;
     margin-top: 20px;
+    width: 30%;
 }
 
 .application-apply-button:hover {
     background-color: #1e45a1;
+}
+
+.employment-history-container {
+    margin-top: 20px;
+    /* margin-bottom: 20px; */
+}
+
+.employment-history-container h2 {
+    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
 }
 
 .employment-history-entry {

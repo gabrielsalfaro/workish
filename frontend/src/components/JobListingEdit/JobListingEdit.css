@@ -14,8 +14,25 @@
     color: white;
     padding: 10px;
     border-radius: 6px;
+    width: 20%;
+    text-align: center;
+}
+
+.job-listing-update-button {
+    margin-top: 10px;
+    background-color: #2453ba;
+    color: white;
+    padding: 10px;
+    border-radius: 6px;
+    width: 20%;
+    text-align: center;
+}
+
+.job-listing-update-button:hover {
+    background-color: #1c4299;
 }
 
 .edit-job-listing-header {
     padding-bottom: 20px;
+    margin-top: 40px;
 }

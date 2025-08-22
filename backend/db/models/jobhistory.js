@@ -22,6 +22,7 @@ module.exports = (sequelize, DataTypes) => {
   JobHistory.init({
     userId: DataTypes.INTEGER,
     employer: DataTypes.STRING,
+    jobTitle: DataTypes.STRING,
     city: DataTypes.STRING,
     state: DataTypes.STRING,
     startDate: DataTypes.DATE,

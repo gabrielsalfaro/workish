@@ -27,6 +27,9 @@ module.exports = {
       employer: {
         type: Sequelize.STRING
       },
+      jobTitle: {
+        type: Sequelize.STRING
+      },
       city: {
         type: Sequelize.STRING
       },

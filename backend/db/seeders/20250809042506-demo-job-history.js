@@ -13,6 +13,7 @@ module.exports = {
       {
         userId: 1,
         employer: 'Tech Corp',
+        jobTitle: 'Full Stack Software Developer',
         city: 'San Francisco',
         state: 'CA',
         startDate: new Date('2020-01-15'),
@@ -21,6 +22,7 @@ module.exports = {
       {
         userId: 2,
         employer: 'Biz Solutions',
+        jobTitle: 'Awesome Job Title',
         city: 'New York',
         state: 'NY',
         startDate: new Date('2019-03-01'),
@@ -29,6 +31,16 @@ module.exports = {
       {
         userId: 1,
         employer: 'DataWorks',
+        jobTitle: 'Awesome Job Title',
+        city: 'Chicago',
+        state: 'IL',
+        startDate: new Date('2018-05-01'),
+        endDate: new Date('2019-12-31'),
+      },
+      {
+        userId: 1,
+        employer: 'Super SaaS Company',
+        jobTitle: 'Awesome Job Title',
         city: 'Chicago',
         state: 'IL',
         startDate: new Date('2018-05-01'),

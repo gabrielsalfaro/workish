@@ -17,7 +17,7 @@ module.exports = {
         firstName: 'Demo',
         lastName: 'User',
         hashedPassword: bcrypt.hashSync('password'),
-        profileImg: 'https://example.com/image.jpg',
+        profileImg: 'https://i.imgur.com/sNiiBeb.png',
         phone: 1234567890,
         city: 'San Francisco',
         state: 'CA',
@@ -26,12 +26,12 @@ module.exports = {
         companyId: 1,
       },
       {
-        email: 'user1@user.io',
-        username: 'FakeUser1',
-        firstName: 'Fake1',
-        lastName: 'User',
+        email: 'marnie@user.io',
+        username: 'marnie',
+        firstName: 'Marnie',
+        lastName: 'Johnson',
         hashedPassword: bcrypt.hashSync('password'),
-        profileImg: 'https://example.com/image.jpg',
+        profileImg: 'https://i.imgur.com/8bglUJr.png',
         phone: 2345678901,
         city: 'New York',
         state: 'NY',
@@ -40,18 +40,32 @@ module.exports = {
         companyId: 2,
       },
       {
-        email: 'user2@user.io',
-        username: 'FakeUser2',
-        firstName: 'Fake2',
-        lastName: 'User',
+        email: 'bobbie@user.io',
+        username: 'bobbie',
+        firstName: 'Bobbie',
+        lastName: 'Jones',
         hashedPassword: bcrypt.hashSync('password'),
-        profileImg: 'https://example.com/image.jpg',
+        profileImg: 'https://i.imgur.com/2R116Ik.png',
         phone: 3456789012,
         city: 'Chicago',
         state: 'IL',
         jobTitle: 'Project Manager',
         summary: 'Detail-oriented and driven.',
-        companyId: 1,
+        companyId: 3,
+      },
+      {
+        email: 'liam@user.io',
+        username: 'liam',
+        firstName: 'Liam',
+        lastName: 'Garcia',
+        hashedPassword: bcrypt.hashSync('password'),
+        profileImg: 'https://i.imgur.com/2R116Ik.png',
+        phone: 3456789012,
+        city: 'Miami',
+        state: 'FL',
+        jobTitle: 'Sales Associate',
+        summary: 'Detail-oriented and driven.',
+        companyId: 3,
       }
     ], { validate: true });
   },
@@ -60,7 +74,7 @@ module.exports = {
     options.tableName = 'Users';
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete(options, {
-      username: { [Op.in]: ['demo', 'FakeUser1', 'FakeUser2'] }
+      username: { [Op.in]: ['demo', 'marnie', 'bobbie', 'liam'] }
     }, {});
   }
 };

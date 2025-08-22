@@ -126,11 +126,12 @@ const ApplicationsCreate = () => {
           />
         </label>
 
-        <div>
+        <div className='employment-history-container'>
             <h2>Employment History</h2>
             {user?.JobHistories?.map((job) => (
             <div key={job.id} className="employment-history-entry">
                 <div className="employment-header">
+                    <div className='employment-job-title'><strong>{job.jobTitle}</strong></div>
                     <div className='employment-employer'><strong>{job.employer}</strong></div>
                     <span className="employment-location">{job.city}, {job.state}</span>
                 </div>
@@ -141,12 +142,15 @@ const ApplicationsCreate = () => {
             ))}
 
         </div>
-        <button 
-            type="submit" 
-            className="application-apply-button"
-            // onClick={handleSubmit}
-        >Submit Application
-        </button>
+        <center>
+          <button 
+              type="submit" 
+              className="application-apply-button"
+              // onClick={handleSubmit}
+          >Submit Application
+          </button>
+        </center>
+
       </form>
     </div>
     </>

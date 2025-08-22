@@ -90,7 +90,7 @@ router.get('/:userId', async (req, res) => {
       include: [
         {
           model: JobHistory,
-          attributes: ['employer', 'city', 'state', 'startDate', 'endDate']
+          attributes: ['employer', 'jobTitle', 'city', 'state', 'startDate', 'endDate']
         },
         {
           model: Company,

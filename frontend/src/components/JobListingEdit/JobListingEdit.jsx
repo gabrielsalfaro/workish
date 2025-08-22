@@ -102,13 +102,15 @@ const JobListingEdit = () => {
             />
           </div>
 
-          <button 
-            className='job-listing-update-button' 
-            onClick={handleSubmit}
-            type="submit"
-          >
-            Update Job
-          </button>
+          <center>
+            <button 
+              className='job-listing-update-button' 
+              onClick={handleSubmit}
+              type="submit"
+            >
+              Update Job
+            </button>
+          </center>
 
         </form>
       </div>
