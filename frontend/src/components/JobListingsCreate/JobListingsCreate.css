@@ -7,7 +7,7 @@
     padding-bottom: 30px;
     border: 1px solid #ddd;
     border-radius: 6px;
-    width: 60%;
+    width: 70%;
     margin: 40px auto 30px auto;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
 }
@@ -22,7 +22,7 @@
 
 .create-job-listing-header {
     padding-bottom: 20px;
-    margin-top: 40px;
+    margin-top: 50px;
 }
 .job-listing-form-content input {
     border: 1px solid #ccc;

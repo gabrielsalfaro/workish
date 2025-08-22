@@ -63,7 +63,12 @@ const UserProfile = () => {
             </div>
 
             <div className="employment-history">
-              <h2 className="section-title">Employment History</h2>
+              <div className="employment-history-top-section">
+                <h2 className="section-title">Employment History</h2>
+                <div className="add-job-history">
+                  <button>Add Job History</button>
+                </div>
+              </div>
 
               {user?.JobHistories?.length > 0 ? (
                 <ul className="employment-list">

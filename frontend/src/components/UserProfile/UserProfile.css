@@ -8,7 +8,7 @@
 .profile-content {
   width: 100%;
   max-width: 800px;
-  padding: 20px;
+  padding: 40px 50px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
   border: 1px solid #ddd;
   border-radius: 10px;
@@ -17,7 +17,7 @@
 
 .profile-header h1 {
   font-size: 28px;
-  margin-bottom: 20px;
+  margin-bottom: 50px;
   border-bottom: 1px solid #ccc;
   padding-bottom: 10px;
 }
@@ -65,6 +65,28 @@
   margin-top: 30px;
 }
 
+.employment-history-top-section {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.add-job-history {
+    display: flex;
+    justify-content: right;
+}
+
+.add-job-history button {
+    background-color: #2453ba;
+    color: white;
+    padding: 10px;
+    border-radius: 6px;
+    padding-right: 10px;
+}
+
+.add-job-history button:hover {
+    background-color: #1c4299;
+}
 .employment-entry {
   margin-bottom: 10px;
   font-size: 15px;
