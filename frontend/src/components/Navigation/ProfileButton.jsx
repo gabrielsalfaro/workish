@@ -6,6 +6,7 @@ import * as sessionActions from '../../store/session';
 import OpenModalMenuItem from './OpenModalMenuItem';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
+import { useSelector } from 'react-redux';
 import './Navigation.css'
 
 
@@ -13,6 +14,9 @@ function ProfileButton({ user }) {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
+  const sessionUser = useSelector(state => state.session.user);
+  const userId = sessionUser?.id;
+  
 
   const toggleMenu = (e) => {
     e.stopPropagation(); // Keep from bubbling up to document and triggering closeMenu
@@ -32,6 +36,7 @@ function ProfileButton({ user }) {
 
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
+
 
   const closeMenu = () => setShowMenu(false);
 
@@ -59,8 +64,9 @@ function ProfileButton({ user }) {
             <li>{user.firstName} {user.lastName}</li>
             <li>{user.email}</li>
             <hr className='menu-hr' />
+             <li><NavLink to={`/users/${userId}`} onClick={closeMenu} className={'manage-jobs-navlink'}>View Profile</NavLink></li>
+             <li><NavLink to="/applications" onClick={closeMenu} className={'applications-navlink'}>My Applications</NavLink></li>
              <li><NavLink to="/jobs/my-jobs" onClick={closeMenu} className={'manage-jobs-navlink'}>Manage Jobs</NavLink></li>
-             <li><NavLink to="/applications" onClick={closeMenu} className={'applications-navlink'}>View Applications</NavLink></li>
             {/* <li style={{color: 'gray'}}>View applications</li> */}
             <hr className='menu-hr' />
             <li>

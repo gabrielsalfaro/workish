@@ -5,6 +5,8 @@ import { fetchJobById } from '../../store/joblistings';
 import { fetchUser } from '../../store/users';
 import { csrfFetch } from '../../store/csrf';
 import './ApplicationsCreate.css';
+import { fetchMyApplications } from '../../store/applications';
+import { useNavigate } from 'react-router-dom';
 
 
 const ApplicationsCreate = () => {
@@ -20,6 +22,7 @@ const ApplicationsCreate = () => {
     // const [coverLetter, setCoverLetter] = useState('');
     // const [resume, setResume] = useState(null);
     // const [errors, setErrors] = useState({});
+    const navigate = useNavigate();
 
     const job = useSelector(state => state.jobs?.[jobId]);
 
@@ -34,6 +37,15 @@ const ApplicationsCreate = () => {
         dispatch(fetchUser(sessionUser.id));
         }
     }, [sessionUser, user, dispatch]);
+
+    useEffect(() => {
+      if (user || sessionUser) {
+        setFirstName(user?.firstName || '');
+        setLastName(user?.lastName || '');
+        setEmail(user?.email || '');
+        setPhone(user?.phone || '');
+      }
+    }, [user, sessionUser]);
 
     const formatDate = (isoDate) => {
         if (!isoDate) return '';
@@ -68,6 +80,8 @@ const ApplicationsCreate = () => {
                 const data = await res.json();
                 console.log('Application submitted successfully:', data);
                 // redirect to application
+                dispatch(fetchMyApplications());
+                navigate(`/applications/${data.id}/details`);
             } 
 
         } catch (error) {
@@ -153,6 +167,8 @@ const ApplicationsCreate = () => {
 
       </form>
     </div>
+      <div style={{ height: '1px' }}></div> 
+
     </>
   )
 }

@@ -15,26 +15,36 @@ const ApplicationDetails = () => {
     }
   }, [dispatch, application, applicationId]);
 
-  if (!application) return (
-  <div>
-      {/* <p>Select an application to see details.</p> */}
-  </div>
-  );
+  if (!application) return <div className="loading">Loading...</div>;
 
 
   return (
     <>
     <div className="application-details-container">
       <div className="application-details-content">
+        <h1>Application Details</h1>
 
-        <div><h1>ApplicationDetails</h1></div>
-        <div><b>Job Title:</b> {application.JobListing?.title}</div>
-        <div><b>Status:</b> {application.status}</div>
-        <div><b>Location:</b> {application.JobListing?.city}, {application.JobListing?.state}</div>
-        <div><b>Company:</b> {application.JobListing?.Company?.name}</div>
-        <div><b>Submitted:</b> {new Date(application.createdAt).toLocaleDateString()}</div>
+        <div className="application-section">
+          <h2>Job Information</h2>
+          <p>Job Title: {application.JobListing?.title}</p>
+          <p>Company: {application.JobListing?.Company?.name}</p>
+          <p>Location: {application.JobListing?.city}, {application.JobListing?.state}</p>
+        </div>
+
+        <div className="application-section">
+          <h2>Application Info</h2>
+          <p>Status: <span className={`status-badge`}><b>{application.status}</b></span></p>
+          <p>Submitted: {new Date(application.createdAt).toLocaleDateString()}</p>
+        </div>
+
+        {application.user && (
+          <div className="application-section">
+            <h2>Applicant Info</h2>
+            <p>Name: {application.user.firstName} {application.user.lastName}</p>
+            <p>Email: {application.user.email}</p>
+          </div>
+        )}
       </div>
-
     </div>
 
     </>

@@ -57,7 +57,7 @@ const ApplicationsSubmitted = () => {
                             <div>{application.JobListing.city}, {application.JobListing.state}</div>
                         </NavLink>
 
-                        <div className="application-status">status</div>
+                        <div className="application-status">{application.status}</div>
                         <div className="my-jobs-button-container">
                             <div>
                                 <NavLink to={`/applications/${application.id}/details`}>
