@@ -71,7 +71,13 @@ const Home = () => {
         </form>
     </div>
     
-    
+    {!searchQuery && (
+        <div className="home-welcome">
+            <div className='navigation-home'>Workish</div>
+            <h2>Your next job starts here</h2>
+            <p>Create an account or sign in to see more!</p>
+        </div>
+    )}
     <div>
         {/* <NavLink to='/jobs/new'>create a job listing!</NavLink> */}
     </div>

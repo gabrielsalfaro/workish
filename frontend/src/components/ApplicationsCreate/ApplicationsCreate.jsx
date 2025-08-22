@@ -81,9 +81,9 @@ const ApplicationsCreate = () => {
     <div className="application-form-container">
       {job && (
         <div className="job-info-preview">
-          <p><strong>Title:</strong> {job.title}</p>
-          <p><strong>Company:</strong> {job.Company?.name}</p>
-          <p><strong>Location:</strong> {job.Company?.city}, {job.Company?.state}</p>
+          <p><b>{job.title}</b></p>
+          <p>{job.Company?.name}</p>
+          <p>{job.Company?.city}, {job.Company?.state}</p>
         </div>
       )}
       <h2>Add your contact information</h2>
@@ -129,15 +129,22 @@ const ApplicationsCreate = () => {
         <div>
             <h2>Employment History</h2>
             {user?.JobHistories?.map((job) => (
-                <div key={job.id}>
-                <p>{job.employer} - {job.city}, {job.state}, {formatDate(job.startDate)} - {formatDate(job.endDate)}</p>
+            <div key={job.id} className="employment-history-entry">
+                <div className="employment-header">
+                    <div className='employment-employer'><strong>{job.employer}</strong></div>
+                    <span className="employment-location">{job.city}, {job.state}</span>
                 </div>
+                <div className="employment-dates">
+                    {formatDate(job.startDate)} - {formatDate(job.endDate)}
+                </div>
+            </div>
             ))}
+
         </div>
         <button 
             type="submit" 
             className="application-apply-button"
-            onClick={handleSubmit}
+            // onClick={handleSubmit}
         >Submit Application
         </button>
       </form>

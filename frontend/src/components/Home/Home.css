@@ -79,6 +79,24 @@
     height: 500px;
 }
 
+.home-welcome {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 60px;
+}
+
+.home-welcome h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.home-welcome p {
+    font-size: 16px;
+    color: #666;
+}
+
 .spacer {
     min-height: 70vh;
     border-right: 1px solid #ddd;
