@@ -1,8 +1,10 @@
 .create-job-listing-container {
     display: flex;
     justify-content: center;
-    margin-top: 20px;
+    margin-top: 40px;
     min-width: 600px;
+    margin-bottom: 30px;
+    padding-bottom: 30px;
 }
 
 .job-listing-form-content {
@@ -24,16 +26,31 @@
 }
 
 .job-listing-post-button {
-    margin-top: 10px;
+    margin-top: 25px;
+    margin-bottom: 25px;
     background-color: #2453ba;
     color: white;
     padding: 10px;
     padding-top: 10px;
     border-radius: 6px;
+    text-align: center;
+    width: 20%;
+}
+
+.job-listing-post-button:hover {
+    background-color: #1c4299;
 }
 
 .quill .ql-editor{
     min-height: 400px;
     margin-bottom: 10px;
     padding-bottom: 10px;
+}
+
+.demo-fill-button {
+    margin-bottom: 10px;
+}
+
+.demo-fill-button:hover {
+    text-decoration: underline;
 }

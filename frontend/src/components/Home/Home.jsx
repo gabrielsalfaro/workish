@@ -1,5 +1,5 @@
 // import { NavLink } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import JobListingsResults from '../JobListingsResults';
@@ -16,6 +16,11 @@ const Home = () => {
     const [selectedJobId, setSelectedJobId] = useState(null);
     const [hasSearched, setHasSearched] = useState(false);
     const location = useLocation();
+    const inputRef = useRef(null);
+
+    useEffect(() => {
+        inputRef.current?.focus();
+    }, []);
 
     useEffect(() => {
         // Reset search when Home is clicked
@@ -53,7 +58,8 @@ const Home = () => {
             <input 
                 placeholder='Job title, keywords, or company'
                 type="text" 
-                value={searchQuery}
+                value={searchQuery} 
+                ref={inputRef} 
                 className='search-field-keyword'
                 onChange={(e) => setSearchQuery(e.target.value)}
             />
@@ -71,11 +77,11 @@ const Home = () => {
         </form>
     </div>
     
-    {!searchQuery && (
-        <div className="home-welcome">
+    {!searchQuery && !locationQuery && (
+        <div className={`home-welcome ${searchQuery ? 'fade-out' : 'fade-in'}`}>
             <div className='navigation-home'>Workish</div>
-            <h2>Your next job starts here</h2>
-            <p>Create an account or sign in to see more!</p>
+            <h2>Your next job sorta starts here</h2>
+            <p>Create an account or sign in to see more.</p>
         </div>
     )}
     <div>

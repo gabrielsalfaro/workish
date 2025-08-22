@@ -2,12 +2,22 @@
   max-width: 800px;
   margin: auto;
   padding: 1rem;
+  color: #333;
 }
 
 .application-card {
   border: 1px solid #ddd;
   border-radius: 6px;
-  padding: 1rem;
-  margin-bottom: 1rem;
-  background-color: #fafafa;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.25rem;
+  /* background-color: #fafafa; */
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  transition: box-shadow 0.3s ease;
 }
+
+.application-card:hover {
+  box-shadow: 0 3px 8px rgba(36, 83, 186, 0.2);
+  cursor: pointer;
+  background-color: #f5faff;
+}
+

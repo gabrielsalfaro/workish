@@ -17,5 +17,7 @@
 }
 
 .job-result-content:hover {
-    background-color: #eaf2ff;
+    /* background-color: #eaf2ff; */
+    background-color: #f5faff;
+    box-shadow: 0 3px 8px rgba(36, 83, 186, 0.2);
 }

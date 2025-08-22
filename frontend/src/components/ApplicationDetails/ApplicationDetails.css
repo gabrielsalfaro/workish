@@ -1,5 +1,33 @@
 .application-details-container {
     display: flex;
     justify-content: center;
-    margin-top: 20px;
+    margin-top: 40px;
+    padding: 20px;
+}
+
+.application-details-content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 600px;
+    width: 100%;
+    border: 1px solid #ddd;
+    padding: 24px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.application-details-content h1 {
+    font-size: 28px;
+    margin-bottom: 12px;
+    /* color: #2453ba; */
+}
+
+.application-details-content div {
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.application-details-content b {
+    font-weight: 600;
 }

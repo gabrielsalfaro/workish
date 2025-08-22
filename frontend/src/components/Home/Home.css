@@ -75,6 +75,10 @@
     border-radius: 6px;
 }
 
+.search-button:hover {
+    background-color: #1c4299;
+}
+
 .home-job-listing-results {
     height: 500px;
 }
@@ -85,6 +89,20 @@
     justify-content: center;
     align-items: center;
     margin-top: 60px;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+}
+
+/* .home-welcome.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+} */
+
+.home-welcome.fade-out {
+    opacity: 0;
+    pointer-events: none;
 }
 
 .home-welcome h2 {
@@ -101,4 +119,16 @@
     min-height: 70vh;
     border-right: 1px solid #ddd;
     /* border-left: 1px solid #ccc; */
+}
+
+home-welcome.visible {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 2s linear;
+}
+
+home-welcome.hidden {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s 2s, opacity 2s linear;
 }

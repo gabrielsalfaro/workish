@@ -75,17 +75,17 @@ const JobListingsCreate = () => {
         </center>
         <form className="job-listing-form-content" onSubmit={handleSubmit}>
             <input 
-                placeholder='job title'
+                placeholder='Job Title'
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
             />
             <input 
-                placeholder='city'
+                placeholder='City'
                 value={city}
                 onChange={(e) => setCity(e.target.value)}
             />
             <input 
-                placeholder='state'
+                placeholder='State'
                 value={state}
                 onChange={(e) => setState(e.target.value)}
             />
@@ -103,10 +103,12 @@ const JobListingsCreate = () => {
                     theme="snow"
                 />
             </div>
-            <button 
-                className='job-listing-post-button' 
-                type="submit">Post Job
-            </button>
+            <center>
+              <button 
+                  className='job-listing-post-button' 
+                  type="submit">Post Job
+              </button>
+            </center>
         </form>
 
         </div>

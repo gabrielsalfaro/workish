@@ -42,7 +42,7 @@ const ApplicationsReview = () => {
   return (
     <>
     <div className="applications-review-container">
-        <div><h2>ApplicationsReview</h2></div>
+        <div><h2>Review Applications Submitted</h2></div>
 
         {job && (
         <div className="job-info-preview">
@@ -58,7 +58,7 @@ const ApplicationsReview = () => {
             <>
             <NavLink to={`/users/${application.User?.id}`}>
                 <div key={application.id} className="application-card">
-                    <h3>{application.JobListing?.title}</h3>
+                    {/* <h3>{application.User?.title}</h3> */}
                     <p><strong>Applicant:</strong> {application.User?.firstName} {application.User?.lastName}</p>
                     <p><strong>Email:</strong> {application.User?.email}</p>
                     <p><strong>Submitted:</strong> {new Date(application.createdAt).toLocaleDateString()}</p>
