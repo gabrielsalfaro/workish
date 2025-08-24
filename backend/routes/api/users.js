@@ -135,6 +135,28 @@ router.post(
     }
 });
 
+// DELETE /api/users/job-history/jobHistoryId
+router.delete(
+  '/job-history/:jobHistoryId', 
+  requireAuth, 
+  async (req, res) => {
+
+    try {
+      const job = await JobHistory.findByPk(req.params.jobHistoryId);
+
+      if (!job) {
+        return res.status(404).json({ message: 'Job not found' });
+      }
+
+      await job.destroy();
+      return res.status(200).json({ message: 'Successfully deleted' });
+    } catch (error) {
+      console.error('Error deleting job history:', error);
+      return res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
+
 
 module.exports = router;
 

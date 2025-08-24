@@ -2,11 +2,15 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useModal } from '../../context/Modal';
 import { addJobHistory } from '../../store/users';
+// import { useSelector } from 'react-redux';
+import { fetchUser } from '../../store/users';
 import './JobHistoryAddModal.css';
+// import { useNavigate } from 'react-router-dom';
 
 const JobHistoryAddModal = ({ onSuccess }) => {
     const dispatch = useDispatch();
     const { closeModal } = useModal();
+    // const navigate = useNavigate();
 
     const [jobTitle, setJobTitle] = useState('');
     const [employer, setEmployer] = useState('');
@@ -15,6 +19,8 @@ const JobHistoryAddModal = ({ onSuccess }) => {
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
 //   const [errors, setErrors] = useState({});
+    // const sessionUser = useSelector(state => state.session.user);
+    // const userId = sessionUser?.id;
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -34,6 +40,10 @@ const JobHistoryAddModal = ({ onSuccess }) => {
             closeModal();
             // dispatch(fetchUser)
             if (onSuccess) onSuccess();
+            setTimeout(() => {
+                // navigate(`/users/${userId}`);
+            dispatch(fetchUser)
+            }, 100);
         } catch (error) {
             console.error('error', error)
         }
@@ -46,7 +56,7 @@ const JobHistoryAddModal = ({ onSuccess }) => {
         <h1 className="modal-title">Add Job History</h1>
         <form onSubmit={handleSubmit} className="job-history-form">
           <label>
-            Job Title
+            <b>Job Title</b>
             <input
               type="text"
               value={jobTitle}
@@ -56,7 +66,7 @@ const JobHistoryAddModal = ({ onSuccess }) => {
           </label>
 
           <label>
-            Employer
+            <b>Employer</b>
             <input
               type="text"
               value={employer}
@@ -66,7 +76,7 @@ const JobHistoryAddModal = ({ onSuccess }) => {
           </label>
 
           <label>
-            City
+            <b>City</b>
             <input
               type="text"
               value={city}
@@ -76,7 +86,7 @@ const JobHistoryAddModal = ({ onSuccess }) => {
           </label>
 
           <label>
-            State
+            <b>State</b>
             <input
               type="text"
               value={state}
@@ -86,7 +96,7 @@ const JobHistoryAddModal = ({ onSuccess }) => {
           </label>
 
           <label>
-            Start Date
+            <b>Start Date</b>
             <input
               type="date"
               value={startDate}
@@ -96,7 +106,7 @@ const JobHistoryAddModal = ({ onSuccess }) => {
           </label>
 
           <label>
-            End Date
+            <b>End Date</b>
             <input
               type="date"
               value={endDate}
