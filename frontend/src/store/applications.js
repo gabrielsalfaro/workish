@@ -1,3 +1,5 @@
+import { csrfFetch } from "./csrf";
+
 const LOAD_MY_APPLICATIONS = 'applications/LOAD_MY_APPLICATIONS';
 const LOAD_SINGLE_APPLICATION = 'applications/LOAD_SINGLE_APPLICATION';
 const LOAD_EMPLOYER_APPLICATIONS = 'applications/LOAD_EMPLOYER_APPLICATIONS';
@@ -53,6 +55,30 @@ export const fetchEmployerApplications = (jobId) => async (dispatch) => {
     dispatch(loadEmployerApplications(data));
   }
 };
+
+// update application status
+export const updateApplicationStatus = (applicationId, newStatus) => async (dispatch) => {
+  try {
+    const res = await csrfFetch(`/api/applications/${applicationId}/status`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ status: newStatus })
+    });
+
+    if (res.ok) {
+      // const data = await res.json();
+      // dispatch(loadSingleApplication(data.application));
+      dispatch(fetchApplicationById(applicationId));
+    } else {
+      console.error('Failed to update application status');
+    }
+  } catch (error) {
+    console.error('Error updating status:', error);
+  }
+};
+
 
 
 const applicationsReducer = (state = initialState, action) => {

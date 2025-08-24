@@ -60,6 +60,12 @@ const UserProfile = () => {
               <p>
                 <span>Email:</span> {user.email}
               </p>
+              <p>
+                <span>Title:</span> {user.jobTitle}
+              </p>
+              <p>
+                <span>Summary:</span> {user.summary}
+              </p>
             </div>
 
             <div className="employment-history">

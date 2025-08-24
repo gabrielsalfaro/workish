@@ -142,18 +142,29 @@ const ApplicationsCreate = () => {
 
         <div className='employment-history-container'>
             <h2>Employment History</h2>
-            {user?.JobHistories?.map((job) => (
-            <div key={job.id} className="employment-history-entry">
-                <div className="employment-header">
-                    <div className='employment-job-title'><strong>{job.jobTitle}</strong></div>
-                    <div className='employment-employer'><strong>{job.employer}</strong></div>
-                    <span className="employment-location">{job.city}, {job.state}</span>
-                </div>
-                <div className="employment-dates">
-                    {formatDate(job.startDate)} - {formatDate(job.endDate)}
-                </div>
-            </div>
-            ))}
+              {user?.JobHistories?.length > 0 ? (
+                <ul className="employment-list">
+                  {user.JobHistories.map((job) => (
+                    
+                    <li key={job.id} className="employment-entry">
+                      <div className="employment-row">
+                        <div className="employment-header">
+                          <span className="employment-title">{job.jobTitle}</span>
+                          <span className="employment-dates">
+                            ({formatDate(job.startDate)} - {formatDate(job.endDate)})
+                          </span>
+                        </div>
+                        <div className="employment-details">
+                          <div>{job.employer} </div>
+                          <div>{job.city}, {job.state}</div>
+                        </div>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="no-history">No employment history available.</p>
+              )}
 
         </div>
         <center>

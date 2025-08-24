@@ -54,7 +54,7 @@ const ApplicationsReview = () => {
 
         {applications.map((application) => (
             <>
-            <NavLink to={`/users/${application.User?.id}`}>
+            <NavLink to={`/applications/${application.id}/details`}>
                 <div key={application.id} className="application-card">
                     {/* <h3>{application.User?.title}</h3> */}
                     <p><strong>Applicant:</strong> {application.User?.firstName} {application.User?.lastName}</p>

@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { requireAuth } = require('../../utils/auth')
-const { JobListing, JobApplication, Company, User } = require('../../db/models');
+const { JobListing, JobApplication, Company, User, JobHistory } = require('../../db/models');
 
 
 
@@ -106,6 +106,51 @@ router.post(
             return res.status(500).json({ message: 'Internal server error' });
         }
 });
+
+// Get a single application by ID - GET /api/applications/:applicationId/details
+router.get('/:applicationId/details', requireAuth, async (req, res) => {
+  const { applicationId } = req.params;
+  const userId = req.user.id;
+
+  try {
+    const application = await JobApplication.findByPk(applicationId, {
+      include: [
+        {
+          model: JobListing,
+          include: [Company]
+        },
+        {
+          model: User,
+          attributes: ['id', 'firstName', 'lastName', 'email', 'jobTitle', 'summary', 'profileImg'],
+          include: [
+            {
+              model: JobHistory,
+              attributes: ['id', 'employer', 'jobTitle', 'city', 'state', 'startDate', 'endDate'],
+              order: [['startDate', 'DESC']]
+            }
+          ]
+        }
+      ]
+    });
+
+    if (!application) {
+      return res.status(404).json({ message: 'Application not found' });
+    }
+
+    const isApplicant = application.userId === userId;
+    const isEmployer = application.JobListing?.employerId === userId;
+
+    if (!isApplicant && !isEmployer) {
+      return res.status(403).json({ message: 'Forbidden' });
+    }
+
+    return res.status(200).json(application);
+  } catch (error) {
+    console.error('Error fetching application details:', error);
+    return res.status(500).json({ message: 'Internal Server Error' });
+  }
+});
+
 
 
 // Delete existing Application - DELETE /api/applications/:applicationId
