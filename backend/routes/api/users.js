@@ -90,7 +90,7 @@ router.get('/:userId', async (req, res) => {
       include: [
         {
           model: JobHistory,
-          attributes: ['employer', 'jobTitle', 'city', 'state', 'startDate', 'endDate']
+          attributes: ['id', 'employer', 'jobTitle', 'city', 'state', 'startDate', 'endDate']
         },
         {
           model: Company,
@@ -108,6 +108,31 @@ router.get('/:userId', async (req, res) => {
     console.error('Error fetching user profile:', error);
     return res.status(500).json({ message: 'Internal server error' });
   }
+});
+
+// POST /api/users/job-history
+router.post(
+  '/job-history', 
+  requireAuth, 
+  async (req, res) => {
+    const { jobTitle, employer, city, state, startDate, endDate } = req.body;
+
+    try {
+      const newJob = await JobHistory.create({
+        userId: req.user.id,
+        jobTitle,
+        employer,
+        city,
+        state,
+        startDate,
+        endDate
+      });
+
+      return res.status(201).json(newJob);
+    } catch (error) {
+      console.error('Error creating job history:', error);
+      return res.status(500).json('Failed to create job history', error);
+    }
 });
 
 

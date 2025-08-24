@@ -5,6 +5,7 @@ import { fetchApplicationById } from '../../store/applications';
 import { updateApplicationStatus } from '../../store/applications';
 import './ApplicationDetails.css';
 
+
 const ApplicationDetails = () => {
   const dispatch = useDispatch();
   const { applicationId } = useParams();
@@ -12,18 +13,20 @@ const ApplicationDetails = () => {
   // const { userId } = useParams();
   const currentUser = useSelector(state => state.session?.user);
   // const status = application.status;
+  // const [loading, setLoading] = useState(true);
+  const hasFullData = application?.User && application?.JobListing?.Company;
 
 
   useEffect(() => {
-    if (!application && applicationId) {
+    if ((!application || !hasFullData) && applicationId) {
       dispatch(fetchApplicationById(applicationId));
     }
-  }, [dispatch, application, applicationId]);
+  }, [dispatch, application, hasFullData, applicationId]);
 
-  if (!application) return <div className="loading">Loading...</div>;
+  if (!application || !hasFullData) return <div>Loading application details...</div>;
 
-  const createdAt = application?.JobListing?.createdAt || application?.createdAt;
   const JobListing = application.JobListing;
+  const createdAt = JobListing?.createdAt || application?.createdAt;
   const User = application.User;
   // const JobHistory = application.JobHistories
 
@@ -93,17 +96,20 @@ const ApplicationDetails = () => {
           <section className="application-section applicant-info">
             <h2>Applicant Info</h2>
             <div className="applicant-profile">
-              <img
-                src={User.profileImg || ''}
-                alt={`${User.firstName}'s profile`}
-                className="applicant-avatar"
-              />
-              <div className="applicant-details">
-                <p><strong>Name:</strong> {User.firstName} {User.lastName}</p>
-                <p><strong>Email:</strong> {User.email}</p>
-                <p><strong>Title:</strong> {User.jobTitle || 'N/A'}</p>
-                <p><strong>Summary:</strong> {User.summary || 'N/A'}</p>
+              <div className="applicant-profile-content">
+                <img
+                  src={User.profileImg || ''}
+                  alt={`${User.firstName}'s profile`}
+                  className="applicant-avatar"
+                />
+                <div className="applicant-details">
+                  <p> <b>{User.firstName} {User.lastName}</b></p>
+                  <p> {User.email}</p>
+                  <p> {User.jobTitle || 'N/A'}</p>
+                  <p> {User.summary || 'N/A'}</p>
+                </div>
               </div>
+
             </div>
           </section>
         )}
@@ -115,7 +121,7 @@ const ApplicationDetails = () => {
               <li key={job.id} className="employment-entry">
                 <div className="employment-row">
                   <div className="employment-header">
-                    <span className="employment-title">{job.jobTitle}</span>
+                    <span className="employment-title"><b>{job.jobTitle}</b></span>
                     <span className="employment-dates">
                       ({formatDate(job.startDate)} - {formatDate(job.endDate)})
                     </span>

@@ -12,7 +12,7 @@ module.exports = {
     await JobApplication.bulkCreate([
       {
         userId: 1, // Demo
-        jobListingId: 1, // Frontend Developer
+        jobListingId: 6, // Frontend Developer
         status: 'applied'
       },
       {

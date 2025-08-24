@@ -50,34 +50,25 @@ const ApplicationsSubmitted = () => {
         <div><h1>ApplicationsSubmitted</h1></div>
             {applications.length > 0 ? (
                 applications.map(application => (
-                    <>
                     <div key={application.id} className="my-job-listing-content">
-                        <NavLink to={`/applications/${application.id}/details`}  >
-                            <div><b>{application.JobListing.title} </b></div>
-                            <div>{application.JobListing.city}, {application.JobListing.state}</div>
+                        <NavLink to={`/applications/${application.id}/details`}>
+                            <h2>{application.JobListing.title}</h2>
+                            <p><strong>Company: </strong> {application.JobListing.Company?.name}</p>
+                            <p><strong>Location: </strong> {application.JobListing.city}, {application.JobListing.state}</p>
                         </NavLink>
 
-                        <div className="application-status">{application.status}</div>
-                        <div className="my-jobs-button-container">
-                            <div>
-                                <NavLink to={`/applications/${application.id}/details`}>
-                                    <button className="my-jobs-update-button">
-                                        view
-                                    </button>
-                                </NavLink>
-                            </div>
-                            <div>
-                                <button 
-                                    onClick={() => handleDelete(application.id)} 
-                                    className="my-jobs-delete-button"
-                                >
-                                    delete
-                                </button>
-                            </div>
-                        </div>
+                        <p><strong>Status: </strong><span className={`status-badge`}> <b>{application.status.toUpperCase()}</b></span></p>
 
+                        <p><strong>Submitted: </strong> {new Date(application.createdAt).toLocaleDateString()}</p>
+
+                        <div className="my-jobs-button-container">
+                            <NavLink to={`/applications/${application.id}/details`}>
+                                <button className="my-jobs-update-button">View</button>
+                            </NavLink>
+                            <button onClick={() => handleDelete(application.id)} className="my-jobs-delete-button">Delete</button>
+                        </div>
                     </div>
-                    </>
+
                 ))
             ) : (
                 <p>No jobs listed yet</p>
