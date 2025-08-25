@@ -156,6 +156,41 @@ router.delete(
     }
 });
 
+// PUT /api/users/job-history/:jobHistoryId
+router.put(
+  '/job-history/:jobHistoryId', 
+  requireAuth, 
+  async (req, res) => {
+    const { jobHistoryId } = req.params;
+    const { jobTitle, employer, city, state, startDate, endDate } = req.body;
+
+    try {
+      const job = await JobHistory.findByPk(jobHistoryId);
+
+      if (!job) {
+        return res.status(404).json({ message: 'Job history entry not found' });
+      }
+
+      if (job.userId !== req.user.id) {
+        return res.status(403).json({ message: 'Forbidden' });
+      }
+
+      await job.update({
+        jobTitle,
+        employer,
+        city,
+        state,
+        startDate,
+        endDate
+      });
+
+      return res.status(200).json(job);
+    } catch (error) {
+      console.error('Error updating job history:', error);
+      return res.status(500).json({ message: 'Internal Server Error' });
+    }
+});
+
 
 
 module.exports = router;

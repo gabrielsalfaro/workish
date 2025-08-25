@@ -41,6 +41,32 @@ export const addJobHistory = (jobData) => async () => {
 };
 
 
+export const editJobHistory = (jobId, jobData) => async (dispatch, getState) => {
+  try {
+    const res = await csrfFetch(`/api/users/job-history/${jobId}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(jobData),
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) throw data;
+
+    const state = getState();
+    const currentUserId = state.session?.user?.id;
+    if (currentUserId) {
+      dispatch(fetchUser(currentUserId));
+    }
+
+    return data;
+  } catch (error) {
+    console.error('Error editing job history:', error);
+    throw error;
+  }
+};
+
+
 
 const usersReducer = (state = initialState, action) => {
   switch (action.type) {

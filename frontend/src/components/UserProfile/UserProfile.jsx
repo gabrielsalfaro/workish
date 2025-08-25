@@ -165,16 +165,17 @@ const UserProfile = () => {
                           <div className="comment-actions">
                             <OpenModalButton
                               buttonText="Edit"
-                              className="edit-job-history-button"
+                              className="edit-job-history-button" 
+                              job={job} 
                               modalComponent={(closeModal) => (
-                                <JobHistoryEditModal commentId={job.id} closeModal={closeModal} />
+                                <JobHistoryEditModal job={job}  closeModal={closeModal} />
                               )}
                             />
                             {/* <OpenModalButton
                               buttonText="Delete"
-                              className="delete-comment-button"
+                              className="delete-job-history-button"
                               modalComponent={
-                                <JobHistoryDeleteModal commentId={job.id} expenseId={expenseId} />
+                                <JobHistoryDeleteModal job={job} closeModal={closeModal} />
                               }
                             /> */}
                             <button onClick={() => handleDelete(job.id)} className="delete-job-history-button">Delete</button>
