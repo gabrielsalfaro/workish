@@ -87,10 +87,57 @@
 .add-job-history button:hover {
     background-color: #1c4299;
 }
+
+.job-history-actions {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  top: 5px;
+  right: 10px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.employment-entry:hover .job-history-actions {
+  opacity: 1;
+}
+
+.employment-entry:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.edit-job-history-button {
+  color: #2453ba;
+  font-weight: bold;
+}
+
+.delete-job-history-button {
+  color: #e02d2d;
+  font-weight: bold;
+}
+
+.edit-job-history-button:hover {
+  text-decoration: underline;
+}
+
+.delete-job-history-button:hover {
+  text-decoration: underline;
+}
+
 .employment-entry {
+  position: relative;
   margin-bottom: 10px;
   font-size: 15px;
   color: #333;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 25px;
+  padding-bottom: 10px;
+}
+
+.employment-details {
+  padding-bottom: 10px;
 }
 
 .loading {

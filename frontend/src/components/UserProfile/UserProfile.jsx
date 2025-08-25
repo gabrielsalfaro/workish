@@ -162,7 +162,8 @@ const UserProfile = () => {
                         <div className="employment-entry-actions">
                         
                         {isOwner && (
-                          <div className="comment-actions">
+                          <center>
+                          <div className="job-history-actions">
                             <OpenModalButton
                               buttonText="Edit"
                               className="edit-job-history-button" 
@@ -180,6 +181,7 @@ const UserProfile = () => {
                             /> */}
                             <button onClick={() => handleDelete(job.id)} className="delete-job-history-button">Delete</button>
                           </div>
+                          </center>
                         )}
                         </div>
                       </div>
