@@ -4,6 +4,7 @@ const sessionRouter = require('./session.js');
 const usersRouter = require('./users.js');
 const jobListingsRouter = require('./joblistings.js');
 const applicationsRouter = require('./applications.js');
+const watchlistRouter = require('./watchlist.js');
 const { restoreUser, setTokenCookie, requireAuth } = require("../../utils/auth.js");
 const { User } = require('../../db/models');
 
@@ -17,6 +18,7 @@ router.use('/users', usersRouter);
 router.use('/jobs', jobListingsRouter)
 router.use('/jobs', applicationsRouter);
 router.use('/applications', applicationsRouter);
+router.use('/watchlist', watchlistRouter);
 
 
 // Test route

@@ -10,14 +10,19 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      // Watchlist belongs to a JobListing
+      Watchlist.belongsTo(models.JobListing, { foreignKey: 'jobListingId' });
+
+      // Watchlist belongs to User
+      Watchlist.belongsTo(models.User, { foreignKey: 'userId' });
+
     }
   }
   Watchlist.init({
-    user_id: DataTypes.INTEGER,
-    job_listing_id: DataTypes.INTEGER,
-    created_at: DataTypes.DATE,
-    updated_at: DataTypes.DATE
+    userId: DataTypes.INTEGER,
+    jobListingId: DataTypes.INTEGER,
+    createdAt: DataTypes.DATE,
+    updatedAt: DataTypes.DATE
   }, {
     sequelize,
     modelName: 'Watchlist',

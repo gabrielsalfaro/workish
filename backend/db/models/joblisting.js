@@ -18,6 +18,10 @@ module.exports = (sequelize, DataTypes) => {
 
       // JobListing has many JobApplications
       JobListing.hasMany(models.JobApplication, { foreignKey: 'jobListingId' });
+
+      // JobListing has many Watchlists
+      JobListing.hasMany(models.Watchlist, { foreignKey: 'jobListingId' });
+
     }
   }
   JobListing.init({

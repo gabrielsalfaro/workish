@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
       User.hasMany(models.JobHistory, { foreignKey: 'userId' });
 
       // A User can have many Watchlist entries
-      // User.hasMany(models.Watchlist, { foreignKey: 'userId' });
+      User.hasMany(models.Watchlist, { foreignKey: 'userId' });
     }
   }
 
