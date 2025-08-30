@@ -35,4 +35,43 @@ router.get(
   }
 });
 
+
+// POST /api/watchlist/:jobId
+router.post(
+    '/:jobId', 
+    requireAuth, 
+    async (req, res) => {
+  const userId = req.user.id;
+  const { jobId } = req.params;
+
+  try {
+    const job = await JobListing.findByPk(jobId);
+    if (!job) {
+      return res.status(404).json({ message: 'Job listing not found' });
+    }
+
+    const existing = await Watchlist.findOne({
+      where: {
+        userId,
+        jobListingId: jobId
+      }
+    });
+
+    if (existing) {
+      return res.status(400).json({ message: 'Job already in watchlist' });
+    }
+
+    const newWatchlistEntry = await Watchlist.create({
+      userId,
+      jobListingId: jobId
+    });
+
+    return res.status(201).json(newWatchlistEntry);
+  } catch (error) {
+    console.error('Error adding to watchlist:', error);
+    return res.status(500).json({ message: 'Internal Server Error' });
+  }
+});
+
+
 module.exports = router;
