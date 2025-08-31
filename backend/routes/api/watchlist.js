@@ -74,4 +74,32 @@ router.post(
 });
 
 
+// DELETE /api/watchlist/:watchlistId
+router.delete(
+    '/:watchlistId', 
+    requireAuth, 
+    async (req, res) => {
+  const { watchlistId } = req.params;
+  const userId = req.user.id;
+
+  try {
+    const item = await Watchlist.findByPk(watchlistId);
+
+    if (!item) {
+      return res.status(404).json({ message: 'Watchlist item not found' });
+    }
+
+    if (item.userId !== userId) {
+      return res.status(403).json({ message: 'Forbidden' });
+    }
+
+    await item.destroy();
+    return res.status(200).json({ message: 'Removed from watchlist' });
+  } catch (error) {
+    console.error('Error deleting watchlist item:', error);
+    return res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+
 module.exports = router;
