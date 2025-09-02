@@ -1,12 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const { requireAuth } = require('../../utils/auth');
-const { Company } = require('../../db/models');
+const { Company, User } = require('../../db/models');
 
 
 // GET /api/companies/me - Get company associated with current user
 router.get(
-    '/me', // use something else?
+    '/my-company', // use something else?
     requireAuth, 
     async (req, res, next) => {
   try {
@@ -33,6 +33,28 @@ router.get(
     res.json(company);
   } catch (error) {
     next(error); // wow
+  }
+});
+
+
+router.delete(
+    '/my-company', 
+    requireAuth, 
+    async (req, res) => {
+  try {
+    const user = req.user;
+    // const companyId = user.companyId;
+    const company = await Company.findByPk(user.companyId);
+
+    if (!company) {
+      return res.status(404).json({message: 'Company not found.'});
+    }
+
+    await company.destroy();
+
+    return res.json({ message: 'Company deleted successfully.' });
+  } catch (error) {
+    console.error('Error deleting company: ', error)
   }
 });
 

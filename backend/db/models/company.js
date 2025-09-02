@@ -10,10 +10,16 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // A Company can have many Users (if they're employers)
-      Company.hasMany(models.User, { foreignKey: 'companyId' });
+      Company.hasMany(models.User, { 
+        foreignKey: 'companyId',
+        onDelete: 'CASCADE' 
+      });
 
       // A Company can have any JobListings (created by employers)
-      Company.hasMany(models.JobListing, { foreignKey: 'companyId' });
+      Company.hasMany(models.JobListing, { 
+        foreignKey: 'companyId',
+        onDelete: 'CASCADE' 
+    });
     }
   }
   Company.init({
