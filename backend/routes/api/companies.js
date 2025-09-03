@@ -36,7 +36,48 @@ router.get(
   }
 });
 
+// PUT /api/companies/:id
+router.put(
+    '/:companyId', 
+    requireAuth,
+    async (req, res) => {
+  const { companyId } = req.params;
+  const {
+    name,
+    city,
+    state,
+    website,
+    phone,
+    email,
+    logo
+  } = req.body;
 
+  try {
+    const company = await Company.findByPk(companyId);
+
+    if (!company) {
+      return res.status(404).json({
+        message: "Company not found"
+      });
+    }
+
+    await company.update({
+      name,
+      city,
+      state,
+      website,
+      phone,
+      email,
+      logo
+    });
+
+    return res.json(company);
+  } catch (error) {
+    console.error('Error updating company', error)
+  }
+});
+
+// DELETE /api/companies/my-company
 router.delete(
     '/my-company', 
     requireAuth, 
