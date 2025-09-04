@@ -36,6 +36,39 @@ router.get(
   }
 });
 
+// POST /api/companies
+router.post(
+    '/', 
+    requireAuth, 
+    async (req, res) => {
+  const {
+    name,
+    city,
+    state,
+    website,
+    phone,
+    email,
+    logo
+  } = req.body;
+
+  try {
+    const newCompany = await Company.create({
+      name,
+      city,
+      state,
+      website,
+      phone,
+      email,
+      logo
+    });
+
+    return res.status(201).json(newCompany);
+  } catch (error) {
+    console.error('Error creating company:', error);
+    return res.status(500).json({ message: 'Internal Server Error' });
+  }
+});
+
 // PUT /api/companies/:id
 router.put(
     '/:companyId', 
