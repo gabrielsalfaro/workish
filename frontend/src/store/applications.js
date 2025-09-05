@@ -25,9 +25,9 @@ export const loadEmployerApplications = (applications) => ({
 
 // my applications (submitted)
 export const fetchMyApplications = () => async (dispatch) => {
-    const rest = await fetch('/api/applications');
-    if (rest.ok) {
-        const data = await rest.json();
+    const res = await fetch('/api/applications');
+    if (res.ok) {
+        const data = await res.json();
         dispatch(loadMyApplications(data))
     }
 }
