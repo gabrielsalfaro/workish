@@ -1,11 +1,14 @@
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchWatchlist } from ''
+import { fetchWatchlist } from '../../store/watchlist';
 import './Watchlist.css'
 
 const Watchlist = () => {
   const dispatch = useDispatch();
-  const watchlistItems = useSelector((state) => Object.values(state.watchlist || {}));
+  const rawWatchlist = useSelector((state) => state.watchlist || {});
+
+  //memo
+  const watchlistItems = useMemo(() => Object.values(rawWatchlist), [rawWatchlist]);
 
   useEffect(() => {
     dispatch(fetchWatchlist());

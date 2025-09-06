@@ -13,7 +13,7 @@ import ApplicationsCreate from './components/ApplicationsCreate/ApplicationsCrea
 import ApplicationsSubmitted from './components/ApplicationsSubmitted/ApplicationsSubmitted';
 import ApplicationDetails from './components/ApplicationDetails/ApplicationDetails';
 import ApplicationsReview from './components/ApplicationsReview/ApplicationsReview';
-import Watchlist from '../../backend/db/models/watchlist';
+import Watchlist from './components/Watchlist/Watchlist';
 
 function Layout() {
   const dispatch = useDispatch();
