@@ -1,9 +1,40 @@
-
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchWatchlist } from ''
 import './Watchlist.css'
 
 const Watchlist = () => {
+  const dispatch = useDispatch();
+  const watchlistItems = useSelector((state) => Object.values(state.watchlist || {}));
+
+  useEffect(() => {
+    dispatch(fetchWatchlist());
+  }, [dispatch]);
+
+  const handleDelete = () => {
+    console.log('clicked')
+  };
+
   return (
-    <div>Watchlist</div>
+    <div className="watchlist-container">
+      <h2>Your Watchlist</h2>
+
+      <ul className="watchlist-list">
+        {watchlistItems.map((item) => (
+          <li key={item.id} className="watchlist-item">
+            <div className="job-info">
+              <h3>{item.JobListing?.title}</h3>
+              <p>{item.JobListing?.Company?.name}</p>
+              <p>{item.JobListing?.city}, {item.JobListing?.state}</p>
+            </div>
+
+            {/* change to modal */}
+            <button onClick={() => handleDelete()}>delete</button>
+          </li>
+        ))}
+      </ul>
+
+    </div>
   )
 }
 

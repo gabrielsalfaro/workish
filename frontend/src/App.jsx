@@ -13,6 +13,7 @@ import ApplicationsCreate from './components/ApplicationsCreate/ApplicationsCrea
 import ApplicationsSubmitted from './components/ApplicationsSubmitted/ApplicationsSubmitted';
 import ApplicationDetails from './components/ApplicationDetails/ApplicationDetails';
 import ApplicationsReview from './components/ApplicationsReview/ApplicationsReview';
+import Watchlist from '../../backend/db/models/watchlist';
 
 function Layout() {
   const dispatch = useDispatch();
@@ -71,6 +72,14 @@ const router = createBrowserRouter([
       {
         path: '/jobs/:jobId/applications',
         element: <ApplicationsReview />
+      },
+      // {
+      //   path: '/companies/my-company',
+      //   element: <MyCompany />
+      // },
+      {
+        path: '/watchlist',
+        element: <Watchlist />
       },
       {
         path: '/users/:userId',
