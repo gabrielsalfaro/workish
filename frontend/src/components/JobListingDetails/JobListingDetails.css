@@ -62,6 +62,12 @@
     /* gap: 10px; */
 }
 
+
+.job-details-top-section {
+  display: flex;
+  justify-content: space-between;
+}
+
 .job-details-title,
 .job-details-company,
 .job-details-location,

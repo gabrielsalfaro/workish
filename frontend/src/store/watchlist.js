@@ -13,6 +13,7 @@ export const fetchWatchlist = () => async (dispatch) => {
   const res = await fetch('/api/watchlist');
   if (res.ok) {
     const data = await res.json();
+    // console.log('Fetched watchlist:', data);
     dispatch(loadWatchlist(data));
   }
 };

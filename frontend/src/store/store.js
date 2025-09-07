@@ -4,12 +4,16 @@ import sessionReducer from './session';
 import jobsReducer from './joblistings';
 import usersReducer from './users';
 import applicationsReducer from './applications';
+import companiesReducer from './companies';
+import watchlistReducer from './watchlist';
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   jobs: jobsReducer,
   user: usersReducer,
-  applications: applicationsReducer
+  applications: applicationsReducer,
+  companies: companiesReducer,
+  watchlist: watchlistReducer
 });
 
 let enhancer;
