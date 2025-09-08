@@ -1,6 +1,6 @@
 import { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchWatchlist } from '../../store/watchlist';
+import { fetchWatchlist, removeWatchlistItem } from '../../store/watchlist';
 import './Watchlist.css'
 
 const Watchlist = () => {
@@ -15,7 +15,8 @@ const Watchlist = () => {
   }, [dispatch]);
 
   const handleDelete = () => {
-    console.log('clicked')
+    // console.log('clicked')
+    dispatch(removeWatchlistItem());
   };
 
   return (
