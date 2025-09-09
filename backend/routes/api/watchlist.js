@@ -40,7 +40,7 @@ router.get(
 router.post(
     '/:jobId', 
     requireAuth, 
-    async (req, res) => {
+    async (req, res, next) => {
   const userId = req.user.id;
   const { jobId } = req.params;
 
@@ -69,6 +69,7 @@ router.post(
     return res.status(201).json(newWatchlistEntry);
   } catch (error) {
     console.error('Error adding to watchlist:', error);
+    next(error)
     return res.status(500).json({ message: 'Internal Server Error' });
   }
 });

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams, NavLink } from 'react-router-dom';
 import { fetchJobById } from '../../store/joblistings';
 import './JobListingDetails.css'
+import { postWatchlistItem } from '../../store/watchlist';
 
 
 const JobListingDetails = ({ jobId: propJobId, embedded = false}) => {
@@ -27,7 +28,10 @@ const JobListingDetails = ({ jobId: propJobId, embedded = false}) => {
     );
 
     const handleWatchlistAdd = () => {
-        console.log('clicked')
+        // console.log('clicked')
+        if (job && jobId ) {
+            dispatch(postWatchlistItem(jobId))
+        }
     }
 
 

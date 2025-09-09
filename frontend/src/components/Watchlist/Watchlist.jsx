@@ -14,9 +14,9 @@ const Watchlist = () => {
     dispatch(fetchWatchlist());
   }, [dispatch]);
 
-  const handleDelete = () => {
+  const handleDelete = (watchlistId) => {
     // console.log('clicked')
-    dispatch(removeWatchlistItem());
+    dispatch(removeWatchlistItem(watchlistId));
   };
 
   return (
@@ -33,7 +33,7 @@ const Watchlist = () => {
             </div>
 
             {/* change to modal */}
-            <button onClick={() => handleDelete()}>delete</button>
+            <button onClick={() => handleDelete(item.id)}>delete</button>
           </li>
         ))}
       </ul>
