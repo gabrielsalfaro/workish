@@ -67,7 +67,8 @@ function ProfileButton({ user }) {
              <li><NavLink to={`/users/${userId}`} onClick={closeMenu} className={'manage-jobs-navlink'}>View Profile</NavLink></li>
              <li><NavLink to="/applications" onClick={closeMenu} className={'applications-navlink'}>My Applications</NavLink></li>
              <li><NavLink to="/jobs/my-jobs" onClick={closeMenu} className={'manage-jobs-navlink'}>Manage Jobs</NavLink></li>
-            {/* <li style={{color: 'gray'}}>View applications</li> */}
+             <li><NavLink to="/watchlist" onClick={closeMenu} className={'watchlist-navlink'}>My Watchlist</NavLink></li>
+             <li><NavLink to="/companies/my-company" onClick={closeMenu} className={'watchlist-navlink'}>View My Company</NavLink></li>
             <hr className='menu-hr' />
             <li>
               <button onClick={logout} className='logout'>Log Out</button>
