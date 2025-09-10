@@ -18,21 +18,21 @@ module.exports = {
       },
       employerId: {
         type: Sequelize.INTEGER,
-        refernces: {
+        references: {
           model: 'Users',
           key: 'id'
         },
         // onUpdate: 'CASCADE',
-        // onDelete: 'SET NULL'
+        onDelete: 'CASCADE'
       },
       companyId: {
         type: Sequelize.INTEGER,
         references: {
           model: 'Companies',
-          keky: 'id'
+          key: 'id'
         },
         // onUpdate: 'CASCADE',
-        // onDelete: 'SET NULL'
+        onDelete: 'CASCADE'
       },
       city: {
         type: Sequelize.STRING

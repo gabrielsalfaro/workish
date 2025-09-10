@@ -6,7 +6,10 @@ module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     static associate(models) {
        // A User belongs to a Company (the one they work at)
-      User.belongsTo(models.Company, { foreignKey: 'companyId' });
+      User.belongsTo(models.Company, { 
+        foreignKey: 'companyId',
+        onDelete: 'CASCADE'
+      });
 
       // A User can have many JobListings (if they're an employer)
       User.hasMany(models.JobListing, { foreignKey: 'employerId' });

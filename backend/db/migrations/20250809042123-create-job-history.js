@@ -17,12 +17,12 @@ module.exports = {
       },
       userId: {
         type: Sequelize.INTEGER,
-        refernces: {
+        references: {
           model: 'Users',
           key: 'id'
         },
         // onUpdate: 'CASCADE',
-        // onDelete: 'SET NULL'
+        onDelete: 'CASCADE'
       },
       employer: {
         type: Sequelize.STRING

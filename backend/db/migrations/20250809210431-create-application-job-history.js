@@ -17,21 +17,21 @@ module.exports = {
       },
       applicationId: {
         type: Sequelize.INTEGER,
-        refernces: {
+        references: {
           model: 'JobApplications',
           key: 'id'
         },
         // onUpdate: 'CASCADE',
-        // onDelete: 'SET NULL'
+        onDelete: 'CASCADE'
       },
       jobHistoryId: {
         type: Sequelize.INTEGER,
-        refernces: {
-          model: 'JobHistory',
+        references: {
+          model: 'JobHistories',
           key: 'id'
         },
         // onUpdate: 'CASCADE',
-        // onDelete: 'SET NULL'
+        onDelete: 'CASCADE'
       },
       createdAt: {
         allowNull: false,

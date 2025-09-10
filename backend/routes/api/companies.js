@@ -6,7 +6,7 @@ const { Company, User } = require('../../db/models');
 
 // GET /api/companies/me - Get company associated with current user
 router.get(
-    '/my-company', // use something else?
+    '/me', // use something else?
     requireAuth, 
     async (req, res, next) => {
   try {
@@ -112,7 +112,7 @@ router.put(
 
 // DELETE /api/companies/my-company
 router.delete(
-    '/my-company', 
+    '/me', 
     requireAuth, 
     async (req, res) => {
   try {

@@ -75,7 +75,7 @@ const router = createBrowserRouter([
         element: <ApplicationsReview />
       },
       {
-        path: '/companies/my-company',
+        path: '/companies/me',
         element: <MyCompany />
       },
       {

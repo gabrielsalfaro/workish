@@ -32,7 +32,7 @@ module.exports = {
           key: 'id'
         },
         // onUpdate: 'CASCADE',
-        // onDelete: 'SET NULL'
+        onDelete: 'CASCADE'
       },
       status: {
         type: Sequelize.STRING
