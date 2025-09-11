@@ -15,6 +15,7 @@ import ApplicationDetails from './components/ApplicationDetails/ApplicationDetai
 import ApplicationsReview from './components/ApplicationsReview/ApplicationsReview';
 import Watchlist from './components/Watchlist/Watchlist';
 import MyCompany from './components/MyCompany/MyCompany';
+import CompanyEdit from './components/CompanyEdit/CompanyEdit';
 
 function Layout() {
   const dispatch = useDispatch();
@@ -77,6 +78,10 @@ const router = createBrowserRouter([
       {
         path: '/companies/me',
         element: <MyCompany />
+      },
+      {
+        path: '/companies/edit',
+        element: <CompanyEdit />
       },
       {
         path: '/watchlist',
