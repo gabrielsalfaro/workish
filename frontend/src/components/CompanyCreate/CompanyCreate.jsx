@@ -1,8 +1,8 @@
 // import { useParams } from 'react-router-dom';
 // import { useState } from 'react';
-import './CompanyEdit.css'
+import './CompanyCreate.css'
 
-const CompanyEdit = () => {
+const CompanyCreate = () => {
     // const { companyId } = useParams();
     // const [errors, setErrors] = useState([]);
 
@@ -12,8 +12,8 @@ const CompanyEdit = () => {
     
   return (
     <>
-    <div>CompanyEdit</div>
-    <form className='company-edit-form'>
+    <div>CompanyCreate</div>
+    <form className='company-create-form'>
         <input type="text" className="name" />
         <input type="text" className="city" />
         <input type="text" className="state" />
@@ -22,10 +22,10 @@ const CompanyEdit = () => {
         <input type="text" className="website" />
         <input type="text" className="logo-url" />
 
-        <button className="company-edit-submit-button" onClick={handleSubmit}>submit</button>
+        <button className="company-create-submit-button" onClick={handleSubmit}>submit</button>
     </form>
     </>
   )
 }
 
-export default CompanyEdit
+export default CompanyCreate
