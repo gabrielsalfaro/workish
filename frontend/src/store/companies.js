@@ -4,7 +4,7 @@ import { csrfFetch } from "./csrf";
 
 const LOAD_MY_COMPANY = 'companies/LOAD_MY_COMPANY';
 const DELETE_COMPANY = 'companies/DELETE_COMPANY'
-
+const ADD_COMPANY = 'companies/ADD_COMPANY';
 
 const initialState = {}
 
@@ -12,6 +12,11 @@ const initialState = {}
 export const loadMyCompany = (company) => ({
     type: LOAD_MY_COMPANY,
     company
+});
+
+const addCompany = (company) => ({
+  type: ADD_COMPANY,
+  company,
 });
 
 export const deleteCompany = (companyId) => ({
@@ -27,6 +32,24 @@ export const fetchMyCompany = () => async (dispatch) => {
         dispatch(loadMyCompany(data))
     }
 }
+
+// POST new Company
+export const createCompany = (companyData) => async (dispatch) => {
+  const res = await csrfFetch('/api/companies/new', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(companyData),
+  });
+
+  if (res.ok) {
+    const newCompany = await res.json();
+    dispatch(addCompany(newCompany));
+    return newCompany;
+  } else {
+    const error = await res.json();
+    console.error('Error creating company', error)
+  }
+};
 
 // DELETE Company by :companyId
 export const removeCompany = (companyId) => async (dispatch) => {
