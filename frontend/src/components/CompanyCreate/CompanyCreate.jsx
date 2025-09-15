@@ -1,8 +1,13 @@
 // import { useParams } from 'react-router-dom';
 import { useState } from 'react';
 import './CompanyCreate.css'
+import { createCompany } from '../../store/companies';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const CompanyCreate = () => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate()
     // const { companyId } = useParams();
     // const [errors, setErrors] = useState([]);
     const [name, setName] = useState('');
@@ -13,7 +18,7 @@ const CompanyCreate = () => {
     const [website, setWebsite] = useState('');
     const [logoUrl, setLogoUrl] = useState('');
     
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         // console.log('clicked')
         e.preventDefault();
 
@@ -28,6 +33,12 @@ const CompanyCreate = () => {
         };
 
         console.log('new company: ', newCompany);
+        try {
+          const newCompany = await dispatch(createCompany(newCompany))
+          navigate(`/companies/${newCompany.id}`)
+        } catch (error) {
+          console.error('Error creating company', error)
+        }
     }
 
   return (

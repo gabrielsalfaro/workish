@@ -73,7 +73,9 @@ const companiesReducer = (state = initialState, action) => {
             newState[action.company.id] = action.company;
             return newState;
         }
-
+        case ADD_COMPANY:
+            return { ...state, [action.company.id]: action.company };
+            
         default:
           return state;
     }
