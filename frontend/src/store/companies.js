@@ -5,6 +5,7 @@ import { csrfFetch } from "./csrf";
 const LOAD_MY_COMPANY = 'companies/LOAD_MY_COMPANY';
 const DELETE_COMPANY = 'companies/DELETE_COMPANY'
 const ADD_COMPANY = 'companies/ADD_COMPANY';
+const UPDATE_COMPANY = 'companies/UPDATE_COMPANY';
 
 const initialState = {}
 
@@ -16,6 +17,11 @@ export const loadMyCompany = (company) => ({
 
 const addCompany = (company) => ({
   type: ADD_COMPANY,
+  company,
+});
+
+const updateCompany = (company) => ({
+  type: UPDATE_COMPANY,
   company,
 });
 
@@ -51,6 +57,25 @@ export const createCompany = (companyData) => async (dispatch) => {
   }
 };
 
+// PUT existing Company
+export const editCompany = (companyId, companyData) => async (dispatch) => {
+  const res = await csrfFetch(`/api/companies/${companyId}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(companyData),
+  });
+
+  if (res.ok) {
+    const updatedCompany = await res.json();
+    dispatch(updateCompany(updatedCompany));
+    return updatedCompany;
+  } else {
+    const error = await res.json();
+    console.error('Error updating company:', error);
+    throw error;
+  }
+};
+
 // DELETE Company by :companyId
 export const removeCompany = (companyId) => async (dispatch) => {
     // const res = await csrfFetch(`/api/companies/${companyId}`, {
@@ -75,7 +100,9 @@ const companiesReducer = (state = initialState, action) => {
         }
         case ADD_COMPANY:
             return { ...state, [action.company.id]: action.company };
-            
+        case UPDATE_COMPANY:
+        return { ...state, [action.company.id]: action.company };
+        
         default:
           return state;
     }
