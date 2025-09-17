@@ -115,11 +115,15 @@ const CompanyCreate = () => {
             />
         </label>
 
-        <button 
-            className="company-create-submit-button" 
-            // onClick={handleSubmit}
-            type='submit'
-        >submit</button>
+        {/* <div className='company-create-button-container'> */}
+        <center>
+          <button 
+              className="company-create-submit-button" 
+              // onClick={handleSubmit}
+              type='submit'
+          >Submit</button>
+        </center>
+        {/* </div> */}
     </form>
     </>
   )
