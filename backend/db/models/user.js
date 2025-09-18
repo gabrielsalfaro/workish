@@ -8,7 +8,8 @@ module.exports = (sequelize, DataTypes) => {
        // A User belongs to a Company (the one they work at)
       User.belongsTo(models.Company, { 
         foreignKey: 'companyId',
-        onDelete: 'CASCADE'
+        // onDelete: 'CASCADE'
+        onDelete: 'SET NULL'
       });
 
       // A User can have many JobListings (if they're an employer)
