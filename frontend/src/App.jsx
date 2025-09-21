@@ -17,6 +17,7 @@ import Watchlist from './components/Watchlist/Watchlist';
 import MyCompany from './components/MyCompany/MyCompany';
 import CompanyEdit from './components/CompanyEdit/CompanyEdit';
 import CompanyCreate from './components/CompanyCreate/CompanyCreate';
+import CompanySearch from './components/CompanySearch/CompanySearch';
 
 function Layout() {
   const dispatch = useDispatch();
@@ -87,6 +88,10 @@ const router = createBrowserRouter([
       {
         path: '/companies/new',
         element: <CompanyCreate />
+      },
+      {
+        path: '/companies/search',
+        element: <CompanySearch />
       },
       {
         path: '/watchlist',
