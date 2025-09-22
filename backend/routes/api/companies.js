@@ -161,4 +161,30 @@ router.get(
 });
 
 
+// PUT /api/companies/assign - Assign a company to the current user
+router.put(
+  '/assign', 
+  requireAuth, 
+  async (req, res) => {
+  const { companyId } = req.body;
+  const user = req.user;
+
+  try {
+    const company = await Company.findByPk(companyId);
+
+    if (!company) {
+      return res.status(404).json({ message: 'Company not found.' });
+    }
+
+    user.companyId = company.id;
+    await user.save();
+
+    return res.status(200).json({ message: 'Company successfully assigned to user.' });
+  } catch (error) {
+    console.error('Error assigning company to user:', error);
+    return res.status(500).json({ message: 'Internal server error.' });
+  }
+});
+
+
 module.exports = router;

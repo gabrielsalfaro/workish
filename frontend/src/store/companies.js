@@ -91,6 +91,10 @@ export const removeCompany = (companyId) => async (dispatch) => {
     }
 }
 
+// export const assignCompany = (companyId) => async (dispatch) {
+    
+// }
+
 const companiesReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOAD_MY_COMPANY: {
@@ -102,7 +106,7 @@ const companiesReducer = (state = initialState, action) => {
             return { ...state, [action.company.id]: action.company };
         case UPDATE_COMPANY:
         return { ...state, [action.company.id]: action.company };
-        
+
         default:
           return state;
     }

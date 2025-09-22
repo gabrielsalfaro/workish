@@ -36,6 +36,17 @@ const CompanySearch = () => {
 
   const handleCompanyAdd = async () => {
     console.log('clicked')
+//     if (!searchResult) return;
+
+//     try {
+//       const newCompany = await dispatch(assignCompany(searchResult));
+//       if (newCompany) {
+//         alert('Company added successfully!');
+//         // Redirect to profile?
+//       }
+//     } catch (error) {
+//       console.error({ message: 'Failed to add company.' });
+//     }
   };
 
   const handleCompanyUpdate = async () => {
