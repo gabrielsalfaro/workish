@@ -1,20 +1,21 @@
 // import { NavLink } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
-import { useLocation } from 'react-router-dom';
-import JobListingsResults from '../JobListingsResults';
-import JobListingDetails from '../JobListingDetails';
-import { fetchJobs, clearJobs } from '../../store/joblistings';
+import { useLocation, useNavigate } from 'react-router-dom';
+// import JobListingsResults from '../JobListingsResults';
+// import JobListingDetails from '../JobListingDetails';
+import { clearJobs } from '../../store/joblistings';
 import './Home.css';
 
 
 const Home = () => {
+    const navigate = useNavigate();
     const [searchQuery, setSearchQuery] = useState('');
     const [locationQuery, setLocationQuery] = useState('');
     const dispatch = useDispatch();
     // const jobsState = useSelector(state => state.jobs);
-    const [selectedJobId, setSelectedJobId] = useState(null);
-    const [hasSearched, setHasSearched] = useState(false);
+    // const [selectedJobId, setSelectedJobId] = useState(null);
+    // const [hasSearched, setHasSearched] = useState(false);
     const location = useLocation();
     const inputRef = useRef(null);
 
@@ -25,8 +26,8 @@ const Home = () => {
     useEffect(() => {
         // Reset search when Home is clicked
         setSearchQuery('');
-        setSelectedJobId(null);
-        setHasSearched(false);
+        // setSelectedJobId(null);
+        // setHasSearched(false);
         dispatch(clearJobs());
     }, [location.key, dispatch]);
 
@@ -41,12 +42,30 @@ const Home = () => {
     const handleSearch = (e) => {
         e.preventDefault();
 
-        const [city, state] = locationQuery.split(',').map(string => string.trim());
-        setHasSearched(true);
-        dispatch(fetchJobs(searchQuery, {city: city, state: state, companyName: searchQuery}));
+        // const [city, state] = locationQuery.split(',').map(string => string.trim());
+
+        // dispatch(fetchJobs(searchQuery, {city: city, state: state, companyName: searchQuery}));
         // dispatch(fetchJobs(searchQuery, { city, state }));
         // dispatch(fetchJobs('', { companyName: searchQuery }));
 
+        // const queryParams = new URLSearchParams({
+        //     keyword: searchQuery,
+        //     city,
+        //     state
+        // }).toString();
+        const params = new URLSearchParams();
+        if (searchQuery) params.set('keyword', searchQuery);
+
+        if (locationQuery.trim()) {
+            const [cityRaw = '', stateRaw = ''] = locationQuery.split(',').map(location => location.trim());
+            if (cityRaw) params.set('city', cityRaw);
+            if (stateRaw) params.set('state', stateRaw.toUpperCase());
+        }
+
+        navigate(`/search?${params.toString()}`);
+
+
+        // navigate(`/search?${queryParams}`);
     };
 
     // const checkState = () => {console.log('jobsState', jobsState)}
@@ -77,30 +96,30 @@ const Home = () => {
         </form>
     </div>
     
-    {!searchQuery && !locationQuery && (
+    {/* {!searchQuery && !locationQuery && ( */}
         <div className={`home-welcome ${searchQuery ? 'fade-out' : 'fade-in'}`}>
             <div className='navigation-home'>Workish</div>
             <h2>Your next job sorta starts here</h2>
             <p>Create an account or sign in to see more.</p>
         </div>
-    )}
+    {/* )} */}
     <div>
         {/* <NavLink to='/jobs/new'>create a job listing!</NavLink> */}
     </div>
 
-    <div className="home-job-listings-container">
+    {/* <div className="home-job-listings-container">
         <div>
             <JobListingsResults 
                 onSelectJob={setSelectedJobId} 
                 hasSearched={hasSearched}
                 className='home-job-listing-results'
             />
-        </div>
+        </div> */}
         {/* <div className="spacer"></div> */}
-        <div className='home-job-listing-details'>
+        {/* <div className='home-job-listing-details'>
             <JobListingDetails jobId={selectedJobId} embedded={true} />
         </div>
-    </div>
+    </div> */}
 
     <div>
         {/* <button onClick={checkState} style={{padding: '10px'}}>check state</button> */}

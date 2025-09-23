@@ -1,0 +1,57 @@
+.company-edit-container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 2rem;
+  /* background-color: #fff; */
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.company-edit-form-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.company-edit-header {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  color: #333;
+}
+
+.company-edit-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.company-edit-form input {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+
+.company-edit-form input {
+  padding: 10px 20px;
+  margin-bottom: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+}
+
+.company-edit-submit-button {
+  background-color: #2453ba;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-top: 1rem;
+}
+
+.company-edit-submit-button:hover {
+  background-color: #1c4299;
+}

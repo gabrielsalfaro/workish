@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 // import { csrfFetch } from '../../store/csrf';
 import { fetchMyCompany } from '../../store/companies';
 import { editCompany } from '../../store/companies';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import './CompanyEdit.css'
 
 const CompanyEdit = () => {
@@ -12,7 +12,8 @@ const CompanyEdit = () => {
     // const [errors, setErrors] = useState([]);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    // const companyState = useSelector((state) => state.companies);
+    const companyState = useSelector((state) => state.companies);
+    const company = Object.values(companyState)[0];
 
     const [name, setName] = useState('');
     const [city, setCity] = useState('');
@@ -24,23 +25,21 @@ const CompanyEdit = () => {
     const [companyId, setCompanyId] = useState(null);
 
     useEffect(() => {
-      const loadCompany = async () => {
-        const res = await dispatch(fetchMyCompany());
-        const company = Object.values(res)[0];
-        if (company) {
-          setName(company.name || '');
-          setCity(company.city || '');
-          setState(company.state || '');
-          setPhone(company.phone || '');
-          setEmail(company.email || '');
-          setWebsite(company.website || '');
-          setLogoUrl(company.logo || '');
-          setCompanyId(company.id);
-        }
-      };
-
-      loadCompany();
+      dispatch(fetchMyCompany());
     }, [dispatch]);
+
+    useEffect(() => {
+      if (company) {
+        setName(company.name || '');
+        setCity(company.city || '');
+        setState(company.state || '');
+        setPhone(company.phone || '');
+        setEmail(company.email || '');
+        setWebsite(company.website || '');
+        setLogoUrl(company.logo || '');
+        setCompanyId(company.id);
+      }
+    }, [company]);
 
     const handleSubmit = async (e) => {
     e.preventDefault();
@@ -58,7 +57,7 @@ const CompanyEdit = () => {
     try {
       const updatedCompany = await dispatch(editCompany(companyId, companyData));
       if (updatedCompany) {
-        navigate(`/companies/${companyId}`);
+        navigate(`/companies/me`);
       }
     } catch (error) {
       console.error('Failed to update company:', error);
