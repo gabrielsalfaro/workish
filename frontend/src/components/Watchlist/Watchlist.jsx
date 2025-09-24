@@ -1,6 +1,7 @@
 import { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchWatchlist, removeWatchlistItem } from '../../store/watchlist';
+import { Link } from 'react-router-dom';
 import './Watchlist.css'
 
 const Watchlist = () => {
@@ -26,11 +27,13 @@ const Watchlist = () => {
       <ul className="watchlist-list">
         {watchlistItems.map((item) => (
           <li key={item.id} className="watchlist-item">
-            <div className="job-info">
-              <h3>{item.JobListing?.title}</h3>
-              <p>{item.JobListing?.Company?.name}</p>
-              <p>{item.JobListing?.city}, {item.JobListing?.state}</p>
-            </div>
+            <Link to={`/jobs/${item.JobListing?.id}/details`} className="job-link">
+              <div className="job-info">
+                <h3>{item.JobListing?.title}</h3>
+                <p>{item.JobListing?.Company?.name}</p>
+                <p>{item.JobListing?.city}, {item.JobListing?.state}</p>
+              </div>
+            </Link>
 
             {/* change to modal */}
             <button onClick={() => handleDelete(item.id)}>delete</button>
