@@ -43,8 +43,8 @@ const CompanyCreate = () => {
 
   return (
     <>
-    <div>CompanyCreate</div>
     <form className='company-create-form' onSubmit={handleSubmit}>
+    <div><h2><center>Create a Company</center></h2></div>
         <label>
           Name
             <input 

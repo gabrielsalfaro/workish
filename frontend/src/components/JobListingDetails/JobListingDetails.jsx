@@ -43,7 +43,7 @@ const JobListingDetails = ({ jobId: propJobId, embedded = false}) => {
             <div>
                 <div className="job-details-top-section">
                 <div className='job-details-title'><span><h1>{job.title}</h1></span></div>
-                <button className="add-to-watchlist" onClick={handleWatchlistAdd}>add to watchlist</button>
+                <button className="add-to-watchlist" onClick={handleWatchlistAdd}>Add to Watchlist</button>
                 </div>
                 <div className='job-details-company'><span> {job.Company?.name}</span></div>
                 <div className='job-details-location'><span>{job?.city}, {job?.state}</span></div>

@@ -31,7 +31,7 @@ const MyCompany = () => {
     }
 
     const handleCompanyAdd = () => {
-      console.log('clicked')
+      navigate('/companies/new')
     }
 
     const handleCompanyUpdate = () => {
@@ -70,7 +70,7 @@ const MyCompany = () => {
         <div className="no-company-message">
           <p>You don&apos;t have a company assigned yet. Search for a company below:</p>
           <input type="text" className="company-search" placeholder="Search for a company..." />
-          <button className="add-company" onClick={handleCompanyAdd}>Add Company</button>
+          <button className="add-company" onClick={handleCompanyAdd}>Create a Company</button>
         </div>
       )}
     </div>
