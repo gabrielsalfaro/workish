@@ -1,0 +1,84 @@
+.my-company-container {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 30px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    /* background-color: #fff; */
+}
+
+.my-company-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.my-company-header h2 {
+    margin: 0;
+}
+
+.company-details p {
+    margin: 8px 0;
+    font-size: 16px;
+    color: #444;
+}
+
+.company-logo {
+    max-width: 100%;
+    max-height: 150px;
+    object-fit: contain;
+    margin: 20px 0;
+    border-radius: 4px;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.no-company-message {
+    text-align: center;
+    padding: 40px;
+    font-size: 18px;
+    color: #666;
+}
+
+.company-search {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0 20px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+.add-company {
+    background-color: #2453ba;
+    color: white;
+    padding: 10px 16px;
+    border-radius: 6px;
+    border: none;
+}
+
+.add-company:hover {
+    background-color: #1c4299;
+}
+
+
+.update-company-button,
+.delete-company-button {
+    background-color: #2453ba;
+    color: white;
+    padding: 10px;
+    border-radius: 6px;
+}
+
+.update-company-button:hover {
+    background-color: #1c4299;
+}
+
+.delete-company-button:hover {
+    background-color: #1c4299;
+}

@@ -2,11 +2,13 @@ const express = require('express');
 const router = express.Router();
 const { requireAuth } = require('../../utils/auth');
 const { Company, User } = require('../../db/models');
+const { sequelize } = require('../../db/models');
+const { Op } = require('sequelize');
 
 
 // GET /api/companies/me - Get company associated with current user
 router.get(
-    '/my-company', // use something else?
+    '/me', // use something else?
     requireAuth, 
     async (req, res, next) => {
   try {
@@ -112,7 +114,7 @@ router.put(
 
 // DELETE /api/companies/my-company
 router.delete(
-    '/my-company', 
+    '/me', 
     requireAuth, 
     async (req, res) => {
   try {
@@ -129,6 +131,58 @@ router.delete(
     return res.json({ message: 'Company deleted successfully.' });
   } catch (error) {
     console.error('Error deleting company: ', error)
+  }
+});
+
+// GET /api/companies/search?name=SomeName
+router.get(
+    '/search', 
+    async (req, res) => {
+    const { name } = req.query;
+    const isPostgres = sequelize.getDialect() === 'postgres';
+    const likeOperator = isPostgres ? Op.iLike : Op.like;
+
+  try {
+    const company = await Company.findOne({
+      where: { 
+        name: { [likeOperator]: `%${name}%` }
+      }
+    });
+
+    if (!company) {
+      return res.status(404).json({ message: 'Company not found.' });
+    }
+
+    res.json({ company });
+  } catch (error) {
+    console.error('Search error:', error);
+    return res.status(500).json({ message: 'Internal server error.' });
+  }
+});
+
+
+// PUT /api/companies/assign - Assign a company to the current user
+router.put(
+  '/assign', 
+  requireAuth, 
+  async (req, res) => {
+  const { companyId } = req.body;
+  const user = req.user;
+
+  try {
+    const company = await Company.findByPk(companyId);
+
+    if (!company) {
+      return res.status(404).json({ message: 'Company not found.' });
+    }
+
+    user.companyId = company.id;
+    await user.save();
+
+    return res.status(200).json({ message: 'Company successfully assigned to user.' });
+  } catch (error) {
+    console.error('Error assigning company to user:', error);
+    return res.status(500).json({ message: 'Internal server error.' });
   }
 });
 

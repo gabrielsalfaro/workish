@@ -1,0 +1,61 @@
+.company-create-form input {
+    margin-top: 0.3rem;
+    padding: 0.6rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    transition: border-color 0.2s ease;
+}
+
+.company-create-form {
+    max-width: 500px;
+    margin: 2rem auto;
+    padding: 2rem;
+    /* background-color: #f9f9f9; */
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.company-create-form label {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #333;
+}
+
+.company-create-form input {
+    margin-top: 0.3rem;
+    padding: 0.6rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    transition: border-color 0.2s ease;
+}
+.company-create-button-container {
+    display: flex;
+    justify-content: center;
+    /* max-width: 80%; */
+    width: 80%;
+}
+
+.company-create-submit-button {
+    margin-top: 1rem;
+    padding: 0.75rem;
+    width: 50%;
+    text-align: center;
+    background-color: #2453ba;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.company-create-submit-button:hover {
+    background-color: #1c4299;
+}

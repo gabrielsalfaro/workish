@@ -128,6 +128,14 @@
   text-decoration: underline;
 }
 
+.watchlist-navlink:hover {
+  text-decoration: underline;
+}
+
+.my-company-navlink:hover {
+  text-decoration: underline;
+}
+
 .logout:hover {
   text-decoration: underline;
 }
