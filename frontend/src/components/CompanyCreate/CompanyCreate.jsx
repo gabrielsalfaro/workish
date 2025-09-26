@@ -22,7 +22,7 @@ const CompanyCreate = () => {
         // console.log('clicked')
         e.preventDefault();
 
-        const newCompany = {
+        const newCompanyData = {
         name,
         city,
         state,
@@ -32,9 +32,9 @@ const CompanyCreate = () => {
         logoUrl
         };
 
-        console.log('new company: ', newCompany);
+        console.log('new company: ', newCompanyData);
         try {
-          const newCompany = await dispatch(createCompany(newCompany))
+          const newCompany = await dispatch(createCompany(newCompanyData))
           navigate(`/companies/${newCompany.id}`)
         } catch (error) {
           console.error('Error creating company', error)

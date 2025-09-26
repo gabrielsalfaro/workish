@@ -41,7 +41,7 @@ export const fetchMyCompany = () => async (dispatch) => {
 
 // POST new Company
 export const createCompany = (companyData) => async (dispatch) => {
-  const res = await csrfFetch('/api/companies/new', {
+  const res = await csrfFetch('/api/companies', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(companyData),
