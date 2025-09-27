@@ -39,6 +39,18 @@ export const fetchMyCompany = () => async (dispatch) => {
     }
 }
 
+// GET single Company by :companyId
+export const fetchCompanyById = (companyId) => async (dispatch) => {
+  const res = await fetch(`/api/companies/${companyId}`);
+  if (res.ok) {
+    const company = await res.json();
+    dispatch({ company });
+  } else {
+    const error = await res.json();
+    console.error('Error fetching company:', error);
+  }
+};
+
 // POST new Company
 export const createCompany = (companyData) => async (dispatch) => {
   const res = await csrfFetch('/api/companies', {

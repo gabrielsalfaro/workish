@@ -19,6 +19,7 @@ import CompanyEdit from './components/CompanyEdit/CompanyEdit';
 import CompanyCreate from './components/CompanyCreate/CompanyCreate';
 import CompanySearch from './components/CompanySearch/CompanySearch';
 import SearchResults from './components/SearchResults/SearchResults';
+import CompanyDetails from './components/CompanyDetails/CompanyDetails';
 
 function Layout() {
   const dispatch = useDispatch();
@@ -89,6 +90,10 @@ const router = createBrowserRouter([
       {
         path: '/companies/new',
         element: <CompanyCreate />
+      },
+      {
+        path: '/companies/:companyId/details',
+        element: <CompanyDetails />
       },
       {
         path: '/companies/search',
