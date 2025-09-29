@@ -1,5 +1,5 @@
-import { useEffect, 
-  // useMemo, useState 
+import { useEffect, useState
+  // useMemo 
 } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchMyCompany, removeCompany } from '../../store/companies'
@@ -12,7 +12,8 @@ const MyCompany = () => {
     const navigate = useNavigate();
     // const [companyName, setCompanyName] = useState();
     const companyState = useSelector((state) => state.companies);
-//   console.log(companyState)
+    // console.log(companyState)
+    const [searchTerm, setSearchTerm] = useState('');
 
     const myCompany = Object.values(companyState)[0] || null;
     // console.log('>>> ', myCompany)
@@ -69,7 +70,13 @@ const MyCompany = () => {
       ) : (
         <div className="no-company-message">
           <p>You don&apos;t have a company assigned yet. Search for a company below:</p>
-          <input type="text" className="company-search" placeholder="Search for a company..." />
+          <input 
+            type="text"
+            className="company-search"
+            placeholder="Search for a company..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
           <button className="add-company" onClick={handleCompanyAdd}>Create a Company</button>
         </div>
       )}

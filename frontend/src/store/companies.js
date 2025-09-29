@@ -103,6 +103,22 @@ export const removeCompany = (companyId) => async (dispatch) => {
     }
 }
 
+// GET a Company through search
+export const searchCompany = (name) => async () => {
+  try {
+    const res = await fetch(`/api/companies/search?name=${encodeURIComponent(name)}`);
+    if (res.ok) {
+      const data = await res.json();
+      return data.company;
+    } else {
+      const error = await res.json();
+      console.error('Search error:', error.message);
+    }
+  } catch (error) {
+    console.error('Search failed:', error);
+  }
+};
+
 // export const assignCompany = (companyId) => async (dispatch) {
     
 // }
