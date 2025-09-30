@@ -119,9 +119,25 @@ export const searchCompany = (name) => async () => {
   }
 };
 
-// export const assignCompany = (companyId) => async (dispatch) {
-    
-// }
+export const assignCompany = (companyId) => async () => {
+  try {
+    const res = await csrfFetch(`/api/companies/assign`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ companyId })
+    });
+
+    if (res.ok) {
+      const data = await res.json();
+      return data;
+    } else {
+      const error = await res.json();
+      console.error('Assignment failed:', error.message);
+    }
+  } catch (error) {
+    console.error('Error assigning company:', error);
+  }
+}
 
 const companiesReducer = (state = initialState, action) => {
     switch (action.type) {
