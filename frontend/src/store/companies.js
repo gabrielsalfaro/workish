@@ -1,11 +1,11 @@
-// import { csrfFetch } from "./csrf";
-
 import { csrfFetch } from "./csrf";
 
 const LOAD_MY_COMPANY = 'companies/LOAD_MY_COMPANY';
 const DELETE_COMPANY = 'companies/DELETE_COMPANY'
 const ADD_COMPANY = 'companies/ADD_COMPANY';
 const UPDATE_COMPANY = 'companies/UPDATE_COMPANY';
+const LOAD_COMPANY_BY_ID = 'companies/LOAD_COMPANY_BY_ID';
+
 
 const initialState = {}
 
@@ -15,12 +15,12 @@ export const loadMyCompany = (company) => ({
     company
 });
 
-const addCompany = (company) => ({
+export const addCompany = (company) => ({
   type: ADD_COMPANY,
   company,
 });
 
-const updateCompany = (company) => ({
+export const updateCompany = (company) => ({
   type: UPDATE_COMPANY,
   company,
 });
@@ -29,6 +29,11 @@ export const deleteCompany = (companyId) => ({
     type: DELETE_COMPANY,
     companyId
 })
+
+export const loadCompanyById = (company) => ({
+  type: LOAD_COMPANY_BY_ID,
+  company,
+});
 
 // GET my Company
 export const fetchMyCompany = () => async (dispatch) => {
@@ -44,7 +49,7 @@ export const fetchCompanyById = (companyId) => async (dispatch) => {
   const res = await fetch(`/api/companies/${companyId}`);
   if (res.ok) {
     const company = await res.json();
-    dispatch({ company });
+    dispatch(loadCompanyById(company));
   } else {
     const error = await res.json();
     console.error('Error fetching company:', error);
@@ -119,6 +124,7 @@ export const searchCompany = (name) => async () => {
   }
 };
 
+// PUT - Assign a Company to UserProfile
 export const assignCompany = (companyId) => async () => {
   try {
     const res = await csrfFetch(`/api/companies/assign`, {
@@ -149,7 +155,9 @@ const companiesReducer = (state = initialState, action) => {
         case ADD_COMPANY:
             return { ...state, [action.company.id]: action.company };
         case UPDATE_COMPANY:
-        return { ...state, [action.company.id]: action.company };
+            return { ...state, [action.company.id]: action.company };
+        case LOAD_COMPANY_BY_ID:
+            return { ...state, [action.company.id]: action.company };
 
         default:
           return state;

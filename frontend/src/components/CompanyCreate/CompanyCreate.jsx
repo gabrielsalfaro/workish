@@ -35,7 +35,7 @@ const CompanyCreate = () => {
         console.log('new company: ', newCompanyData);
         try {
           const newCompany = await dispatch(createCompany(newCompanyData))
-          navigate(`/companies/${newCompany.id}`)
+          navigate(`/companies/${newCompany.id}/details`)
         } catch (error) {
           console.error('Error creating company', error)
         }
