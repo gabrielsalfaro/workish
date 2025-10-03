@@ -160,6 +160,23 @@ router.get(
   }
 });
 
+// GET /api/companies/:companyId/details
+router.get('/:companyId', async (req, res) => {
+  const { companyId } = req.params;
+
+  try {
+    const company = await Company.findByPk(companyId);
+
+    if (!company) {
+      return res.status(404).json({ message: 'Company not found' });
+    }
+
+    return res.json(company);
+  } catch (error) {
+    console.error('Error fetching company:', error);
+    return res.status(500).json({ message: 'Internal Server Error' });
+  }
+});
 
 // PUT /api/companies/assign - Assign a company to the current user
 router.put(

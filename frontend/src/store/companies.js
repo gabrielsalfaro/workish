@@ -148,9 +148,10 @@ export const assignCompany = (companyId) => async () => {
 const companiesReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOAD_MY_COMPANY: {
-            const newState = {};
-            newState[action.company.id] = action.company;
-            return newState;
+            return {
+                ...state, 
+                [action.company.id]: action.company
+            };
         }
         case ADD_COMPANY:
             return { ...state, [action.company.id]: action.company };
