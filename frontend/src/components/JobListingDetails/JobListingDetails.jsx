@@ -14,6 +14,8 @@ const JobListingDetails = ({ jobId: propJobId, embedded = false}) => {
     // const jobs = useSelector(state => state.jobs.jobs);
     // const job = jobs?.[jobId];
     const job = useSelector(state => state.jobs?.[jobId]);
+    const companyId = job?.companyId;
+
 
     useEffect(() => {
         if (!job && jobId) {
@@ -45,7 +47,9 @@ const JobListingDetails = ({ jobId: propJobId, embedded = false}) => {
                 <div className='job-details-title'><span><h1>{job.title}</h1></span></div>
                 <button className="add-to-watchlist" onClick={handleWatchlistAdd}>Add to Watchlist</button>
                 </div>
-                <div className='job-details-company'><span> {job.Company?.name}</span></div>
+                <NavLink to={`/companies/${companyId}/details`}>
+                    <div className='job-details-company'><span> {job.Company?.name}</span></div>
+                </NavLink>
                 <div className='job-details-location'><span>{job?.city}, {job?.state}</span></div>
                 {/* <div><span><b>State:</b> </span></div> */}
                 {/* <div><span><b>Website:</b> {job.Company?.website}</span></div> */}
