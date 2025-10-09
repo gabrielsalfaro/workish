@@ -1,15 +1,16 @@
 import { useState } from 'react';
-// import { useDispatch } from 'react-redux';
-// import { editCompany } from '../../store/companies';
+import { useDispatch } from 'react-redux';
+import { assignCompany } from '../../store/companies';
+import { useNavigate } from 'react-router-dom';
 import './CompanySearch.css'
 
 const CompanySearch = () => {
-//   const dispatch = useDispatch();
-
   const [companyName, setCompanyName] = useState('');
   const [searchResult, setSearchResult] = useState(null);
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleCompanySearch = async (e) => {
     e.preventDefault();
@@ -35,18 +36,19 @@ const CompanySearch = () => {
   };
 
   const handleCompanyAdd = async () => {
-    console.log('clicked')
-//     if (!searchResult) return;
+    if (!searchResult) return;
 
-//     try {
-//       const newCompany = await dispatch(assignCompany(searchResult));
-//       if (newCompany) {
-//         alert('Company added successfully!');
-//         // Redirect to profile?
-//       }
-//     } catch (error) {
-//       console.error({ message: 'Failed to add company.' });
-//     }
+    try {
+      const response = await dispatch(assignCompany(searchResult.id));
+
+      if (response?.message === 'Company successfully assigned to user.') {
+        navigate('/companies/me');
+      } else {
+        setErrors({ add: 'Failed to assign company.' });
+      }
+    } catch (error) {
+      console.error('Assign company error:', error);
+    }
   };
 
   const handleCompanyUpdate = async () => {
