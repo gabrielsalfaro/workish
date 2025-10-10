@@ -71,6 +71,98 @@ router.post(
   }
 });
 
+
+// DELETE /api/companies/my-company
+router.delete(
+    '/me', 
+    requireAuth, 
+    async (req, res) => {
+  try {
+    const user = req.user;
+    // const companyId = user.companyId;
+    const company = await Company.findByPk(user.companyId);
+
+    if (!company) {
+      return res.status(404).json({message: 'Company not found.'});
+    }
+
+    await company.destroy();
+
+    return res.json({ message: 'Company deleted successfully.' });
+  } catch (error) {
+    console.error('Error deleting company: ', error)
+  }
+});
+
+
+// GET /api/companies/search?name=SomeName
+router.get(
+    '/search', 
+    async (req, res) => {
+    const { name } = req.query;
+    const isPostgres = sequelize.getDialect() === 'postgres';
+    const likeOperator = isPostgres ? Op.iLike : Op.like;
+
+  try {
+    const company = await Company.findOne({
+      where: { 
+        name: { [likeOperator]: `%${name}%` }
+      }
+    });
+
+    if (!company) {
+      return res.status(404).json({ message: 'Company not found.' });
+    }
+
+    res.json({ company });
+  } catch (error) {
+    console.error('Search error:', error);
+    return res.status(500).json({ message: 'Internal server error.' });
+  }
+});
+
+// PUT /api/companies/assign - Assign a company to the current user
+router.put(
+  '/assign', 
+  requireAuth, async (req, res) => {
+    const { companyId } = req.body;
+    const user = req.user;
+
+    try {
+      const company = await Company.findByPk(companyId);
+      if (!company) {
+        return res.status(404).json({ message: 'Company not found.' });
+      }
+
+      user.companyId = companyId;
+      await user.save();
+
+      return res.json({ message: 'Company successfully assigned to user.' });
+    } catch (error) {
+      console.error('Error assigning company:', error);
+      return res.status(500).json({ message: 'Internal server error.' });
+    }
+});
+
+
+// GET /api/companies/:companyId/details
+router.get('/:companyId', async (req, res) => {
+  const { companyId } = req.params;
+
+  try {
+    const company = await Company.findByPk(companyId);
+
+    if (!company) {
+      return res.status(404).json({ message: 'Company not found' });
+    }
+
+    return res.json(company);
+  } catch (error) {
+    console.error('Error fetching company:', error);
+    return res.status(500).json({ message: 'Internal Server Error' });
+  }
+});
+
 // PUT /api/companies/:id
 router.put(
     '/:companyId', 
@@ -109,72 +201,6 @@ router.put(
     return res.json(company);
   } catch (error) {
     console.error('Error updating company', error)
-  }
-});
-
-// DELETE /api/companies/my-company
-router.delete(
-    '/me', 
-    requireAuth, 
-    async (req, res) => {
-  try {
-    const user = req.user;
-    // const companyId = user.companyId;
-    const company = await Company.findByPk(user.companyId);
-
-    if (!company) {
-      return res.status(404).json({message: 'Company not found.'});
-    }
-
-    await company.destroy();
-
-    return res.json({ message: 'Company deleted successfully.' });
-  } catch (error) {
-    console.error('Error deleting company: ', error)
-  }
-});
-
-// GET /api/companies/search?name=SomeName
-router.get(
-    '/search', 
-    async (req, res) => {
-    const { name } = req.query;
-    const isPostgres = sequelize.getDialect() === 'postgres';
-    const likeOperator = isPostgres ? Op.iLike : Op.like;
-
-  try {
-    const company = await Company.findOne({
-      where: { 
-        name: { [likeOperator]: `%${name}%` }
-      }
-    });
-
-    if (!company) {
-      return res.status(404).json({ message: 'Company not found.' });
-    }
-
-    res.json({ company });
-  } catch (error) {
-    console.error('Search error:', error);
-    return res.status(500).json({ message: 'Internal server error.' });
-  }
-});
-
-// GET /api/companies/:companyId/details
-router.get('/:companyId', async (req, res) => {
-  const { companyId } = req.params;
-
-  try {
-    const company = await Company.findByPk(companyId);
-
-    if (!company) {
-      return res.status(404).json({ message: 'Company not found' });
-    }
-
-    return res.json(company);
-  } catch (error) {
-    console.error('Error fetching company:', error);
-    return res.status(500).json({ message: 'Internal Server Error' });
   }
 });
 
