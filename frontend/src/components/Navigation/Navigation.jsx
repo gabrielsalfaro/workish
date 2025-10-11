@@ -14,6 +14,14 @@ function Navigation({ isLoaded }) {
           <NavLink to="/">Workish</NavLink>
         </li>
 
+        <li className='navigation-home-tab'>
+          <div className="tab-wrapper">Home</div>
+        </li>
+        <li className='navigation-companies-tab'>
+          <div className="tab-wrapper">Companies</div>
+        </li>
+
+
         <li className="navigation-spacer"></li>
 
         {isLoaded && sessionUser && (

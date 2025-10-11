@@ -166,7 +166,22 @@
   text-decoration: underline;
 }
 
+.navigation-home-tab,
+.navigation-companies-tab {
+  display: flex;
+  align-items: flex-end; 
+  height: 70px; 
+  padding: 10px;
+  border-left: 1px, solid, #ddd;
+  border-top: 1px, solid, #ddd;
+  border-right: 1px, solid, #ddd;
+  border-radius: 6px;
+}
 
-.hidden { /* for menu toggle, missed in instructions? */
+.tab-wrapper {
+  padding-bottom: 5px; 
+}
+
+.hidden { /* for menu toggle */
   display: none;
 }
