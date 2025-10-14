@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { assignCompany } from '../../store/companies';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, NavLink } from 'react-router-dom';
 import './CompanySearch.css'
 
 const CompanySearch = () => {
@@ -74,6 +74,10 @@ const CompanySearch = () => {
 
       {errors.search && <p className="error-message">{errors.search}</p>}
 
+      <div className='company-create-link'>
+        <NavLink to="/companies/new">Or create a Company</NavLink>
+      </div>
+      
       {searchResult && (
         <div className="company-search-result">
           <h3>{searchResult.name}</h3>

@@ -15,10 +15,13 @@ function Navigation({ isLoaded }) {
         </li>
 
         <li className='navigation-home-tab'>
-          <div className="tab-wrapper">Home</div>
+          <div className="tab-wrapper">
+            <NavLink to="/">Home</NavLink>
+          </div>
         </li>
         <li className='navigation-companies-tab'>
-          <div className="tab-wrapper">Companies</div>
+          <div className="tab-wrapper">
+            <NavLink to="/companies/search">Companies</NavLink></div>
         </li>
 
 

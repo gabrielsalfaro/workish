@@ -63,6 +63,17 @@
   cursor: pointer;
 }
 
+.company-create-link {
+  display: flex;
+  justify-content: center;
+  
+}
+
+.company-create-link:hover {
+  text-decoration: underline;
+
+}
+
 .company-add-button {
   background-color: #2453ba;
   color: white;
